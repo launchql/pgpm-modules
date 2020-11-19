@@ -1,13 +1,14 @@
 import { getConnections } from './utils';
+import { snap } from './utils/snaps';
 
-let db, dbs, conn, teardown;
+let db, dbs, teardown;
 const objs = {
   tables: {}
 };
 
 beforeAll(async () => {
-  ({ db, conn, teardown } = await getConnections());
-  dbs = db.helper('yourschema');
+  ({ db, teardown } = await getConnections());
+  dbs = db.helper('services_public');
 });
 
 afterAll(async () => {
@@ -27,8 +28,93 @@ afterEach(async () => {
   await db.afterEach();
 });
 
-it('a test here', async () => {
-  await db.any('INSERT INTO services_public.services DEFAULT VALUES');
-  const res = await db.any('SELECT * FROM services_public.services');
-  console.log(res);
+it('add_renderer', async () => {
+  const results = await dbs.call('add_renderer', {
+    subdomain: 'subdomain',
+    domain: 'domain',
+    dbname: 'mydatabase'
+  });
+  snap(results);
+});
+
+it('add_api_service', async () => {
+  const results = await dbs.call('add_api_service', {
+    subdomain: 'subdomain',
+    domain: 'domain',
+    dbname: 'mydatabase',
+    role_name: 'postgres',
+    anon_role: 'public',
+    schemas: ['schema_public', 'schema_private']
+  });
+  snap(results);
+  await (async () => {
+    const results = await dbs.call(
+      'add_plugin',
+      {
+        subdomain: 'subdomain',
+        domain: 'domain',
+        name: 'authenticate',
+        data: JSON.stringify({
+          schema: 'dashboard_private',
+          function: 'authenticate'
+        })
+      },
+      {
+        data: 'jsonb'
+      }
+    );
+    snap(results);
+  })();
+});
+
+it('plugins', async () => {
+  await dbs.call('add_renderer', {
+    subdomain: 'subdomain',
+    domain: 'domain',
+    dbname: 'mydatabase'
+  });
+  await (async () => {
+    const results = await dbs.call(
+      'add_plugin',
+      {
+        subdomain: 'subdomain',
+        domain: 'domain',
+        name: 'verify_email',
+        data: JSON.stringify({
+          schema: 'dashboard_public',
+          function: 'verify_email'
+        })
+      },
+      {
+        data: 'jsonb'
+      }
+    );
+    snap(results);
+  })();
+  await (async () => {
+    const results = await dbs.call(
+      'add_plugin',
+      {
+        subdomain: 'subdomain',
+        domain: 'domain',
+        name: 'multi_factor',
+        data: JSON.stringify({
+          schema: 'dashboard_private',
+          function: 'verify_2fa'
+        })
+      },
+      {
+        data: 'jsonb'
+      }
+    );
+    snap(results);
+  })();
+  await (async () => {
+    const results = await dbs.call('remove_plugin', {
+      subdomain: 'subdomain',
+      domain: 'domain',
+      name: 'verify_email'
+    });
+    snap(results);
+  })();
 });
