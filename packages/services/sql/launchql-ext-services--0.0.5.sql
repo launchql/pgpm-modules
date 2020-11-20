@@ -21,7 +21,11 @@ DECLARE
 BEGIN
 
   IF (v_name IS NULL) THEN 
-    v_name = concat(v_subdomain, '.', v_domain);
+    IF (v_subdomain IS NULL) THEN 
+      v_name = concat(v_domain);
+    ELSE
+      v_name = concat(v_subdomain, '.', v_domain);
+    END IF;
   END IF;
 
   INSERT INTO services_public.services 
@@ -46,11 +50,20 @@ DECLARE
   newdata jsonb;
 BEGIN
 
-  SELECT * FROM services_public.services
-  WHERE 
-    subdomain = v_subdomain
-    AND domain = v_domain 
-  INTO svc;
+  IF (v_subdomain IS NULL) THEN 
+    SELECT * FROM services_public.services
+    WHERE 
+      subdomain IS NULL
+      AND domain = v_domain 
+    INTO svc;
+  ELSE
+    SELECT * FROM services_public.services
+    WHERE 
+      subdomain = v_subdomain
+      AND domain = v_domain 
+    INTO svc;
+  END IF;
+
 
   IF (NOT FOUND) THEN 
     RAISE EXCEPTION 'NOT_FOUND';

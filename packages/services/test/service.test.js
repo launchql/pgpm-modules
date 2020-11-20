@@ -118,3 +118,30 @@ it('plugins', async () => {
     snap(results);
   })();
 });
+
+// SELECT services_public.add_api_service(
+//   v_subdomain := NULL,
+//   v_domain := 'launchql',
+//   v_dbname := 'dashboard',
+//   v_role_name := 'administrator',
+//   v_anon_role := 'administrator',
+//   v_schemas := ARRAY['dashboard_public', 'dashboard_private']
+// );
+
+it('domains only', async () => {
+  const results = await dbs.call(
+    'add_api_service',
+    {
+      subdomain: null,
+      domain: 'launchql',
+      dbname: 'awesome-db',
+      role_name: 'adminitrator',
+      anon_role: 'adminitrator',
+      schemas: ['hola', 'chicos']
+    },
+    {
+      schemas: 'text[]'
+    }
+  );
+  snap(results);
+});

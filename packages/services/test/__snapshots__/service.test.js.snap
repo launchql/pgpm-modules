@@ -67,6 +67,30 @@ Array [
 ]
 `;
 
+exports[`domains only 1`] = `
+Array [
+  Object {
+    "data": Object {
+      "graphile": Object {
+        "anon_role": "adminitrator",
+        "role_name": "adminitrator",
+        "schemas": Array [
+          "hola",
+          "chicos",
+        ],
+      },
+    },
+    "database_id": null,
+    "dbname": "awesome-db",
+    "domain": "launchql",
+    "id": "[ID]",
+    "name": "launchql",
+    "subdomain": null,
+    "type": "api",
+  },
+]
+`;
+
 exports[`plugins 1`] = `
 Array [
   Object {
