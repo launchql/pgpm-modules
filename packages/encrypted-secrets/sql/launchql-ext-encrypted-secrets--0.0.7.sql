@@ -80,26 +80,6 @@ CREATE FUNCTION encrypted_secrets.encrypt_field_set ( secret_value text ) RETURN
   SELECT encrypt_field_set.secret_value::bytea;
 $EOFCODE$ LANGUAGE sql;
 
-CREATE FUNCTION encrypted_secrets.secrets_delete ( secrets_owned_field uuid, secret_name text ) RETURNS void AS $EOFCODE$
-BEGIN
-  DELETE FROM secrets_schema.secrets_table s
-  WHERE s.secrets_owned_field = secrets_delete.secrets_owned_field
-    AND s.name = secrets_delete.secret_name;
-END
-$EOFCODE$ LANGUAGE plpgsql VOLATILE;
-
-CREATE FUNCTION encrypted_secrets.secrets_delete ( secrets_owned_field uuid, secret_names text[] ) RETURNS void AS $EOFCODE$
-BEGIN
-  DELETE FROM secrets_schema.secrets_table s
-  WHERE s.secrets_owned_field = secrets_delete.secrets_owned_field
-    AND s.name = ANY(secrets_delete.secret_names);
-END
-$EOFCODE$ LANGUAGE plpgsql VOLATILE;
-
-GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_delete ( uuid,text ) TO authenticated;
-
-GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_delete ( uuid,text[] ) TO authenticated;
-
 CREATE FUNCTION encrypted_secrets.secrets_getter ( secrets_owned_field uuid, secret_name text, default_value text DEFAULT NULL ) RETURNS text AS $EOFCODE$
 DECLARE
   v_secret secrets_schema.secrets_table;
@@ -127,6 +107,54 @@ BEGIN
 
 END
 $EOFCODE$ LANGUAGE plpgsql STABLE;
+
+CREATE FUNCTION encrypted_secrets.secrets_upsert ( v_secrets_owned_field uuid, secret_name text, secret_value text, field_encoding text DEFAULT 'pgp' ) RETURNS boolean AS $EOFCODE$
+BEGIN
+  INSERT INTO secrets_schema.secrets_table (secrets_owned_field, name, secrets_value_field, secrets_enc_field)
+    VALUES (v_secrets_owned_field, secrets_upsert.secret_name, secrets_upsert.secret_value::bytea, secrets_upsert.field_encoding)
+    ON CONFLICT (secrets_owned_field, name)
+    DO
+    UPDATE
+    SET
+      -- don't change this, cannot use EXCLUDED, don't know why, but you have to set to the ::bytea
+      secrets_value_field = secrets_upsert.secret_value::bytea,
+      secrets_enc_field = EXCLUDED.secrets_enc_field;
+  RETURN TRUE;
+END
+$EOFCODE$ LANGUAGE plpgsql VOLATILE;
+
+GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_upsert TO authenticated;
+
+CREATE FUNCTION encrypted_secrets.secrets_verify ( secrets_owned_field uuid, secret_name text, secret_value text ) RETURNS boolean AS $EOFCODE$
+DECLARE
+  v_secret_text text;
+  v_secret secrets_schema.secrets_table;
+BEGIN
+  SELECT
+    *
+  FROM
+    encrypted_secrets.secrets_getter (secrets_verify.secrets_owned_field, secrets_verify.secret_name)
+  INTO v_secret_text;
+
+  SELECT
+    *
+  FROM
+    secrets_schema.secrets_table s
+  WHERE
+    s.name = secrets_verify.secret_name
+    AND s.secrets_owned_field = secrets_verify.secrets_owned_field INTO v_secret;
+
+  IF (v_secret.secrets_enc_field = 'crypt') THEN
+    RETURN v_secret_text = crypt(secrets_verify.secret_value::bytea::text, v_secret_text);
+  ELSIF (v_secret.secrets_enc_field = 'pgp') THEN
+    RETURN secrets_verify.secret_value = v_secret_text;
+  END IF;
+
+  RETURN secrets_verify.secret_value = v_secret_text;
+END
+$EOFCODE$ LANGUAGE plpgsql STABLE;
+
+GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_verify TO authenticated;
 
 CREATE FUNCTION encrypted_secrets.secrets_table_upsert ( secrets_owned_field uuid, data json ) RETURNS void AS $EOFCODE$
 DECLARE
@@ -182,50 +210,22 @@ $EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
 GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_table_upsert TO authenticated;
 
-CREATE FUNCTION encrypted_secrets.secrets_upsert ( v_secrets_owned_field uuid, secret_name text, secret_value text, field_encoding text DEFAULT 'pgp' ) RETURNS boolean AS $EOFCODE$
+CREATE FUNCTION encrypted_secrets.secrets_delete ( secrets_owned_field uuid, secret_name text ) RETURNS void AS $EOFCODE$
 BEGIN
-  INSERT INTO secrets_schema.secrets_table (secrets_owned_field, name, secrets_value_field, secrets_enc_field)
-    VALUES (v_secrets_owned_field, secrets_upsert.secret_name, secrets_upsert.secret_value::bytea, secrets_upsert.field_encoding)
-    ON CONFLICT (secrets_owned_field, name)
-    DO
-    UPDATE
-    SET
-      -- don't change this, cannot use EXCLUDED, don't know why, but you have to set to the ::bytea
-      secrets_value_field = secrets_upsert.secret_value::bytea,
-      secrets_enc_field = EXCLUDED.secrets_enc_field;
-  RETURN TRUE;
+  DELETE FROM secrets_schema.secrets_table s
+  WHERE s.secrets_owned_field = secrets_delete.secrets_owned_field
+    AND s.name = secrets_delete.secret_name;
 END
 $EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
-GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_upsert TO authenticated;
-
-CREATE FUNCTION encrypted_secrets.secrets_verify ( secrets_owned_field uuid, secret_name text, secret_value text ) RETURNS boolean AS $EOFCODE$
-DECLARE
-  v_secret_text text;
-  v_secret secrets_schema.secrets_table;
+CREATE FUNCTION encrypted_secrets.secrets_delete ( secrets_owned_field uuid, secret_names text[] ) RETURNS void AS $EOFCODE$
 BEGIN
-  SELECT
-    *
-  FROM
-    encrypted_secrets.secrets_getter (secrets_verify.secrets_owned_field, secrets_verify.secret_name)
-  INTO v_secret_text;
-
-  SELECT
-    *
-  FROM
-    secrets_schema.secrets_table s
-  WHERE
-    s.name = secrets_verify.secret_name
-    AND s.secrets_owned_field = secrets_verify.secrets_owned_field INTO v_secret;
-
-  IF (v_secret.secrets_enc_field = 'crypt') THEN
-    RETURN v_secret_text = crypt(secrets_verify.secret_value::bytea::text, v_secret_text);
-  ELSIF (v_secret.secrets_enc_field = 'pgp') THEN
-    RETURN secrets_verify.secret_value = v_secret_text;
-  END IF;
-
-  RETURN secrets_verify.secret_value = v_secret_text;
+  DELETE FROM secrets_schema.secrets_table s
+  WHERE s.secrets_owned_field = secrets_delete.secrets_owned_field
+    AND s.name = ANY(secrets_delete.secret_names);
 END
-$EOFCODE$ LANGUAGE plpgsql STABLE;
+$EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
-GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_verify TO authenticated;
+GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_delete ( uuid,text ) TO authenticated;
+
+GRANT EXECUTE ON FUNCTION encrypted_secrets.secrets_delete ( uuid,text[] ) TO authenticated;
