@@ -1,0 +1,6 @@
+-- Verify: schemas/meta_public/tables/api_modules/columns/id/alterations/alt0000000108 on pg
+
+BEGIN;
+
+COMMIT;  
+
