@@ -1934,7 +1934,7 @@ CREATE INDEX domains_owner_id_idx ON meta_public.domains ( owner_id );
 
 ALTER TABLE meta_public.domains ADD CONSTRAINT domains_subdomain_domain_key UNIQUE ( subdomain, domain );
 
-COMMENT ON CONSTRAINT domains_subdomain_domain_key ON meta_public.domains IS E'@omit';
+COMMENT ON CONSTRAINT domains_subdomain_domain_key ON meta_public.domains IS NULL;
 
 ALTER TABLE meta_public.domains ENABLE ROW LEVEL SECURITY;
 
@@ -2032,6 +2032,10 @@ COMMENT ON CONSTRAINT apis_domain_id_fkey ON meta_public.apis IS E'@omit manyToM
 
 CREATE INDEX apis_domain_id_idx ON meta_public.apis ( domain_id );
 
+ALTER TABLE meta_public.apis ADD CONSTRAINT apis_domain_id_key UNIQUE ( domain_id );
+
+COMMENT ON CONSTRAINT apis_domain_id_key ON meta_public.apis IS NULL;
+
 ALTER TABLE meta_public.apis ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY authenticated_can_select_on_apis ON meta_public.apis FOR SELECT TO authenticated USING ( owner_id = meta_public.get_current_user_id() OR owner_id = ANY (meta_public.get_current_group_ids()) );
@@ -2109,6 +2113,10 @@ ALTER TABLE meta_public.sites ADD CONSTRAINT sites_domain_id_fkey FOREIGN KEY ( 
 COMMENT ON CONSTRAINT sites_domain_id_fkey ON meta_public.sites IS E'@omit manyToMany';
 
 CREATE INDEX sites_domain_id_idx ON meta_public.sites ( domain_id );
+
+ALTER TABLE meta_public.sites ADD CONSTRAINT sites_domain_id_key UNIQUE ( domain_id );
+
+COMMENT ON CONSTRAINT sites_domain_id_key ON meta_public.sites IS NULL;
 
 ALTER TABLE meta_public.sites ADD COLUMN  owner_id uuid;
 

@@ -4,7 +4,8 @@ BEGIN;
 
 
 ALTER TABLE "meta_public".sites 
-    ALTER COLUMN id DROP DEFAULT;
+    ALTER COLUMN id DROP NOT NULL;
+
 
 COMMIT;  
 
