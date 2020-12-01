@@ -1,4 +1,4 @@
-\echo Use "CREATE EXTENSION meta" to load this file. \quit
+\echo Use "CREATE EXTENSION launchql-meta" to load this file. \quit
 CREATE SCHEMA meta_public;
 
 GRANT USAGE ON SCHEMA meta_public TO authenticated;
