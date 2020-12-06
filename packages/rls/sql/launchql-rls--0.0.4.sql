@@ -1837,290 +1837,290 @@ CREATE TRIGGER emails_update_status_achievement_is_verified_tg
  WHEN ( OLD.is_verified IS DISTINCT FROM NEW.is_verified ) 
  EXECUTE PROCEDURE rls_private. tg_achievement_boolean ( 'is_verified','email_verified' );
 
-ALTER TABLE rls_collections_public.database ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.database ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_database ON rls_collections_public.database FOR SELECT TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
+CREATE POLICY authenticated_can_select_on_database ON collections_public.database FOR SELECT TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
 
-CREATE POLICY authenticated_can_insert_on_database ON rls_collections_public.database FOR INSERT TO authenticated WITH CHECK ( owner_id = rls_public.get_current_user_id() );
+CREATE POLICY authenticated_can_insert_on_database ON collections_public.database FOR INSERT TO authenticated WITH CHECK ( owner_id = rls_public.get_current_user_id() );
 
-CREATE POLICY authenticated_can_update_on_database ON rls_collections_public.database FOR UPDATE TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
+CREATE POLICY authenticated_can_update_on_database ON collections_public.database FOR UPDATE TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
 
-CREATE POLICY authenticated_can_delete_on_database ON rls_collections_public.database FOR DELETE TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
+CREATE POLICY authenticated_can_delete_on_database ON collections_public.database FOR DELETE TO authenticated USING ( owner_id = rls_public.get_current_user_id() );
 
-GRANT SELECT ON TABLE rls_collections_public.database TO authenticated;
+GRANT SELECT ON TABLE collections_public.database TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.database TO authenticated;
+GRANT INSERT ON TABLE collections_public.database TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.database TO authenticated;
+GRANT UPDATE ON TABLE collections_public.database TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.database TO authenticated;
+GRANT DELETE ON TABLE collections_public.database TO authenticated;
 
-ALTER TABLE rls_collections_public.schema ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.schema ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_schema ON rls_collections_public.schema FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_schema ON collections_public.schema FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_schema ON rls_collections_public.schema FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_schema ON collections_public.schema FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_schema ON rls_collections_public.schema FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_schema ON collections_public.schema FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_schema ON rls_collections_public.schema FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_schema ON collections_public.schema FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.schema TO authenticated;
+GRANT SELECT ON TABLE collections_public.schema TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.schema TO authenticated;
+GRANT INSERT ON TABLE collections_public.schema TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.schema TO authenticated;
+GRANT UPDATE ON TABLE collections_public.schema TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.schema TO authenticated;
+GRANT DELETE ON TABLE collections_public.schema TO authenticated;
 
-ALTER TABLE rls_collections_public.foreign_key_constraint ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.foreign_key_constraint ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_foreign_key_constraint ON rls_collections_public.foreign_key_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_foreign_key_constraint ON collections_public.foreign_key_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_foreign_key_constraint ON rls_collections_public.foreign_key_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_foreign_key_constraint ON collections_public.foreign_key_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_foreign_key_constraint ON rls_collections_public.foreign_key_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_foreign_key_constraint ON collections_public.foreign_key_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_foreign_key_constraint ON rls_collections_public.foreign_key_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_foreign_key_constraint ON collections_public.foreign_key_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.foreign_key_constraint TO authenticated;
+GRANT SELECT ON TABLE collections_public.foreign_key_constraint TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.foreign_key_constraint TO authenticated;
+GRANT INSERT ON TABLE collections_public.foreign_key_constraint TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.foreign_key_constraint TO authenticated;
+GRANT UPDATE ON TABLE collections_public.foreign_key_constraint TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.foreign_key_constraint TO authenticated;
+GRANT DELETE ON TABLE collections_public.foreign_key_constraint TO authenticated;
 
-ALTER TABLE rls_collections_public.full_text_search ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.full_text_search ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_full_text_search ON rls_collections_public.full_text_search FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_full_text_search ON collections_public.full_text_search FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_full_text_search ON rls_collections_public.full_text_search FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_full_text_search ON collections_public.full_text_search FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_full_text_search ON rls_collections_public.full_text_search FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_full_text_search ON collections_public.full_text_search FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_full_text_search ON rls_collections_public.full_text_search FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_full_text_search ON collections_public.full_text_search FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.full_text_search TO authenticated;
+GRANT SELECT ON TABLE collections_public.full_text_search TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.full_text_search TO authenticated;
+GRANT INSERT ON TABLE collections_public.full_text_search TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.full_text_search TO authenticated;
+GRANT UPDATE ON TABLE collections_public.full_text_search TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.full_text_search TO authenticated;
+GRANT DELETE ON TABLE collections_public.full_text_search TO authenticated;
 
-ALTER TABLE rls_collections_public.index ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.index ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_index ON rls_collections_public.index FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_index ON collections_public.index FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_index ON rls_collections_public.index FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_index ON collections_public.index FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_index ON rls_collections_public.index FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_index ON collections_public.index FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_index ON rls_collections_public.index FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_index ON collections_public.index FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.index TO authenticated;
+GRANT SELECT ON TABLE collections_public.index TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.index TO authenticated;
+GRANT INSERT ON TABLE collections_public.index TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.index TO authenticated;
+GRANT UPDATE ON TABLE collections_public.index TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.index TO authenticated;
+GRANT DELETE ON TABLE collections_public.index TO authenticated;
 
-ALTER TABLE rls_collections_public.rls_function ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.rls_function ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_rls_function ON rls_collections_public.rls_function FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_rls_function ON collections_public.rls_function FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_rls_function ON rls_collections_public.rls_function FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_rls_function ON collections_public.rls_function FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_rls_function ON rls_collections_public.rls_function FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_rls_function ON collections_public.rls_function FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_rls_function ON rls_collections_public.rls_function FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_rls_function ON collections_public.rls_function FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.rls_function TO authenticated;
+GRANT SELECT ON TABLE collections_public.rls_function TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.rls_function TO authenticated;
+GRANT INSERT ON TABLE collections_public.rls_function TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.rls_function TO authenticated;
+GRANT UPDATE ON TABLE collections_public.rls_function TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.rls_function TO authenticated;
+GRANT DELETE ON TABLE collections_public.rls_function TO authenticated;
 
-ALTER TABLE rls_collections_public.policy ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.policy ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_policy ON rls_collections_public.policy FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_policy ON collections_public.policy FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_policy ON rls_collections_public.policy FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_policy ON collections_public.policy FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_policy ON rls_collections_public.policy FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_policy ON collections_public.policy FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_policy ON rls_collections_public.policy FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_policy ON collections_public.policy FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.policy TO authenticated;
+GRANT SELECT ON TABLE collections_public.policy TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.policy TO authenticated;
+GRANT INSERT ON TABLE collections_public.policy TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.policy TO authenticated;
+GRANT UPDATE ON TABLE collections_public.policy TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.policy TO authenticated;
+GRANT DELETE ON TABLE collections_public.policy TO authenticated;
 
-ALTER TABLE rls_collections_public.primary_key_constraint ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.primary_key_constraint ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_primary_key_constraint ON rls_collections_public.primary_key_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_primary_key_constraint ON collections_public.primary_key_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_primary_key_constraint ON rls_collections_public.primary_key_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_primary_key_constraint ON collections_public.primary_key_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_primary_key_constraint ON rls_collections_public.primary_key_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_primary_key_constraint ON collections_public.primary_key_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_primary_key_constraint ON rls_collections_public.primary_key_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_primary_key_constraint ON collections_public.primary_key_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.primary_key_constraint TO authenticated;
+GRANT SELECT ON TABLE collections_public.primary_key_constraint TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.primary_key_constraint TO authenticated;
+GRANT INSERT ON TABLE collections_public.primary_key_constraint TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.primary_key_constraint TO authenticated;
+GRANT UPDATE ON TABLE collections_public.primary_key_constraint TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.primary_key_constraint TO authenticated;
+GRANT DELETE ON TABLE collections_public.primary_key_constraint TO authenticated;
 
-ALTER TABLE rls_collections_public.procedure ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.procedure ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_procedure ON rls_collections_public.procedure FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_procedure ON collections_public.procedure FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_procedure ON rls_collections_public.procedure FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_procedure ON collections_public.procedure FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_procedure ON rls_collections_public.procedure FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_procedure ON collections_public.procedure FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_procedure ON rls_collections_public.procedure FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_procedure ON collections_public.procedure FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.procedure TO authenticated;
+GRANT SELECT ON TABLE collections_public.procedure TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.procedure TO authenticated;
+GRANT INSERT ON TABLE collections_public.procedure TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.procedure TO authenticated;
+GRANT UPDATE ON TABLE collections_public.procedure TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.procedure TO authenticated;
+GRANT DELETE ON TABLE collections_public.procedure TO authenticated;
 
-ALTER TABLE rls_collections_public.schema_grant ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.schema_grant ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_schema_grant ON rls_collections_public.schema_grant FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_schema_grant ON collections_public.schema_grant FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_schema_grant ON rls_collections_public.schema_grant FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_schema_grant ON collections_public.schema_grant FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_schema_grant ON rls_collections_public.schema_grant FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_schema_grant ON collections_public.schema_grant FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_schema_grant ON rls_collections_public.schema_grant FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_schema_grant ON collections_public.schema_grant FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.schema_grant TO authenticated;
+GRANT SELECT ON TABLE collections_public.schema_grant TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.schema_grant TO authenticated;
+GRANT INSERT ON TABLE collections_public.schema_grant TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.schema_grant TO authenticated;
+GRANT UPDATE ON TABLE collections_public.schema_grant TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.schema_grant TO authenticated;
+GRANT DELETE ON TABLE collections_public.schema_grant TO authenticated;
 
-ALTER TABLE rls_collections_public.table_grant ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.table_grant ENABLE ROW LEVEL SECURITY;
 
-ALTER TABLE rls_collections_public."table" ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public."table" ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_table_grant ON rls_collections_public.table_grant FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_table_grant ON collections_public.table_grant FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_select_on_table ON rls_collections_public."table" FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_table ON collections_public."table" FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_table_grant ON rls_collections_public.table_grant FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_table_grant ON collections_public.table_grant FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_table ON rls_collections_public."table" FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_table ON collections_public."table" FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_table_grant ON rls_collections_public.table_grant FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_table_grant ON collections_public.table_grant FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_table ON rls_collections_public."table" FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_table ON collections_public."table" FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_table_grant ON rls_collections_public.table_grant FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_table_grant ON collections_public.table_grant FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_table ON rls_collections_public."table" FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_table ON collections_public."table" FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.table_grant TO authenticated;
+GRANT SELECT ON TABLE collections_public.table_grant TO authenticated;
 
-GRANT SELECT ON TABLE rls_collections_public."table" TO authenticated;
+GRANT SELECT ON TABLE collections_public."table" TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.table_grant TO authenticated;
+GRANT INSERT ON TABLE collections_public.table_grant TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public."table" TO authenticated;
+GRANT INSERT ON TABLE collections_public."table" TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.table_grant TO authenticated;
+GRANT UPDATE ON TABLE collections_public.table_grant TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public."table" TO authenticated;
+GRANT UPDATE ON TABLE collections_public."table" TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.table_grant TO authenticated;
+GRANT DELETE ON TABLE collections_public.table_grant TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public."table" TO authenticated;
+GRANT DELETE ON TABLE collections_public."table" TO authenticated;
 
-ALTER TABLE rls_collections_public.trigger ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.trigger ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_trigger ON rls_collections_public.trigger FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_trigger ON collections_public.trigger FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_trigger ON rls_collections_public.trigger FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_trigger ON collections_public.trigger FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_trigger ON rls_collections_public.trigger FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_trigger ON collections_public.trigger FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_trigger ON rls_collections_public.trigger FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_trigger ON collections_public.trigger FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.trigger TO authenticated;
+GRANT SELECT ON TABLE collections_public.trigger TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.trigger TO authenticated;
+GRANT INSERT ON TABLE collections_public.trigger TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.trigger TO authenticated;
+GRANT UPDATE ON TABLE collections_public.trigger TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.trigger TO authenticated;
+GRANT DELETE ON TABLE collections_public.trigger TO authenticated;
 
-ALTER TABLE rls_collections_public.trigger_function ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.trigger_function ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_trigger_function ON rls_collections_public.trigger_function FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_trigger_function ON collections_public.trigger_function FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_trigger_function ON rls_collections_public.trigger_function FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_trigger_function ON collections_public.trigger_function FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_trigger_function ON rls_collections_public.trigger_function FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_trigger_function ON collections_public.trigger_function FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_trigger_function ON rls_collections_public.trigger_function FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_trigger_function ON collections_public.trigger_function FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.trigger_function TO authenticated;
+GRANT SELECT ON TABLE collections_public.trigger_function TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.trigger_function TO authenticated;
+GRANT INSERT ON TABLE collections_public.trigger_function TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.trigger_function TO authenticated;
+GRANT UPDATE ON TABLE collections_public.trigger_function TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.trigger_function TO authenticated;
+GRANT DELETE ON TABLE collections_public.trigger_function TO authenticated;
 
-ALTER TABLE rls_collections_public.unique_constraint ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.unique_constraint ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_unique_constraint ON rls_collections_public.unique_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_unique_constraint ON collections_public.unique_constraint FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_unique_constraint ON rls_collections_public.unique_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_unique_constraint ON collections_public.unique_constraint FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_unique_constraint ON rls_collections_public.unique_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_unique_constraint ON collections_public.unique_constraint FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_unique_constraint ON rls_collections_public.unique_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_unique_constraint ON collections_public.unique_constraint FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.unique_constraint TO authenticated;
+GRANT SELECT ON TABLE collections_public.unique_constraint TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.unique_constraint TO authenticated;
+GRANT INSERT ON TABLE collections_public.unique_constraint TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.unique_constraint TO authenticated;
+GRANT UPDATE ON TABLE collections_public.unique_constraint TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.unique_constraint TO authenticated;
+GRANT DELETE ON TABLE collections_public.unique_constraint TO authenticated;
 
-ALTER TABLE rls_collections_public.field ENABLE ROW LEVEL SECURITY;
+ALTER TABLE collections_public.field ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY authenticated_can_select_on_field ON rls_collections_public.field FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_select_on_field ON collections_public.field FOR SELECT TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_insert_on_field ON rls_collections_public.field FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_insert_on_field ON collections_public.field FOR INSERT TO authenticated WITH CHECK ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_update_on_field ON rls_collections_public.field FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_update_on_field ON collections_public.field FOR UPDATE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-CREATE POLICY authenticated_can_delete_on_field ON rls_collections_public.field FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM rls_collections_public.database AS p WHERE p.id = database_id) );
+CREATE POLICY authenticated_can_delete_on_field ON collections_public.field FOR DELETE TO authenticated USING ( (SELECT p.owner_id = ANY (rls_public.get_current_group_ids()) FROM collections_public.database AS p WHERE p.id = database_id) );
 
-GRANT SELECT ON TABLE rls_collections_public.field TO authenticated;
+GRANT SELECT ON TABLE collections_public.field TO authenticated;
 
-GRANT INSERT ON TABLE rls_collections_public.field TO authenticated;
+GRANT INSERT ON TABLE collections_public.field TO authenticated;
 
-GRANT UPDATE ON TABLE rls_collections_public.field TO authenticated;
+GRANT UPDATE ON TABLE collections_public.field TO authenticated;
 
-GRANT DELETE ON TABLE rls_collections_public.field TO authenticated;
+GRANT DELETE ON TABLE collections_public.field TO authenticated;

@@ -1,8 +1,8 @@
 # launchql-rls extension
 comment = 'launchql-rls extension'
-default_version = '0.0.3'
+default_version = '0.0.4'
 module_pathname = '$libdir/launchql-rls'
-requires = 'plpgsql,launchql-ext-jobs'
+requires = 'plpgsql,launchql-ext-jobs,dbs'
 relocatable = false
 superuser = false
   
