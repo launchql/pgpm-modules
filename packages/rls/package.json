@@ -1,6 +1,6 @@
 {
   "name": "@pyramation/launchql-ext-rls",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "rls",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "publishConfig": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "FAST_TEST=1 launchql-templatedb && jest",
     "test:watch": "FAST_TEST=1 jest --watch",
-    "prepare": "lql package"    
+    "prepare": "lql package"
   },
   "devDependencies": {
     "@babel/cli": "7.10.4",
@@ -29,6 +29,5 @@
     "jest": "26.1.0",
     "prettier": "2.0.5",
     "regenerator-runtime": "^0.13.2"
-  },
-  "dependencies": {}
+  }
 }
