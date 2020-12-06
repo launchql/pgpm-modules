@@ -1,5 +1,5 @@
 {
-  "name": "@pyramation/lql-ext-rls",
+  "name": "@pyramation/launchql-ext-rls",
   "version": "0.0.1",
   "description": "rls",
   "author": "Dan Lynch <pyramation@gmail.com>",
