@@ -268,7 +268,11 @@ CREATE INDEX unique_constraint_database_id_idx ON collections_public.unique_cons
 
 CREATE SCHEMA meta_private;
 
+GRANT USAGE ON SCHEMA meta_private TO authenticated;
+
 CREATE SCHEMA meta_public;
+
+GRANT USAGE ON SCHEMA meta_public TO authenticated;
 
 CREATE TABLE meta_public.domains (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
