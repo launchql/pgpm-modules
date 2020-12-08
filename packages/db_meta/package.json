@@ -1,6 +1,6 @@
 {
   "name": "@pyramation/launchql-meta-schema",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "db meta",
   "author": "Web, Inc. <pyramation@gmail.com>",
   "publishConfig": {
@@ -31,8 +31,8 @@
     "regenerator-runtime": "^0.13.2"
   },
   "dependencies": {
-    "@launchql/inflection": "^0.1.0",
     "@launchql/ext-jobs": "^0.1.0",
-    "@launchql/ext-types": "^0.0.6"
+    "@launchql/ext-types": "^0.0.6",
+    "@launchql/inflection": "^0.1.0"
   }
 }
