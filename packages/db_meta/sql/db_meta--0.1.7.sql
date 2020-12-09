@@ -297,7 +297,7 @@ CREATE TABLE meta_public.apis (
 	dbname text NOT NULL DEFAULT ( current_database() ),
 	role_name text NOT NULL DEFAULT ( 'authenticated' ),
 	anon_role text NOT NULL DEFAULT ( 'anonymous' ),
-	public boolean NOT NULL DEFAULT ( TRUE ),
+	is_public boolean NOT NULL DEFAULT ( TRUE ),
 	UNIQUE ( database_id, name ),
 	UNIQUE ( domain_id ) 
 );
