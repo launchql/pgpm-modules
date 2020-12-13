@@ -1048,7 +1048,7 @@ BEGIN
                 'email_type', 'invite_email',
                 'email', NEW.email,
                 'sender_id', NEW.sender_id,
-                'invite_code', NEW.invite_code
+                'invite_token', NEW.invite_token
                 )
             );
     END IF;
@@ -1187,6 +1187,17 @@ END;
 $EOFCODE$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
 
 GRANT EXECUTE ON FUNCTION rls_roles_public.register TO anonymous;
+
+CREATE FUNCTION rls_roles_public.logout ( token text ) RETURNS void AS $EOFCODE$
+BEGIN
+  IF (token IS NOT NULL) THEN 
+      DELETE FROM "rls_roles_private".api_tokens t
+    WHERE t.access_token = logout.token;
+  END IF;
+END;
+$EOFCODE$ LANGUAGE plpgsql VOLATILE SECURITY DEFINER;
+
+GRANT EXECUTE ON FUNCTION rls_roles_public.logout TO authenticated;
 
 CREATE FUNCTION rls_roles_public.set_password ( current_password text, new_password text ) RETURNS boolean AS $EOFCODE$
 DECLARE

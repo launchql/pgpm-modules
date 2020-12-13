@@ -1052,7 +1052,7 @@ BEGIN
                 'email_type', 'invite_email',
                 'email', NEW.email,
                 'sender_id', NEW.sender_id,
-                'invite_code', NEW.invite_code
+                'invite_token', NEW.invite_token
                 )
             );
     END IF;
