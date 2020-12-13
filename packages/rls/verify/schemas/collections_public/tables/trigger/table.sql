@@ -1,6 +1,0 @@
--- Verify: schemas/collections_public/tables/trigger/table on pg
-
-BEGIN;
-
-COMMIT;  
-

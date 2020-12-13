@@ -1,6 +1,0 @@
--- Verify: schemas/collections_public/tables/foreign_key_constraint/table on pg
-
-BEGIN;
-
-COMMIT;  
-

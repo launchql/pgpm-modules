@@ -18,6 +18,7 @@ lql package
 
 * Then copy/paste the code from extension `sql/*.sql` into `rls-export`'s rls.sql
 * leave the table rls alone
+* you can delete `rls` package now (just keep `rls-export`)
 
 4. test it
 

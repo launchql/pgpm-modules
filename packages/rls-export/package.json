@@ -32,5 +32,6 @@
   },
   "dependencies": {
     "@launchql/ext-jobs": "0.1.0"
-  }
+  },
+  "gitHead": "116280f1b437286d7ec889591e8f3cd77bfdf629"
 }
