@@ -1090,7 +1090,7 @@ CREATE TRIGGER invite_trigger_send_email
  FOR EACH ROW
  EXECUTE PROCEDURE rls_private. after_insert_invite_add_job_tg (  );
 
-CREATE FUNCTION rls_roles_public.login ( email text, password text ) RETURNS rls_roles_private.api_tokens AS $EOFCODE$
+CREATE FUNCTION rls_roles_public.login ( email text, password text, remember_me boolean DEFAULT FALSE ) RETURNS rls_roles_private.api_tokens AS $EOFCODE$
 DECLARE
   v_token "rls_roles_private".api_tokens;
   v_email "rls_public".emails;
@@ -1125,10 +1125,27 @@ BEGIN
     ARRAY[
       'password_attempts', 'first_failed_password_attempt'
     ]);
-    INSERT INTO "rls_roles_private".api_tokens (user_id)
-      VALUES (v_email.owner_id)
-    RETURNING
-      * INTO v_token;
+    IF (remember_me IS TRUE) THEN 
+      INSERT INTO "rls_roles_private".api_tokens (
+        user_id,
+        access_token_expires_at
+      )
+      VALUES (
+        v_email.owner_id,
+        ( NOW() + '1 year'::interval )
+      )
+      RETURNING
+        * INTO v_token;
+    ELSE 
+      INSERT INTO "rls_roles_private".api_tokens (
+        user_id
+      )
+      VALUES (
+        v_email.owner_id
+      )
+      RETURNING
+        * INTO v_token;
+    END IF;
     RETURN v_token;
   ELSE
     IF (password_attempts IS NULL) THEN
@@ -1153,7 +1170,7 @@ $EOFCODE$ LANGUAGE plpgsql STRICT SECURITY DEFINER;
 
 GRANT EXECUTE ON FUNCTION rls_roles_public.login TO anonymous;
 
-CREATE FUNCTION rls_roles_public.register ( email text, password text ) RETURNS rls_roles_private.api_tokens AS $EOFCODE$
+CREATE FUNCTION rls_roles_public.register ( email text, password text, remember_me boolean DEFAULT FALSE ) RETURNS rls_roles_private.api_tokens AS $EOFCODE$
 DECLARE
   v_user "rls_public".users;
   v_email "rls_public".emails;
@@ -1178,10 +1195,27 @@ BEGIN
       VALUES (v_user.id, trim(register.email))
     RETURNING
       * INTO v_email;
-    INSERT INTO "rls_roles_private".api_tokens (user_id)
-      VALUES (v_user.id)
-    RETURNING
-      * INTO v_token;
+    IF (remember_me IS TRUE) THEN 
+      INSERT INTO "rls_roles_private".api_tokens (
+        user_id,
+        access_token_expires_at
+      )
+      VALUES (
+        v_user.id,
+        ( NOW() + '1 year'::interval )
+      )
+      RETURNING
+        * INTO v_token;
+    ELSE 
+      INSERT INTO "rls_roles_private".api_tokens (
+        user_id
+      )
+      VALUES (
+        v_user.id
+      )
+      RETURNING
+        * INTO v_token;
+    END IF;
     PERFORM "rls_encrypted_secrets".set
       (v_user.id, 'password_hash', trim(password), 'crypt');
     RETURN v_token;
@@ -2395,4 +2429,5 @@ GRANT INSERT ON TABLE collections_public.field TO authenticated;
 GRANT UPDATE ON TABLE collections_public.field TO authenticated;
 
 GRANT DELETE ON TABLE collections_public.field TO authenticated;
+
 COMMIT;
