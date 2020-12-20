@@ -34,6 +34,5 @@
     "@launchql/ext-jobs": "^0.1.0",
     "@launchql/ext-types": "^0.0.6",
     "@launchql/inflection": "^0.1.0"
-  },
-  "gitHead": "be77252570b8dc21f7e2fb1a4ed546ea98e47460"
+  }
 }

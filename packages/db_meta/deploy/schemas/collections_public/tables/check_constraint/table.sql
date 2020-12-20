@@ -14,6 +14,7 @@ CREATE TABLE collections_public.check_constraint (
   type text,
   field_ids uuid[] NOT NULL,
   expr jsonb,
+  --
   UNIQUE (database_id, name),
   CHECK (field_ids <> '{}')
 );
