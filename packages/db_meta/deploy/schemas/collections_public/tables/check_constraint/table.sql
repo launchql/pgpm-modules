@@ -19,7 +19,7 @@ CREATE TABLE collections_public.check_constraint (
   CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
   CONSTRAINT table_fkey FOREIGN KEY (table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE,
 
-  UNIQUE (database_id, name),
+  UNIQUE (table_id, name),
   CHECK (field_ids <> '{}')
 );
 

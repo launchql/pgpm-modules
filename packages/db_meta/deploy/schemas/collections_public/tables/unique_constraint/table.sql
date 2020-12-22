@@ -23,7 +23,7 @@ CREATE TABLE collections_public.unique_constraint (
   -- TODO these are unique across schema, NOT table. We'll need to update this to have database_id
   -- for portability
 
-  UNIQUE (database_id, name),
+  UNIQUE (table_id, name),
   CHECK (field_ids <> '{}')
 );
 
