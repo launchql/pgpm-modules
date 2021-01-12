@@ -171,7 +171,7 @@ CREATE TABLE collections_public.foreign_key_constraint (
 	field_ids uuid[] NOT NULL,
 	ref_table_id uuid NOT NULL REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	ref_field_ids uuid[] NOT NULL,
-	delete_action char(1) DEFAULT ( 'a' ),
+	delete_action char(1) DEFAULT ( 'c' ),
 	update_action char(1) DEFAULT ( 'a' ),
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
