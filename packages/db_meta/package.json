@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "@launchql/ext-jobs": "^0.2.16",
-    "@launchql/ext-types": "^0.1.17",
-    "@launchql/inflection": "^0.1.17"
+    "@launchql/ext-types": "^0.1.18",
+    "@launchql/inflection": "^0.1.18"
   }
 }
