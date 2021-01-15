@@ -16,7 +16,7 @@ CREATE TABLE meta_public.field_module (
 
     -- data = '{"regexp":"^kjhsdkjhsd$"}'
     -- data = '{"min":10, "max": 20}'
-    data json NOT NULL DEFAULT '{}',
+    data jsonb NOT NULL DEFAULT '{}',
 
     triggers text[],
     functions text[],

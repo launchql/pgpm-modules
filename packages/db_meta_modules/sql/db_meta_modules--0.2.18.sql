@@ -395,6 +395,8 @@ CREATE TABLE meta_public.field_module (
 	table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	field_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	data json NOT NULL DEFAULT ( '{}' ),
+	triggers text[],
+	functions text[],
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT field_fkey FOREIGN KEY ( field_id ) REFERENCES collections_public.field ( id ) ON DELETE CASCADE,
