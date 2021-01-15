@@ -8,7 +8,6 @@ CREATE TABLE meta_public.field_module (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
     database_id uuid NOT NULL,
     
-    schema_id uuid NOT NULL DEFAULT uuid_nil(),
     private_schema_id uuid NOT NULL DEFAULT uuid_nil(),
     
     table_id uuid NOT NULL DEFAULT uuid_nil(),
@@ -25,11 +24,9 @@ CREATE TABLE meta_public.field_module (
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
     CONSTRAINT table_fkey FOREIGN KEY (table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE,
     CONSTRAINT field_fkey FOREIGN KEY (field_id) REFERENCES collections_public.field (id) ON DELETE CASCADE,
-    CONSTRAINT schema_fkey FOREIGN KEY (schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE,
     CONSTRAINT private_schema_fkey FOREIGN KEY (private_schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE
 );
 
-COMMENT ON CONSTRAINT schema_fkey ON meta_public.field_module IS E'@omit manyToMany';
 COMMENT ON CONSTRAINT private_schema_fkey ON meta_public.field_module IS E'@omit manyToMany';
 COMMENT ON CONSTRAINT table_fkey ON meta_public.field_module IS E'@omit manyToMany';
 COMMENT ON CONSTRAINT field_fkey ON meta_public.field_module IS E'@omit manyToMany';
