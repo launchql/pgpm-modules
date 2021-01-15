@@ -18,6 +18,9 @@ CREATE TABLE meta_public.field_module (
     -- data = '{"min":10, "max": 20}'
     data json NOT NULL DEFAULT '{}',
 
+    triggers text[],
+    functions text[],
+
     --
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
     CONSTRAINT table_fkey FOREIGN KEY (table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE,
