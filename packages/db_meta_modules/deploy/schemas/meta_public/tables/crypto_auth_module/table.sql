@@ -9,7 +9,7 @@ CREATE TABLE meta_public.crypto_auth_module (
     database_id uuid NOT NULL,
     
     schema_id uuid NOT NULL DEFAULT uuid_nil(),
-    
+
     users_table_id uuid NOT NULL DEFAULT uuid_nil(),
     tokens_table_id uuid NOT NULL DEFAULT uuid_nil(),
     secrets_table_id uuid NOT NULL DEFAULT uuid_nil(),
@@ -20,8 +20,7 @@ CREATE TABLE meta_public.crypto_auth_module (
     crypto_network text NOT NULL DEFAULT 'BTC',
     sign_in_request_challenge text NOT NULL DEFAULT 'sign_in_request_challenge',
     sign_in_record_failure text NOT NULL DEFAULT 'sign_in_record_failure',
-    sign_up_unique_key text NOT NULL DEFAULT 'sign_up_with_address',
-    sign_up_owned_object text NOT NULL DEFAULT 'sign_up_owned_object',
+    sign_up_with_address text NOT NULL DEFAULT 'sign_up_with_address',
     sign_in_with_challenge text NOT NULL DEFAULT 'sign_in_with_challenge',
 
     --
