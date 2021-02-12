@@ -15,7 +15,7 @@ CREATE TABLE meta_public.users_module (
 
     --
     type_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    type_table_name text NOT NULL DEFAULT 'profile_types',
+    type_table_name text NOT NULL DEFAULT 'role_types',
     -- 
      
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
