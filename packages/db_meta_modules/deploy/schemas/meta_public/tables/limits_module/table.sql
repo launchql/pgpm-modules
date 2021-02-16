@@ -23,10 +23,15 @@ CREATE TABLE meta_public.limits_module (
     -- e.g. limits to the app itself are considered global owned by app and no explicit owner
     owner_table_id uuid NULL,
 
+    -- required tables    
+    actor_table_id uuid NOT NULL DEFAULT uuid_nil(),
      
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
     CONSTRAINT schema_fkey FOREIGN KEY (schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE,
-    CONSTRAINT table_fkey FOREIGN KEY (table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE
+    CONSTRAINT table_fkey FOREIGN KEY (table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE,
+    CONSTRAINT default_table_fkey FOREIGN KEY (default_table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE,
+    CONSTRAINT actor_table_fkey FOREIGN KEY (actor_table_id) REFERENCES collections_public.table (id) ON DELETE CASCADE
+
 );
 
 COMMENT ON CONSTRAINT schema_fkey ON meta_public.limits_module IS E'@omit manyToMany';
@@ -37,6 +42,9 @@ COMMENT ON CONSTRAINT table_fkey
      ON meta_public.limits_module IS E'@omit manyToMany';
 
 COMMENT ON CONSTRAINT default_table_fkey
+     ON meta_public.limits_module IS E'@omit manyToMany';
+
+COMMENT ON CONSTRAINT actor_table_fkey
      ON meta_public.limits_module IS E'@omit manyToMany';
 
 COMMIT;
