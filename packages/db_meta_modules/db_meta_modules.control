@@ -1,6 +1,6 @@
 # launchql-meta-modules extension
 comment = 'launchql-meta-modules extension'
-default_version = '0.2.28'
+default_version = '0.2.29'
 module_pathname = '$libdir/launchql-meta-modules'
 requires = 'plpgsql,db_meta'
 relocatable = false
