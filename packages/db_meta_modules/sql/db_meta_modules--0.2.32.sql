@@ -294,6 +294,7 @@ CREATE TABLE meta_public.permissions_module (
 	table_name text NOT NULL DEFAULT ( 'permissions' ),
 	default_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	default_table_name text NOT NULL DEFAULT ( 'default_permissions' ),
+	bitlen int NOT NULL DEFAULT ( 24 ),
 	membership_type int NOT NULL,
 	owner_table_id uuid NULL,
 	actor_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
