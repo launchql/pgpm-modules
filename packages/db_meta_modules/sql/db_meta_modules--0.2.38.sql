@@ -503,6 +503,8 @@ CREATE TABLE meta_public.user_status_module (
 	tg_achievement_boolean text NOT NULL DEFAULT ( 'tg_achievement_boolean' ),
 	upsert_achievement text NOT NULL DEFAULT ( 'upsert_achievement' ),
 	tg_update_achievements text NOT NULL DEFAULT ( 'tg_update_achievements' ),
+	steps_required text NOT NULL DEFAULT ( 'steps_required' ),
+	user_achieved text NOT NULL DEFAULT ( 'user_achieved' ),
 	membership_type int NOT NULL,
 	owner_table_id uuid NULL,
 	actor_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
