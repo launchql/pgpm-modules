@@ -28,6 +28,15 @@ CREATE TABLE meta_public.permissions_module (
     -- required tables    
     actor_table_id uuid NOT NULL DEFAULT uuid_nil(),
 
+    --
+
+    get_padded_mask text NOT NULL DEFAULT '',
+    get_mask text NOT NULL DEFAULT '',
+    get_by_mask text NOT NULL DEFAULT '',
+    get_mask_by_name text NOT NULL DEFAULT '',
+
+    --
+
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
     CONSTRAINT schema_fkey FOREIGN KEY (schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE,
     CONSTRAINT private_schema_fkey FOREIGN KEY (private_schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE,

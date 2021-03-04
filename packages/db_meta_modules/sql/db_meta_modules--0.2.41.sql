@@ -258,6 +258,7 @@ CREATE TABLE meta_public.memberships_module (
 	default_limits_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	permissions_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	default_permissions_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
+	acl_table_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	membership_type int NOT NULL,
 	owner_table_id uuid NULL,
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
@@ -265,6 +266,7 @@ CREATE TABLE meta_public.memberships_module (
 	CONSTRAINT private_schema_fkey FOREIGN KEY ( private_schema_id ) REFERENCES collections_public.schema ( id ) ON DELETE CASCADE,
 	CONSTRAINT members_table_fkey FOREIGN KEY ( members_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT grants_table_fkey FOREIGN KEY ( grants_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
+	CONSTRAINT acl_table_fkey FOREIGN KEY ( acl_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT actor_table_fkey FOREIGN KEY ( actor_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT limits_table_fkey FOREIGN KEY ( limits_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT default_limits_table_fkey FOREIGN KEY ( default_limits_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
@@ -283,6 +285,8 @@ CREATE INDEX memberships_module_database_id_idx ON meta_public.memberships_modul
 COMMENT ON CONSTRAINT members_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 
 COMMENT ON CONSTRAINT grants_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
+
+COMMENT ON CONSTRAINT acl_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 
 COMMENT ON CONSTRAINT actor_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 

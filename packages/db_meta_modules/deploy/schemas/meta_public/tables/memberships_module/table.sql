@@ -30,6 +30,8 @@ CREATE TABLE meta_public.memberships_module (
     -- e.g. memberships to the app itself are considered global owned by app and no explicit owner
     owner_table_id uuid NULL,
 
+    --
+
     -- 
      
     CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
