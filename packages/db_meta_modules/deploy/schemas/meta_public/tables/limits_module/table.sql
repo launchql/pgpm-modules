@@ -14,9 +14,12 @@ CREATE TABLE meta_public.limits_module (
     table_name text NOT NULL DEFAULT 'limits',
     -- 
 
-    limit_increment_function text,
-    limit_decrement_function text,
-    limit_check_function text,
+    limit_increment_function text NOT NULL DEFAULT '',
+    limit_decrement_function text NOT NULL DEFAULT '',
+    limit_increment_trigger text NOT NULL DEFAULT '',
+    limit_decrement_trigger text NOT NULL DEFAULT '',
+    limit_update_trigger text NOT NULL DEFAULT '',
+    limit_check_function text NOT NULL DEFAULT '',
 
     --
     default_table_id uuid NOT NULL DEFAULT uuid_nil(),
