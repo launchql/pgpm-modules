@@ -22,6 +22,8 @@ CREATE TABLE collections_public.policy (
 
   policy_template_name text,
   policy_template_vars jsonb,
+
+  disabled boolean default false,
   --
 
   CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
