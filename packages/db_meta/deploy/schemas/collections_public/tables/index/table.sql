@@ -10,9 +10,17 @@ CREATE TABLE collections_public.index (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
   database_id uuid NOT NULL,
   table_id uuid NOT NULL,
-  name text NOT NULL,
+  name text NOT NULL DEFAULT '',
+
   field_ids uuid[],
   include_field_ids uuid[],
+
+  access_method text NOT NULL DEFAULT 'BTREE',
+
+  index_params jsonb,
+  where_clause jsonb,
+  is_unique boolean NOT NULL default false,
+
   --
 
   CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
