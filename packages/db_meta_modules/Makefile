@@ -1,5 +1,5 @@
 EXTENSION = db_meta_modules
-DATA = sql/db_meta_modules--0.3.4.sql
+DATA = sql/db_meta_modules--0.3.5.sql
 
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
