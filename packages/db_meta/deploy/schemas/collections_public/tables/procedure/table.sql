@@ -7,7 +7,8 @@ BEGIN;
 
 CREATE TABLE collections_public.procedure (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-  database_id uuid NOT NULL,
+  database_id uuid NOT NULL DEFAULT uuid_nil(),
+
   name text NOT NULL,
 
   -- MAYBE MAKE A SPECIAL RLS functions for policy making...

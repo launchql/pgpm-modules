@@ -6,7 +6,8 @@ BEGIN;
 
 CREATE TABLE collections_public.full_text_search (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    database_id uuid NOT NULL,
+    database_id uuid NOT NULL DEFAULT uuid_nil(),
+    
     table_id uuid NOT NULL,
     field_id uuid NOT NULL,
     field_ids uuid[] NOT NULL,

@@ -25,10 +25,13 @@ BEGIN;
 
 CREATE TABLE collections_public.field (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-  database_id uuid NOT NULL,
+  database_id uuid NOT NULL DEFAULT uuid_nil(),
+  
   table_id uuid NOT NULL,
   
   name text NOT NULL,
+  label text,
+  
   description text,
   smart_tags jsonb,
 

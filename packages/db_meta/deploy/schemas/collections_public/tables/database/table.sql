@@ -10,7 +10,10 @@ CREATE TABLE collections_public.database (
   schema_hash text,
   schema_name text,
   private_schema_name text,
+  
   name text,
+  label text,
+  
   hash uuid,
   unique(schema_hash),
   unique(schema_name),

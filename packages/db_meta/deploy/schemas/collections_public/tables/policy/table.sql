@@ -7,9 +7,9 @@ BEGIN;
 
 CREATE TABLE collections_public.policy (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-  database_id uuid NOT NULL,
+  database_id uuid NOT NULL DEFAULT uuid_nil(),
+
   table_id uuid NOT NULL,
-  
   name text,
   role_name text,
   privilege text,
@@ -19,11 +19,11 @@ CREATE TABLE collections_public.policy (
   -- policy_text text,
 
   permissive boolean default true,
-
-  policy_template_name text,
-  policy_template_vars jsonb,
-
   disabled boolean default false,
+
+  template text,
+  data jsonb,
+
   --
 
   CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,

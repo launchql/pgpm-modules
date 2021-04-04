@@ -7,7 +7,8 @@ BEGIN;
 
 CREATE TABLE collections_public.schema_grant (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    database_id uuid NOT NULL,
+    database_id uuid NOT NULL DEFAULT uuid_nil(),
+    
     schema_id uuid NOT NULL,
     grantee_name text NOT NULL,
     --

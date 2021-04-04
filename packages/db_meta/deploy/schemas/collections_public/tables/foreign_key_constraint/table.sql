@@ -8,7 +8,8 @@ BEGIN;
 
 CREATE TABLE collections_public.foreign_key_constraint (
     id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    database_id uuid NOT NULL,
+    database_id uuid NOT NULL DEFAULT uuid_nil(),
+    
     table_id uuid NOT NULL,
     name text,
     description text,
