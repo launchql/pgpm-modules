@@ -36,6 +36,7 @@ CREATE TABLE collections_public.database (
 	schema_name text,
 	private_schema_name text,
 	name text,
+	label text,
 	hash uuid,
 	UNIQUE ( schema_hash ),
 	UNIQUE ( schema_name ),
@@ -51,6 +52,7 @@ CREATE TABLE collections_public.schema (
 	database_id uuid NOT NULL,
 	name text NOT NULL,
 	schema_name text NOT NULL,
+	label text,
 	description text,
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	UNIQUE ( database_id, name ),
@@ -65,7 +67,7 @@ CREATE INDEX schema_database_id_idx ON collections_public.schema ( database_id )
 
 CREATE TABLE collections_public."table" (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	schema_id uuid NOT NULL,
 	name text NOT NULL,
 	description text,
@@ -91,7 +93,7 @@ CREATE INDEX table_database_id_idx ON collections_public."table" ( database_id )
 
 CREATE TABLE collections_public.check_constraint (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text,
 	type text,
@@ -140,9 +142,10 @@ CREATE UNIQUE INDEX databases_database_unique_name_idx ON collections_public.dat
 
 CREATE TABLE collections_public.field (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text NOT NULL,
+	label text,
 	description text,
 	smart_tags jsonb,
 	is_required boolean NOT NULL DEFAULT ( FALSE ),
@@ -172,7 +175,7 @@ CREATE UNIQUE INDEX databases_field_uniq_names_idx ON collections_public.field (
 
 CREATE TABLE collections_public.foreign_key_constraint (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text,
 	description text,
@@ -200,7 +203,7 @@ CREATE INDEX foreign_key_constraint_database_id_idx ON collections_public.foreig
 
 CREATE TABLE collections_public.full_text_search (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	field_id uuid NOT NULL,
 	field_ids uuid[] NOT NULL,
@@ -243,17 +246,40 @@ CREATE INDEX index_table_id_idx ON collections_public.index ( table_id );
 
 CREATE INDEX index_database_id_idx ON collections_public.index ( database_id );
 
+CREATE TABLE collections_public.limit_function (
+ 	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
+	table_id uuid NOT NULL,
+	name text,
+	label text,
+	description text,
+	data jsonb,
+	security int DEFAULT ( 0 ),
+	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
+	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
+	UNIQUE ( function_template_name, database_id ),
+	UNIQUE ( database_id, name ) 
+);
+
+COMMENT ON CONSTRAINT db_fkey ON collections_public.limit_function IS E'@omit manyToMany';
+
+COMMENT ON CONSTRAINT table_fkey ON collections_public.limit_function IS E'@omit manyToMany';
+
+CREATE INDEX limit_function_table_id_idx ON collections_public.limit_function ( table_id );
+
+CREATE INDEX limit_function_database_id_idx ON collections_public.limit_function ( database_id );
+
 CREATE TABLE collections_public.policy (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text,
 	role_name text,
 	privilege text,
 	permissive boolean DEFAULT ( TRUE ),
-	policy_template_name text,
-	policy_template_vars jsonb,
 	disabled boolean DEFAULT ( FALSE ),
+	template text,
+	data jsonb,
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	UNIQUE ( table_id, name ) 
@@ -269,7 +295,7 @@ CREATE INDEX policy_database_id_idx ON collections_public.policy ( database_id )
 
 CREATE TABLE collections_public.primary_key_constraint (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text,
 	type text,
@@ -290,7 +316,7 @@ CREATE INDEX primary_key_constraint_database_id_idx ON collections_public.primar
 
 CREATE TABLE collections_public.procedure (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	name text NOT NULL,
 	argnames text[],
 	argtypes text[],
@@ -305,31 +331,33 @@ COMMENT ON CONSTRAINT db_fkey ON collections_public.procedure IS E'@omit manyToM
 
 CREATE INDEX procedure_database_id_idx ON collections_public.procedure ( database_id );
 
-CREATE TABLE collections_public.rls_expression (
- 	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	expr json 
-);
-
 CREATE TABLE collections_public.rls_function (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
-	name text NOT NULL,
-	function_template_name text,
-	function_template_vars json,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
+	table_id uuid NOT NULL,
+	name text,
 	label text,
 	description text,
+	data jsonb,
+	inline boolean DEFAULT ( FALSE ),
+	security int DEFAULT ( 0 ),
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
+	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	UNIQUE ( function_template_name, database_id ),
 	UNIQUE ( database_id, name ) 
 );
 
 COMMENT ON CONSTRAINT db_fkey ON collections_public.rls_function IS E'@omit manyToMany';
 
+COMMENT ON CONSTRAINT table_fkey ON collections_public.rls_function IS E'@omit manyToMany';
+
+CREATE INDEX rls_function_table_id_idx ON collections_public.rls_function ( table_id );
+
 CREATE INDEX rls_function_database_id_idx ON collections_public.rls_function ( database_id );
 
 CREATE TABLE collections_public.schema_grant (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	schema_id uuid NOT NULL,
 	grantee_name text NOT NULL,
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
@@ -346,7 +374,7 @@ CREATE INDEX schema_grant_database_id_idx ON collections_public.schema_grant ( d
 
 CREATE TABLE collections_public.table_grant (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	privilege text NOT NULL,
 	role_name text NOT NULL,
@@ -386,7 +414,7 @@ CREATE INDEX trigger_function_database_id_idx ON collections_public.trigger_func
 
 CREATE TABLE collections_public.trigger (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text NOT NULL,
 	event text,
@@ -406,7 +434,7 @@ CREATE INDEX trigger_database_id_idx ON collections_public.trigger ( database_id
 
 CREATE TABLE collections_public.unique_constraint (
  	id uuid PRIMARY KEY DEFAULT ( uuid_generate_v4() ),
-	database_id uuid NOT NULL,
+	database_id uuid NOT NULL DEFAULT ( uuid_nil() ),
 	table_id uuid NOT NULL,
 	name text,
 	description text,
