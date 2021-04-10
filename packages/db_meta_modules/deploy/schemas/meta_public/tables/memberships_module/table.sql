@@ -26,11 +26,14 @@ CREATE TABLE meta_public.memberships_module (
     acl_table_id uuid NOT NULL DEFAULT uuid_nil(),
 
     membership_type int NOT NULL,
-    prefix text NOT NULL,
+
     -- if this is NOT NULL, then we add entity_id 
     -- e.g. memberships to the app itself are considered global owned by app and no explicit owner
     entity_table_id uuid NULL,
     entity_table_owner_id uuid NULL,
+
+    owned_field_ids uuid[] NULL,
+    data jsonb, -- can store payload which can then parse into other fields
     --
 
     actor_mask_check text NOT NULL DEFAULT '',
