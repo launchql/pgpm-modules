@@ -11,12 +11,12 @@ CREATE TABLE meta_public.permissions_module (
     schema_id uuid NOT NULL DEFAULT uuid_nil(),
     private_schema_id uuid NOT NULL DEFAULT uuid_nil(),
     table_id uuid NOT NULL DEFAULT uuid_nil(),
-    table_name text NOT NULL DEFAULT 'permissions',
+    table_name text NOT NULL DEFAULT '',
     -- 
 
     --
     default_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    default_table_name text NOT NULL DEFAULT 'default_permissions',
+    default_table_name text NOT NULL DEFAULT '',
     -- 
      
     bitlen int NOT NULL DEFAULT 24,
@@ -27,6 +27,8 @@ CREATE TABLE meta_public.permissions_module (
 
     -- required tables    
     actor_table_id uuid NOT NULL DEFAULT uuid_nil(),
+
+    prefix text NULL,
 
     --
 

@@ -11,7 +11,7 @@ CREATE TABLE meta_public.limits_module (
     schema_id uuid NOT NULL DEFAULT uuid_nil(),
     private_schema_id uuid NOT NULL DEFAULT uuid_nil(),
     table_id uuid NOT NULL DEFAULT uuid_nil(),
-    table_name text NOT NULL DEFAULT 'limits',
+    table_name text NOT NULL DEFAULT '',
     -- 
 
     limit_increment_function text NOT NULL DEFAULT '',
@@ -23,8 +23,10 @@ CREATE TABLE meta_public.limits_module (
 
     --
     default_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    default_table_name text NOT NULL DEFAULT 'default_limits',
+    default_table_name text NOT NULL DEFAULT '',
     -- 
+
+    prefix text NULL,
 
     membership_type int NOT NULL,
     -- if this is NOT NULL, then we add entity_id 
