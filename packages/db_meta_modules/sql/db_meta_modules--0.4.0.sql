@@ -325,7 +325,7 @@ COMMENT ON CONSTRAINT entity_table_owner_fkey ON meta_public.memberships_module 
 
 COMMENT ON CONSTRAINT members_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 
-COMMENT ON CONSTRAINT member_defaults_table_name ON meta_public.memberships_module IS E'@omit manyToMany';
+COMMENT ON CONSTRAINT member_defaults_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 
 COMMENT ON CONSTRAINT grants_table_fkey ON meta_public.memberships_module IS E'@omit manyToMany';
 

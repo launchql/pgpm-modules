@@ -12,13 +12,13 @@ CREATE TABLE meta_public.memberships_module (
     private_schema_id uuid NOT NULL DEFAULT uuid_nil(),
 
     members_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    members_table_name text NOT NULL DEFAULT 'memberships',
+    members_table_name text NOT NULL DEFAULT '',
 
     member_defaults_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    member_defaults_table_name text NOT NULL DEFAULT 'membership_defaults',
+    member_defaults_table_name text NOT NULL DEFAULT '',
 
     grants_table_id uuid NOT NULL DEFAULT uuid_nil(),
-    grants_table_name text NOT NULL DEFAULT 'grants',
+    grants_table_name text NOT NULL DEFAULT '',
 
     -- required tables    
     actor_table_id uuid NOT NULL DEFAULT uuid_nil(),
@@ -35,9 +35,8 @@ CREATE TABLE meta_public.memberships_module (
     entity_table_id uuid NULL,
     entity_table_owner_id uuid NULL,
 
-    owned_field_ids uuid[] NULL,
+    prefix text NULL,
 
-    data jsonb, -- can store payload which can then parse into other fields
     --
 
     actor_mask_check text NOT NULL DEFAULT '',
