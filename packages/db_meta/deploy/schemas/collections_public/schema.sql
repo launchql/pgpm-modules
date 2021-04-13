@@ -5,9 +5,8 @@ BEGIN;
 CREATE SCHEMA collections_public;
 
 GRANT USAGE ON SCHEMA collections_public TO authenticated;
-GRANT USAGE ON SCHEMA collections_public TO administrator;
-ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON TABLES TO administrator;
-ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON SEQUENCES TO administrator;
-ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON FUNCTIONS TO administrator;
+ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON TABLES TO authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON SEQUENCES TO authenticated;
+ALTER DEFAULT PRIVILEGES IN SCHEMA collections_public GRANT ALL ON FUNCTIONS TO authenticated;
 
 COMMIT;
