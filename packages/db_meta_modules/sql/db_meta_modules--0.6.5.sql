@@ -476,7 +476,6 @@ CREATE TABLE meta_public.rls_module (
 	authenticate_strict text NOT NULL DEFAULT ( 'authenticate_strict' ),
 	"current_role" text NOT NULL DEFAULT ( 'current_user' ),
 	current_role_id text NOT NULL DEFAULT ( 'current_user_id' ),
-	current_group_ids text NOT NULL DEFAULT ( 'current_group_ids' ),
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	CONSTRAINT api_fkey FOREIGN KEY ( api_id ) REFERENCES meta_public.apis ( id ) ON DELETE CASCADE,
 	CONSTRAINT tokens_table_fkey FOREIGN KEY ( tokens_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
