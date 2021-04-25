@@ -1,6 +1,6 @@
 {
   "name": "@pyramation/launchql-meta-schema",
-  "version": "0.7.10",
+  "version": "0.7.11",
   "description": "db meta",
   "author": "Web, Inc. <pyramation@gmail.com>",
   "publishConfig": {
