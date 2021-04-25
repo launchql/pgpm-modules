@@ -33,7 +33,9 @@ CREATE TABLE meta_public.memberships_module (
 
     admin_grants_table_id uuid NOT NULL DEFAULT uuid_nil(),
     admin_grants_table_name text NOT NULL DEFAULT '',
-    grant_admin_function text NOT NULL DEFAULT '',
+
+    owner_grants_table_id uuid NOT NULL DEFAULT uuid_nil(),
+    owner_grants_table_name text NOT NULL DEFAULT '',
 
     membership_type int NOT NULL,
 
