@@ -108,6 +108,7 @@ CREATE TABLE meta_public.denormalized_table_field (
 	ref_ids uuid[],
 	use_updates bool NOT NULL DEFAULT ( TRUE ),
 	update_defaults bool NOT NULL DEFAULT ( TRUE ),
+	func_name text NULL,
 	CONSTRAINT db_fkey FOREIGN KEY ( database_id ) REFERENCES collections_public.database ( id ) ON DELETE CASCADE,
 	CONSTRAINT table_fkey FOREIGN KEY ( table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
 	CONSTRAINT ref_table_fkey FOREIGN KEY ( ref_table_id ) REFERENCES collections_public."table" ( id ) ON DELETE CASCADE,
