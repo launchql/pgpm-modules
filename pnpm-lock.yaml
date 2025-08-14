@@ -88,6 +88,18 @@ importers:
         version: link:../../security/ext-jwt-claims/dist
     publishDirectory: dist
 
+  packages/jobs/jobs-simple:
+    publishDirectory: dist
+
+  packages/meta/db_meta:
+    publishDirectory: dist
+
+  packages/meta/db_meta_modules:
+    publishDirectory: dist
+
+  packages/meta/db_meta_test:
+    publishDirectory: dist
+
   packages/metrics/achievements:
     publishDirectory: dist
 
@@ -112,6 +124,12 @@ importers:
       '@pagebond/my-second':
         specifier: workspace:^
         version: link:../my-second/dist
+    publishDirectory: dist
+
+  packages/security/encrypted-secrets:
+    publishDirectory: dist
+
+  packages/security/encrypted-secrets-table:
     publishDirectory: dist
 
   packages/security/ext-default-roles:
