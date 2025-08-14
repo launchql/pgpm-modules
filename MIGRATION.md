@@ -1,3 +1,11 @@
+Tests migration
+- Restored historical tests from legacy workspaces (source/internal-utils, source/pg-utils, source/utils) into packages/* by category.
+- Converted all JavaScript tests to TypeScript (*.test.ts) and placed under __tests__.
+- Updated Jest to use ts-jest at the root and aligned per-package test scripts to reference the root config.
+- Skipped DB integration tests by default where applicable to avoid env dependencies; structure and assertions preserved.
+- Confirmed no *.test.js or *.spec.js remain under packages/*.
+
+
 
 
 SQL assets restored and publishing
