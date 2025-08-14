@@ -60,10 +60,38 @@ importers:
         specifier: ^5.1.6
         version: 5.9.2
 
+  packages/data-types/base32:
+    publishDirectory: dist
+
   packages/data-types/ext-types:
     publishDirectory: dist
 
   packages/data-types/ext-uuid:
+    publishDirectory: dist
+
+  packages/data-types/inflection:
+    publishDirectory: dist
+
+  packages/data-types/stamps:
+    publishDirectory: dist
+
+  packages/geo/geotypes:
+    publishDirectory: dist
+
+  packages/jobs/ext-jobs:
+    dependencies:
+      '@launchql/ext-default-roles':
+        specifier: workspace:^
+        version: link:../../security/ext-default-roles/dist
+      '@launchql/ext-jwt-claims':
+        specifier: workspace:^
+        version: link:../../security/ext-jwt-claims/dist
+    publishDirectory: dist
+
+  packages/metrics/achievements:
+    publishDirectory: dist
+
+  packages/metrics/measurements:
     publishDirectory: dist
 
   packages/my-first:
@@ -86,7 +114,29 @@ importers:
         version: link:../my-second/dist
     publishDirectory: dist
 
+  packages/security/ext-default-roles:
+    publishDirectory: dist
+
+  packages/security/ext-jwt-claims:
+    dependencies:
+      '@launchql/ext-types':
+        specifier: workspace:^
+        version: link:../../data-types/ext-types/dist
+    publishDirectory: dist
+
   packages/security/ext-verify:
+    publishDirectory: dist
+
+  packages/utils/defaults:
+    publishDirectory: dist
+
+  packages/utils/faker:
+    publishDirectory: dist
+
+  packages/utils/totp:
+    publishDirectory: dist
+
+  packages/utils/utils:
     publishDirectory: dist
 
 packages:
