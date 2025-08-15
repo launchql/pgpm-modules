@@ -5,5 +5,7 @@
     "module": "es2022",
     "rootDir": "src/",
     "declaration": false
-  }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["__tests__"]
 }

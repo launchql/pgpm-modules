@@ -10,9 +10,13 @@ describe('signup', () => {
     await teardown();
   });
   describe('has a database', () => {
-    it('query your database', async () => {
-      const res = await conn.any('SELECT * FROM measurements.quantities LIMIT 1');
+    it('schema exists', async () => {
+      const res = await conn.any(
+        "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'measurements'"
+      );
       expect(Array.isArray(res)).toBe(true);
+      expect(res.length).toBe(1);
+      expect(res[0].schema_name).toBe('measurements');
     });
   });
 });

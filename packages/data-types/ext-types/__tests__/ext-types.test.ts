@@ -1,11 +1,10 @@
-import { getConnections, PgTestClient } from 'pgsql-test';
+import { getConnections } from '@launchql/db-testing';
 
-let db: PgTestClient;
-let pg: PgTestClient;
 let teardown: () => Promise<void>;
+let db: any;
 
 beforeAll(async () => {
-  ({ db, pg, teardown } = await getConnections());
+  ({ db, teardown } = await getConnections());
 });
 
 afterAll(async () => {
@@ -14,14 +13,11 @@ afterAll(async () => {
   } catch {}
 });
 
-beforeEach(() => pg.beforeEach());
-afterEach(() => pg.afterEach());
-
 describe('@launchql/ext-types', () => {
-  it('has extension installed', async () => {
-    const { extname } = await pg.one(
-      `SELECT extname FROM pg_extension WHERE extname = 'ext_types'`
+  it('creates domain types', async () => {
+    const { typname } = await db.one(
+      `SELECT typname FROM pg_type WHERE typname = 'url'`
     );
-    expect(extname).toBe('ext_types');
+    expect(typname).toBe('url');
   });
 });

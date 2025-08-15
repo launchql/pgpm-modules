@@ -84,8 +84,8 @@ afterAll(async () => {
 describe('types', () => {
   it('valid attachment and image', async () => {
     for (const value of validAttachments) {
-      await db.any(\`INSERT INTO customers (image) VALUES ($1::json);\`, [value]);
-      await db.any(\`INSERT INTO customers (attachment) VALUES ($1::json);\`, [value]);
+      await db.any(`INSERT INTO customers (image) VALUES ($1::json);`, [value]);
+      await db.any(`INSERT INTO customers (attachment) VALUES ($1::json);`, [value]);
     }
   });
 
@@ -93,14 +93,14 @@ describe('types', () => {
     for (const value of invalidAttachments) {
       let failed = false;
       try {
-        await db.any(\`INSERT INTO customers (attachment) VALUES ($1);\`, [value]);
+        await db.any(`INSERT INTO customers (attachment) VALUES ($1);`, [value]);
       } catch (e) {
         failed = true;
       }
       expect(failed).toBe(true);
       failed = false;
       try {
-        await db.any(\`INSERT INTO customers (image) VALUES ($1);\`, [value]);
+        await db.any(`INSERT INTO customers (image) VALUES ($1);`, [value]);
       } catch (e) {
         failed = true;
       }
@@ -110,7 +110,7 @@ describe('types', () => {
 
   it('valid url', async () => {
     for (const value of validUrls) {
-      await db.any(\`INSERT INTO customers (url) VALUES ($1);\`, [value]);
+      await db.any(`INSERT INTO customers (url) VALUES ($1);`, [value]);
     }
   });
 
@@ -118,7 +118,7 @@ describe('types', () => {
     for (const value of invalidUrls) {
       let failed = false;
       try {
-        await db.any(\`INSERT INTO customers (url) VALUES ($1);\`, [value]);
+        await db.any(`INSERT INTO customers (url) VALUES ($1);`, [value]);
       } catch (e) {
         failed = true;
       }

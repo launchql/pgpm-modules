@@ -13,9 +13,9 @@ INSERT INTO measurements.quantities (id, name, label, unit, unit_desc, descripti
 -- measures of concetration
  (45, 'Percent', 'Percent', '%', 'percentage', 'a number or ratio expressed as a fraction of 100'),
 -- parts per 1M 
- (45, 'PartsPerMillion', 'Parts per Million', 'ppm', 'parts per million', 'pseudo-units to describe small values of miscellaneous dimensionless quantities that are pure numbers representing a quantity-per-quantity measure in parts per million'),
+ (46, 'PartsPerMillion', 'Parts per Million', 'ppm', 'parts per million', 'pseudo-units to describe small values of miscellaneous dimensionless quantities that are pure numbers representing a quantity-per-quantity measure in parts per million'),
 -- parts per 1B 
- (46, 'PartsPerBillion', 'Parts per Billion', 'ppb', 'parts per billion', 'pseudo-units to describe small values of miscellaneous dimensionless quantities that are pure numbers representing a quantity-per-quantity measure in parts per billion')
+ (47, 'PartsPerBillion', 'Parts per Billion', 'ppb', 'parts per billion', 'pseudo-units to describe small values of miscellaneous dimensionless quantities that are pure numbers representing a quantity-per-quantity measure in parts per billion')
  ;
 
 COMMIT;

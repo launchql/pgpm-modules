@@ -1,5 +1,4 @@
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'node',
   rootDir: '.',
   roots: ['<rootDir>/__tests__'],
@@ -8,4 +7,7 @@ module.exports = {
   modulePathIgnorePatterns: ['/dist/'],
   watchPathIgnorePatterns: ['/dist/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  transform: {
+    '^.+\\.(ts|tsx)$': ['ts-jest', { tsconfig: '<rootDir>/tsconfig.jest.json' }]
+  }
 };

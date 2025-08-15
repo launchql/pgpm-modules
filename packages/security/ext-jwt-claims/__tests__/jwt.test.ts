@@ -1,3 +1,6 @@
+/// <reference types="jest" />
+
+
 import { getConnections } from './utils';
 
 let db: any, teardown: () => Promise<void>;
