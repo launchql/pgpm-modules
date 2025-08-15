@@ -17,6 +17,8 @@ export PGPORT=5432
 export PGUSER=postgres
 export PGPASSWORD=postgres
 export PGDATABASE=testdb
+- Dist now includes SQL assets for SQL-backed packages: launchql.plan, deploy/, verify/, revert/, schemas/, *.control, optional sql/, and sqitch.conf. Copy scripts standardized with cpy --parents --cwd . so nested directories are preserved during build.
+- TypeScript emit excludes __tests__/ to keep test sources out of dist via per-package tsconfig.json exclude.
 export DATABASE_URL=postgres://postgres:postgres@localhost:5432/testdb
 ```
 
