@@ -1,7 +1,6 @@
 import { getConnections } from './utils';
 
 let db: any, teardown: () => Promise<void>;
-const apis: any = {};
 const jwt = {
   user_id: 'b9d22af1-62c7-43a5-b8c4-50630bbd4962',
   database_id: '44744c94-93cf-425a-b524-ce6f1466e327',
@@ -11,41 +10,53 @@ const jwt = {
     'c8a27b31-1d40-4f40-9cb0-e96a44e68072'
   ]
 };
+
 beforeAll(async () => {
   ({ db, teardown } = await getConnections());
-  apis.public = db.helper('jwt_public');
-  apis.private = db.helper('jwt_private');
 });
 
 afterAll(async () => {
   try {
     await teardown();
-  } catch (e) {
-  }
-});
-
-beforeEach(async () => {
-  await db.beforeEach();
-});
-
-afterEach(async () => {
-  await db.afterEach();
+  } catch (e) {}
 });
 
 it('get values', async () => {
-  db.setContext({
-    'jwt.claims.user_agent':
+  await db.any(`BEGIN`);
+  await db.any(
+    `SELECT 
+      set_config('jwt.claims.user_agent', $1, true),
+      set_config('jwt.claims.ip_address', $2, true),
+      set_config('jwt.claims.database_id', $3, true),
+      set_config('jwt.claims.user_id', $4, true),
+      set_config('jwt.claims.group_ids', $5, true)
+    `,
+    [
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36',
-    'jwt.claims.ip_address': '127.0.0.1',
-    'jwt.claims.database_id': jwt.database_id,
-    'jwt.claims.user_id': jwt.user_id,
-    'jwt.claims.group_ids': `{${jwt.group_ids.join(',')}}`
-  });
-  const user_agent = await apis.public.call('current_user_agent');
-  const ip_address = await apis.public.call('current_ip_address');
-  const database_id = await apis.private.call('current_database_id');
-  const group_ids = await apis.public.call('current_group_ids');
-  const user_id = await apis.public.call('current_user_id');
+      '127.0.0.1',
+      jwt.database_id,
+      jwt.user_id,
+      `{${jwt.group_ids.join(',')}}`
+    ]
+  );
+
+  const { user_agent } = await db.one(
+    `select jwt_public.current_user_agent() as user_agent`
+  );
+  const { ip_address } = await db.one(
+    `select jwt_public.current_ip_address() as ip_address`
+  );
+  const { database_id } = await db.one(
+    `select jwt_private.current_database_id() as database_id`
+  );
+  const { group_ids } = await db.one(
+    `select jwt_public.current_group_ids() as group_ids`
+  );
+  const { user_id } = await db.one(
+    `select jwt_public.current_user_id() as user_id`
+  );
+  await db.any(`ROLLBACK`);
+
   expect({ user_agent }).toMatchSnapshot();
   expect({ ip_address }).toMatchSnapshot();
   expect({ database_id }).toMatchSnapshot();

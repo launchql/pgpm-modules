@@ -1,5 +1,5 @@
-import { getConnections as getConn } from 'pgsql-test';
+import { getConnections as getC } from '@launchql/db-testing';
 
 export const getConnections = async () => {
-  return getConn();
+  return getC(['jwt_public', 'jwt_private'], { plan: 'launchql.plan' });
 };

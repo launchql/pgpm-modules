@@ -128,6 +128,23 @@ Notes
 - Prefer @launchql/ext-* scoped names for extensions.
 - Normalize package.json scripts, metadata, and internal deps (workspace:^).
 - Use dual TS outputs (CJS + ESM) mirroring example packages.
+## Helper scripts
+
+Start a local PostGIS and prepare CI-like DB (extensions/schemas):
+```
+pnpm db:start
+```
+
+Stop and remove the local DB container:
+```
+pnpm db:stop
+```
+
+Run all package tests against the local DB:
+```
+pnpm test:db
+```
+
 ## Quick commands
 
 Setup Node and install deps:
