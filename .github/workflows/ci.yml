@@ -54,6 +54,7 @@ jobs:
           psql -h localhost -U postgres -d testdb -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
           psql -h localhost -U postgres -d testdb -c "CREATE EXTENSION IF NOT EXISTS citext;"
           psql -h localhost -U postgres -d testdb -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+          psql -h localhost -U postgres -d testdb -c "CREATE EXTENSION IF NOT EXISTS hstore;"
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS myschema;"
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS myschema_public;"
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS meta_public;"
@@ -61,6 +62,25 @@ jobs:
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS collections_public;"
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS collections_private;"
           psql -h localhost -U postgres -d testdb -c "CREATE SCHEMA IF NOT EXISTS app_jobs;"
+          psql -h localhost -U postgres -d testdb -v ON_ERROR_STOP=1 -c "DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'anonymous') THEN CREATE ROLE anonymous; END IF; END $$;"
+          psql -h localhost -U postgres -d testdb -c "ALTER ROLE anonymous WITH NOCREATEDB NOSUPERUSER NOCREATEROLE NOLOGIN NOREPLICATION NOBYPASSRLS;"
+          psql -h localhost -U postgres -d testdb -v ON_ERROR_STOP=1 -c "DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'authenticated') THEN CREATE ROLE authenticated; END IF; END $$;"
+          psql -h localhost -U postgres -d testdb -c "ALTER ROLE authenticated WITH NOCREATEDB NOSUPERUSER NOCREATEROLE NOLOGIN NOREPLICATION NOBYPASSRLS;"
+          psql -h localhost -U postgres -d testdb -v ON_ERROR_STOP=1 -c "DO $$ BEGIN IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'administrator') THEN CREATE ROLE administrator; END IF; END $$;"
+          psql -h localhost -U postgres -d testdb -c "ALTER ROLE administrator WITH NOCREATEDB NOSUPERUSER NOCREATEROLE NOLOGIN NOREPLICATION BYPASSRLS;"
+      - name: Prepare testing template database
+        env:
+          PGPASSWORD: postgres
+        run: |
+          if ! psql -h localhost -U postgres -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname = 'testing-template-db'" | grep -q 1; then
+            createdb -U postgres -h localhost -e testing-template-db -T template0
+          fi
+          psql -h localhost -U postgres -d testing-template-db -c "CREATE EXTENSION IF NOT EXISTS postgis;"
+          psql -h localhost -U postgres -d testing-template-db -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;"
+          psql -h localhost -U postgres -d testing-template-db -c "CREATE EXTENSION IF NOT EXISTS citext;"
+          psql -h localhost -U postgres -d testing-template-db -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
+          psql -h localhost -U postgres -d testing-template-db -c "CREATE EXTENSION IF NOT EXISTS hstore;"
+
 
       - name: Build
         run: pnpm -r build
