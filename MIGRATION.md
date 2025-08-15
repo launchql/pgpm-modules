@@ -27,7 +27,8 @@ Each package contains a local `jest.config.js`. Running tests within a package o
 
 ## Historical tests
 All historical tests from legacy workspaces were restored and converted to TypeScript under `packages/*/**/__tests__`. No `.test.js` or `.spec.js` files remain, and no placeholder tests were left in place.
-
+- Legacy JS test files that co-existed with the restored TS tests have been removed to avoid duplication.
+- Per-package utils from history were restored where required so the original test logic runs unchanged (modulo TS types).
 ## SQL assets
 For each SQL-backed extension/package:
 - `sqitch.plan` files were renamed to `launchql.plan` while preserving any existing `launchql.plan`
