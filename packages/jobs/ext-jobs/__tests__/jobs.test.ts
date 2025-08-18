@@ -1,4 +1,4 @@
-import { getConnections } from 'pgsql-test';
+import { getConnections, PgTestClient } from 'pgsql-test';
 
 let db: any;
 let pg: any;

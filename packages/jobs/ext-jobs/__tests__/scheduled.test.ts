@@ -1,4 +1,4 @@
-import { getConnections } from 'pgsql-test';
+import { getConnections, PgTestClient } from 'pgsql-test';
 import { wrapConn } from './utils';
 
 let db: any, pg: any, teardown: (() => Promise<void>) | undefined, app: any;

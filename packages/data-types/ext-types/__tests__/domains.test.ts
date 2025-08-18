@@ -1,4 +1,4 @@
-import { getConnections } from 'pgsql-test';
+import { getConnections, PgTestClient } from 'pgsql-test';
 
 const validUrls = [
   'http://foo.com/blah_blah',

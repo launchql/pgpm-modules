@@ -1,8 +1,8 @@
-import { getConnections } from 'pgsql-test';
+import { getConnections, PgTestClient } from 'pgsql-test';
 
-let db: any;
-let pg: any;
-let teardown: any;
+let db: PgTestClient;
+let pg: PgTestClient;
+let teardown:  () => Promise<void>;
 
 beforeAll(async () => {
   ({ db, pg, teardown } = await getConnections());

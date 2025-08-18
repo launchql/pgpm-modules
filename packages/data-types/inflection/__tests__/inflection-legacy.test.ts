@@ -1,9 +1,9 @@
 import cases from 'jest-in-case';
-import { getConnections } from 'pgsql-test';
+import { getConnections, PgTestClient } from 'pgsql-test';
 
-let db: any;
-let pg: any;
-let teardown: any;
+let db: PgTestClient;
+let pg: PgTestClient;
+let teardown:  () => Promise<void>;
 
 describe('inflection', () => {
   beforeAll(async () => {
