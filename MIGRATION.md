@@ -187,3 +187,19 @@ docker run --name launchql-pg -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=pos
 - TypeScript test configs:
   - Packages that need local test typings include tsconfig.jest.json and use ts-jest transform in their jest.config.js.
   - Intentional ambient test types should live in __tests__/types.d.ts. Generated declaration artifacts like *.test.d.ts are ignored by .gitignore.
+ 
+## Testing updates (pgsql-test, graphile-test, per-package Jest)
+
+- Historical tests have been restored from legacy workspaces and converted to TypeScript.
+- Libraries:
+  - PostgreSQL: pgsql-test with getConnections() returning pg (superuser) and db (app user).
+  - GraphQL: graphile-test where applicable.
+- Harness pattern:
+  - Use pg for grants/DDL in beforeAll.
+  - Use db.beforeEach() / db.afterEach() for isolation per test.
+  - Use db.setContext(...) when testing RLS/claims.
+- Per-package Jest scoping:
+  - Each package has a local jest.config.js using ts-jest, roots: ['<rootDir>/__tests__'], and testMatch for *.test.ts/*.spec.ts.
+  - dist/ is ignored for test discovery.
+- SQL assets:
+  - launchql.plan, deploy/, verify/, and revert/ are copied into dist only when present.
