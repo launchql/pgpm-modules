@@ -14,6 +14,14 @@ describe('inflection', () => {
     await teardown();
   });
 
+  beforeEach(() => {
+    pg.beforeEach();
+  });
+
+  afterEach(() => {
+    pg.afterEach();
+  });
+
   cases(
     'slugify',
     async (opts: { name: string; allowUnicode: boolean; result: string }) => {
