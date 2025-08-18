@@ -1,11 +1,15 @@
 import { getConnections, wrapConn } from './utils';
 
-let db: any, teardown: () => Promise<void>, app: any;
+let db: any, pg: any, teardown: () => Promise<void>, app: any;
 const objs: Record<string, any> = {};
 
 describe('scheduled jobs', () => {
   beforeAll(async () => {
-    ({ db, teardown } = await getConnections());
+    ({ db, pg, teardown } = await getConnections());
+    const [{ u }] = await db.any('select current_user as u');
+    await pg.any(`grant usage on schema app_jobs to "${u}"`);
+    await pg.any(`grant all privileges on all tables in schema app_jobs to "${u}"`);
+    await pg.any(`grant usage, select on all sequences in schema app_jobs to "${u}"`);
     app = wrapConn(db, 'app_jobs');
   });
 

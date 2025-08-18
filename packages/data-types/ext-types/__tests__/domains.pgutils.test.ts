@@ -1,4 +1,4 @@
-import { getConnections, wrapConn } from '@launchql/db-testing';
+import { getConnections } from 'pgsql-test';
 
 const validUrls = [
   'http://foo.com/blah_blah',
@@ -55,12 +55,14 @@ const invalidAttachments = [
 
 let teardown: () => Promise<void>;
 let db: any;
-let conn: any;
+let pg: any;
 let d: any;
 
 beforeAll(async () => {
-  ({ db, conn, teardown } = await getConnections());
-  d = wrapConn(db, 'public');
+  ({ db, pg, teardown } = await getConnections());
+  const [{ u }] = await db.any('select current_user as u');
+  await pg.any(`grant usage, create on schema public to "${u}"`);
+  d = db;
 });
 
 beforeAll(async () => {
