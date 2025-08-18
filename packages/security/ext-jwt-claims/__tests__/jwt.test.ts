@@ -15,22 +15,14 @@ const jwt = {
 };
 
 beforeAll(async () => {
-  try {
-    ({ db, teardown } = await getConnections());
-  } catch (e) {
-  }
+  ({ db, teardown } = await getConnections());
 });
 
 afterAll(async () => {
-  try {
-    if (typeof teardown === 'function') {
-      await teardown();
-    }
-  } catch (e) {}
+  await teardown();
 });
 
 it('get values', async () => {
-  if (!db || typeof db.any !== 'function' || typeof db.one !== 'function') { expect(true).toBe(true); return; }
   await db.any(`BEGIN`);
   await db.any(
     `SELECT 

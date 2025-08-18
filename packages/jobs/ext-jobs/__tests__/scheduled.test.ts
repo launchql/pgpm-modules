@@ -6,33 +6,24 @@ const objs: Record<string, any> = {};
 
 describe('scheduled jobs', () => {
   beforeAll(async () => {
-    try {
-      ({ db, pg, teardown } = await getConnections());
-      const [{ u }] = await db.any('select current_user as u');
-      await pg.any(`grant usage on schema app_jobs to "${u}"`);
-      await pg.any(`grant all privileges on all tables in schema app_jobs to "${u}"`);
-      await pg.any(`grant usage, select on all sequences in schema app_jobs to "${u}"`);
-      app = wrapConn(db, 'app_jobs');
-    } catch (e) {
-    }
+    ({ db, pg, teardown } = await getConnections());
+    const [{ u }] = await db.any('select current_user as u');
+    await pg.any(`grant usage on schema app_jobs to "${u}"`);
+    await pg.any(`grant all privileges on all tables in schema app_jobs to "${u}"`);
+    await pg.any(`grant usage, select on all sequences in schema app_jobs to "${u}"`);
+    app = wrapConn(db, 'app_jobs');
   });
 
   beforeEach(async () => {
-    if (db && typeof db.beforeEach === 'function') {
-      await db.beforeEach();
-    }
+    await db.beforeEach();
   });
 
   afterEach(async () => {
-    if (db && typeof db.afterEach === 'function') {
-      await db.afterEach();
-    }
+    await db.afterEach();
   });
 
   afterAll(async () => {
-    if (typeof teardown === 'function') {
-      await teardown();
-    }
+    await teardown();
   });
 
   it('schedule jobs by cron', async () => {

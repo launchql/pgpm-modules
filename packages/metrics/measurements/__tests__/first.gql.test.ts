@@ -4,16 +4,11 @@ import gql from 'graphql-tag';
 let teardown: (() => Promise<void>) | undefined, query: any;
 
 beforeAll(async () => {
-  try {
-    ({ teardown, query } = await getConnections(['measurements']));
-  } catch (e) {
-  }
+  ({ teardown, query } = await getConnections(['measurements']));
 });
 
 afterAll(async () => {
-  if (typeof teardown === 'function') {
-    await teardown();
-  }
+  await teardown();
 });
 
 const SimpleQuery = gql`
@@ -25,10 +20,6 @@ const SimpleQuery = gql`
 describe('signup', () => {
   describe('has an API', () => {
     it('query your API', async () => {
-      if (typeof query !== 'function') {
-        expect(true).toBe(true);
-        return;
-      }
       const result = await query(SimpleQuery, {}, true);
       expect(result?.errors).toBeFalsy();
     });
