@@ -1,10 +1,10 @@
 import { getConnections } from './utils/graphql';
 import gql from 'graphql-tag';
 
-let teardown: () => Promise<void>, graphQLQuery: any;
+let teardown: () => Promise<void>, query: any;
 
 beforeAll(async () => {
-  ({ teardown, query: graphQLQuery } = await getConnections(['measurements']));
+  ({ teardown, query } = await getConnections(['measurements']));
 });
 
 afterAll(async () => {
@@ -20,7 +20,7 @@ const SimpleQuery = gql`
 describe('signup', () => {
   describe('has an API', () => {
     it('query your API', async () => {
-      const result = await graphQLQuery(SimpleQuery, {}, true);
+      const result = await query(SimpleQuery, {}, true);
       expect(result.errors).toBeFalsy();
     });
   });
