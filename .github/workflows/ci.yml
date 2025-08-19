@@ -55,6 +55,11 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
+          # IMPORTANT: pnpm setup is required in container environments when pnpm is installed via corepack
+          # This creates the global bin directory and configures PNPM_HOME environment variable
+          # Without this, global package installation (like @launchql/cli) will fail with:
+          # "ERR_PNPM_NO_GLOBAL_BIN_DIR Unable to find the global bin directory"
+          pnpm setup
           pnpm -v
           node -v
 
