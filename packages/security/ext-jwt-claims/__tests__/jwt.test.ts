@@ -1,9 +1,7 @@
-/// <reference types="jest" />
-
 
 import { getConnections } from './utils';
 
-let db: any, teardown: (() => Promise<void>) | undefined;
+let pg: any, teardown: (() => Promise<void>) | undefined;
 const jwt = {
   user_id: 'b9d22af1-62c7-43a5-b8c4-50630bbd4962',
   database_id: '44744c94-93cf-425a-b524-ce6f1466e327',
@@ -15,11 +13,11 @@ const jwt = {
 };
 
 beforeAll(async () => {
-  ({ db, teardown } = await getConnections());
+  ({ pg, teardown } = await getConnections());
 });
 
 afterAll(async () => {
-  await teardown();
+  await teardown?.();
 });
 
 it('get values', async () => {
