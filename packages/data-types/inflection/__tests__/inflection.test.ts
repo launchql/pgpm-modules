@@ -15,7 +15,7 @@ describe('inflection', () => {
 
   cases(
     'slugify',
-    async (opts) => {
+    async (opts: { name: string; allowUnicode: boolean; result: string }) => {
       const { pg_slugify } = await pg.one(
         'SELECT * FROM inflection.pg_slugify($1, $2)',
         [opts.name, opts.allowUnicode]
@@ -38,7 +38,7 @@ describe('inflection', () => {
 
   cases(
     'underscore',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { underscore } = await pg.one(
         'SELECT * FROM inflection.underscore($1)',
         [opts.name]
@@ -59,7 +59,7 @@ describe('inflection', () => {
 
   cases(
     'no_single_underscores',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { no_single_underscores } = await pg.one(
         'SELECT * FROM inflection.no_single_underscores($1)',
         [opts.name]
@@ -73,7 +73,7 @@ describe('inflection', () => {
 
   cases(
     'pascal',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { pascal } = await pg.one(
         'SELECT * FROM inflection.pascal($1)',
         [opts.name]
@@ -97,7 +97,7 @@ describe('inflection', () => {
 
   cases(
     'camel',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { camel } = await pg.one(
         'SELECT * FROM inflection.camel($1)',
         [opts.name]
@@ -122,7 +122,7 @@ describe('inflection', () => {
 
   cases(
     'no_consecutive_caps',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { no_consecutive_caps } = await pg.one(
         'SELECT * FROM inflection.no_consecutive_caps($1)',
         [opts.name]
@@ -139,7 +139,7 @@ describe('inflection', () => {
 
   cases(
     'plural',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { plural } = await pg.one(
         'SELECT * FROM inflection.plural($1)',
         [opts.name]
@@ -160,7 +160,7 @@ describe('inflection', () => {
 
   cases(
     'singular',
-    async (opts) => {
+    async (opts: { name: string; result: string }) => {
       const { singular } = await pg.one(
         'SELECT * FROM inflection.singular($1)',
         [opts.name]
