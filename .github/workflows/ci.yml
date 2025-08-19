@@ -55,12 +55,6 @@ jobs:
         run: |
           corepack enable
           corepack prepare pnpm@9 --activate
-          # IMPORTANT: pnpm setup is required in container environments when pnpm is installed via corepack
-          # This creates the global bin directory and configures PNPM_HOME environment variable
-          # Without this, global package installation (like @launchql/cli) will fail with:
-          # "ERR_PNPM_NO_GLOBAL_BIN_DIR Unable to find the global bin directory"
-          # Set SHELL env var explicitly since container environment doesn't auto-detect shell type
-          SHELL=/bin/sh pnpm setup
           pnpm -v
           node -v
 
@@ -68,7 +62,7 @@ jobs:
         run: pnpm install
 
       - name: Install LaunchQL CLI globally
-        run: pnpm add -g @launchql/cli@4.7.2
+        run: npm install -g @launchql/cli@4.7.2
 
       - name: Build
         run: pnpm -r build
