@@ -18,13 +18,6 @@ describe.skip('default-roles', () => {
     }
   });
 
-  beforeEach(async () => {
-    await pg.beforeEach();
-  });
-
-  afterEach(async () => {
-    await pg.afterEach();
-  });
 
   it('should have the required roles', async () => {
     const result = await pg.query(`

@@ -1,24 +1,17 @@
 import { getConnections, PgTestClient } from 'pgsql-test';
 import cases from 'jest-in-case';
 
-let db: PgTestClient;
 let pg: PgTestClient;
 let teardown:  () => Promise<void>;
 
 beforeAll(async () => {
-  ({ db, pg, teardown } = await getConnections());
+  ({ pg, teardown } = await getConnections());
 });
 
 afterAll(async () => {
   await teardown();
 });
 
-beforeEach(() => {
-  pg.beforeEach();
-});
-afterEach(() => {
-  pg.afterEach();
-});
 
 cases(
   'rfc6238',
