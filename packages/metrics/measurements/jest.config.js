@@ -1,12 +1,15 @@
+/** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  rootDir: '.',
-  roots: ['<rootDir>/__tests__'],
-  testMatch: ['<rootDir>/__tests__/**/*.test.ts', '<rootDir>/?(*.)+(spec|test).ts'],
-  testPathIgnorePatterns: ['/dist/'],
+
+  // Match both __tests__ and colocated test files
+  testMatch: ['**/?(*.)+(test|spec).{ts,tsx,js,jsx}'],
+
+  // Ignore build artifacts and type declarations
+  testPathIgnorePatterns: ['/dist/', '\\.d\\.ts$'],
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   watchPathIgnorePatterns: ['/dist/'],
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
-  maxWorkers: 1
+
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 };
