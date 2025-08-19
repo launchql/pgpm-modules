@@ -1,26 +1,18 @@
 import { getConnections, PgTestClient } from 'pgsql-test';
 
-let db: PgTestClient;
 let pg: PgTestClient;
 let teardown:  () => Promise<void>;
 
 beforeAll(async () => {
-  ({ db, pg, teardown } = await getConnections());
+  ({ pg, teardown } = await getConnections());
 });
 
 afterAll(async () => {
   await teardown();
 });
 
-beforeEach(() => {
-  db.beforeEach();
-});
-afterEach(() => {
-  db.afterEach();
-});
-
 it('more', async () => {
-  const { mask_pad } = await db.one(
+  const { mask_pad } = await pg.one(
     `SELECT utils.mask_pad($1, $2) AS mask_pad`,
     ['101', 20]
   );
@@ -28,7 +20,7 @@ it('more', async () => {
 });
 
 it('less', async () => {
-  const { mask_pad } = await db.one(
+  const { mask_pad } = await pg.one(
     `SELECT utils.mask_pad($1, $2) AS mask_pad`,
     ['101', 2]
   );
@@ -37,7 +29,7 @@ it('less', async () => {
 
 describe('bitmask', () => {
   it('more', async () => {
-    const { bitmask_pad } = await db.one(
+    const { bitmask_pad } = await pg.one(
       `SELECT utils.bitmask_pad($1::varbit, $2) AS bitmask_pad`,
       ['101', 20]
     );
@@ -45,7 +37,7 @@ describe('bitmask', () => {
   });
 
   it('less', async () => {
-    const { bitmask_pad } = await db.one(
+    const { bitmask_pad } = await pg.one(
       `SELECT utils.bitmask_pad($1::varbit, $2) AS bitmask_pad`,
       ['101', 2]
     );

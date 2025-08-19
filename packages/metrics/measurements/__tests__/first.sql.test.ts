@@ -1,23 +1,17 @@
 import { getConnections } from './utils';
 
-let teardown: (() => Promise<void>) | undefined, db: any;
+let teardown: (() => Promise<void>) | undefined, pg: any;
 
 describe('signup', () => {
   beforeAll(async () => {
-    ({ db, teardown } = await getConnections());
-  });
-  beforeEach(async () => {
-    await db.beforeEach();
-  });
-  afterEach(async () => {
-    await db.afterEach();
+    ({ pg, teardown } = await getConnections());
   });
   afterAll(async () => {
     await teardown();
   });
   describe('has a database', () => {
     it('schema exists', async () => {
-      const res = await db.any(
+      const res = await pg.any(
         "SELECT schema_name FROM information_schema.schemata WHERE schema_name = 'measurements'"
       );
       expect(Array.isArray(res)).toBe(true);

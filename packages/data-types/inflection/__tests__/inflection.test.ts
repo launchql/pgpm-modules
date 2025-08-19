@@ -1,13 +1,12 @@
 import cases from 'jest-in-case';
 import { getConnections, PgTestClient } from 'pgsql-test';
 
-let db: PgTestClient; // app-level connection for testing
-let pg: PgTestClient; // root connection (not used here but available)
+let pg: PgTestClient;
 let teardown: () => Promise<void>;
 
 describe('inflection', () => {
   beforeAll(async () => {
-    ({ db, pg, teardown } = await getConnections());
+    ({ pg, teardown } = await getConnections());
   });
 
   afterAll(async () => {
