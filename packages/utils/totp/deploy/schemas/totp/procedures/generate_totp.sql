@@ -92,6 +92,9 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql STABLE;
 
+-- Mitigate timing attacks by using constant-time comparison.
+-- Context: https://news.ycombinator.com/item?id=26260667
+
 CREATE FUNCTION totp.timing_safe_equals(a text, b text)
 RETURNS boolean
 AS $$
