@@ -1,7 +1,12 @@
 {
   "packages": [
     "packages/*",
-    "extensions/@*/*",
-    "extensions/*"
+    "packages/security/*",
+    "packages/jobs/*",
+    "packages/data-types/*",
+    "packages/metrics/*",
+    "packages/geo/*",
+    "packages/utils/*",
+    "packages/meta/*"
   ]
 }

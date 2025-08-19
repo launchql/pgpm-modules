@@ -8,6 +8,9 @@
     "url": "https://github.com/launchql/extensions"
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
   "publishConfig": {
     "access": "restricted"
   },
@@ -15,15 +18,11 @@
   "workspaces": [
     "packages/*"
   ],
-  "pnpm": {
-    "overrides": {
-      "glob@*": "11.0.3"
-    }
-  },
   "scripts": {
     "clean": "pnpm -r clean",
     "build": "pnpm -r build",
-    "lint": "pnpm -r lint"
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
@@ -35,8 +34,13 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "eslint-plugin-unused-imports": "^4.0.0",
+    "graphile-test": "^2.3.1",
+    "graphql-tag": "^2.12.6",
     "jest": "^29.6.2",
+    "jest-in-case": "^1.0.2",
+    "@types/jest-in-case": "^1.0.3",
     "lerna": "^8.2.3",
+    "pgsql-test": "^2.6.2",
     "prettier": "^3.0.2",
     "rimraf": "4.4.1",
     "ts-jest": "^29.1.1",

@@ -1,4 +1,10 @@
-/** Minimal root Jest config to be extended by packages as needed */
+/** Root Jest config for TS tests */
 module.exports = {
-  testEnvironment: "node"
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  roots: ['<rootDir>/packages', '<rootDir>'],
+  testMatch: ['**/__tests__/**/*.test.ts', '**/?(*.)+(spec|test).ts'],
+  testPathIgnorePatterns: ['/dist/'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json'],
+  modulePathIgnorePatterns: ['<rootDir>/packages/.*/dist', '<rootDir>/packages/.*/dist/.*'],
 };
