@@ -86,12 +86,12 @@ jobs:
       fail-fast: false
       matrix:
         package:
-          - data-types/base32
+          - data-types/geotypes
+          - data-types/stamps
           - data-types/types
           - data-types/uuid
-          - data-types/inflection
-          - data-types/stamps
-          - geo/geotypes
+          - utils/base32
+          - utils/inflection
           - jobs/database-jobs
           - jobs/jobs
           - meta/db_meta

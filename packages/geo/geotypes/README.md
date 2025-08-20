@@ -1,3 +1,0 @@
-# @launchql/geotypes
-
-Geospatial types.

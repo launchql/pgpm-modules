@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/inflection",
+  "name": "@pgql/inflection",
   "version": "0.4.7",
   "description": "inflection is a port of Rails Active Support Inflection into PostgreSQL",
   "publishConfig": {

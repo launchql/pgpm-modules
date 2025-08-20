@@ -1,7 +1,7 @@
 {
-  "name": "@launchql/geotypes",
+  "name": "@pgql/base32",
   "version": "0.4.6",
-  "description": "geo types",
+  "description": "base32 utilities",
   "publishConfig": {
     "access": "public",
     "directory": "dist"

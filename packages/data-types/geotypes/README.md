@@ -1,0 +1,3 @@
+# @pgql/geotypes
+
+Geospatial types.

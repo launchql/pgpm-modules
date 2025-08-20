@@ -1,3 +1,3 @@
-# @launchql/inflection
+# @pgql/inflection
 
 Inflection functions.
