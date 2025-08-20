@@ -1,17 +1,12 @@
 {
   "name": "@pgql/geotypes",
   "version": "0.4.6",
-  "description": "geo types",
+  "description": "geotypes",
   "publishConfig": {
-    "access": "public",
-    "directory": "dist"
+    "access": "public"
   },
   "scripts": {
     "bundle": "lql package",
-    "copy": "cpy ../../../LICENSE README.md package.json dist --flat && cpy \"schemas/**\" \"sql/**\" \"*.control\" \"launchql.plan\" dist --parents --cwd . && sh -c 'for d in deploy verify revert; do if [ -d \"$d\" ]; then cp -a \"$d\" dist/; fi; done'",
-    "clean": "rimraf dist",
-    "prepare": "npm run build",
-    "build": "npm run clean && npm run copy",
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --config ./jest.config.js --watch"
   },
