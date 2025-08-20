@@ -7,12 +7,16 @@
     "directory": "dist"
   },
   "scripts": {
+    "bundle": "lql package",
     "copy": "cpy ../../../LICENSE README.md package.json dist --flat",
     "clean": "rimraf dist",
     "prepare": "npm run build",
     "build": "npm run clean && npm run copy",
     "test": "jest --config ./jest.config.js",
     "test:watch": "jest --config ./jest.config.js --watch"
+  },
+  "devDependencies": {
+    "@launchql/cli": "^4.8.0"
   },
   "repository": {
     "type": "git",
