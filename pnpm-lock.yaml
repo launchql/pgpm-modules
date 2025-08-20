@@ -72,89 +72,67 @@ importers:
         specifier: ^5.1.6
         version: 5.9.2
 
-  packages/data-types/geotypes:
-    publishDirectory: dist
+  packages/data-types/geotypes: {}
 
-  packages/data-types/stamps:
-    publishDirectory: dist
+  packages/data-types/stamps: {}
 
-  packages/data-types/types:
-    publishDirectory: dist
+  packages/data-types/types: {}
 
-  packages/data-types/uuid:
-    publishDirectory: dist
+  packages/data-types/uuid: {}
 
   packages/jobs/database-jobs:
     dependencies:
       '@pgql/default-roles':
         specifier: workspace:^
-        version: link:../../security/default-roles/dist
+        version: link:../../security/default-roles
       '@pgql/jwt-claims':
         specifier: workspace:^
-        version: link:../../security/jwt-claims/dist
-    publishDirectory: dist
+        version: link:../../security/jwt-claims
 
   packages/jobs/jobs:
     dependencies:
       '@pgql/default-roles':
         specifier: workspace:^
-        version: link:../../security/default-roles/dist
+        version: link:../../security/default-roles
       '@pgql/jwt-claims':
         specifier: workspace:^
-        version: link:../../security/jwt-claims/dist
-    publishDirectory: dist
+        version: link:../../security/jwt-claims
 
-  packages/meta/db_meta:
-    publishDirectory: dist
+  packages/meta/db_meta: {}
 
-  packages/meta/db_meta_modules:
-    publishDirectory: dist
+  packages/meta/db_meta_modules: {}
 
-  packages/meta/db_meta_test:
-    publishDirectory: dist
+  packages/meta/db_meta_test: {}
 
-  packages/metrics/achievements:
-    publishDirectory: dist
+  packages/metrics/achievements: {}
 
-  packages/metrics/measurements:
-    publishDirectory: dist
+  packages/metrics/measurements: {}
 
-  packages/security/default-roles:
-    publishDirectory: dist
+  packages/security/default-roles: {}
 
-  packages/security/defaults:
-    publishDirectory: dist
+  packages/security/defaults: {}
 
-  packages/security/encrypted-secrets:
-    publishDirectory: dist
+  packages/security/encrypted-secrets: {}
 
-  packages/security/encrypted-secrets-table:
-    publishDirectory: dist
+  packages/security/encrypted-secrets-table: {}
 
   packages/security/jwt-claims:
     dependencies:
       '@pgql/types':
         specifier: workspace:^
-        version: link:../../data-types/types/dist
-    publishDirectory: dist
+        version: link:../../data-types/types
 
-  packages/security/totp:
-    publishDirectory: dist
+  packages/security/totp: {}
 
-  packages/utils/base32:
-    publishDirectory: dist
+  packages/utils/base32: {}
 
-  packages/utils/faker:
-    publishDirectory: dist
+  packages/utils/faker: {}
 
-  packages/utils/inflection:
-    publishDirectory: dist
+  packages/utils/inflection: {}
 
-  packages/utils/utils:
-    publishDirectory: dist
+  packages/utils/utils: {}
 
-  packages/utils/verify:
-    publishDirectory: dist
+  packages/utils/verify: {}
 
 packages:
 
