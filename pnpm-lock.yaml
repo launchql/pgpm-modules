@@ -141,9 +141,6 @@ importers:
   packages/security/totp:
     publishDirectory: dist
 
-  packages/security/verify:
-    publishDirectory: dist
-
   packages/utils/base32:
     publishDirectory: dist
 
@@ -154,6 +151,9 @@ importers:
     publishDirectory: dist
 
   packages/utils/utils:
+    publishDirectory: dist
+
+  packages/utils/verify:
     publishDirectory: dist
 
 packages:

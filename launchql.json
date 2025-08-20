@@ -5,7 +5,6 @@
     "packages/jobs/*",
     "packages/data-types/*",
     "packages/metrics/*",
-    "packages/geo/*",
     "packages/utils/*",
     "packages/meta/*"
   ]

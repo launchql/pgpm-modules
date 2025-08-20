@@ -86,28 +86,28 @@ jobs:
       fail-fast: false
       matrix:
         package:
-          - data-types/geotypes
-          - data-types/stamps
-          - data-types/types
-          - data-types/uuid
-          - utils/base32
-          - utils/inflection
-          - jobs/database-jobs
-          - jobs/jobs
-          - meta/db_meta
-          - meta/db_meta_modules
-          - meta/db_meta_test
-          - metrics/achievements
-          - metrics/measurements
-          - security/encrypted-secrets
-          - security/encrypted-secrets-table
-          - security/default-roles
-          - security/jwt-claims
-          - security/verify
-          - security/defaults
-          - utils/faker
-          - security/totp
+          - utils/verify
           - utils/utils
+          - utils/inflection
+          - utils/faker
+          - utils/base32
+          - security/totp
+          - security/jwt-claims
+          - security/encrypted-secrets-table
+          - security/encrypted-secrets
+          - security/defaults
+          - security/default-roles
+          - metrics/measurements
+          - metrics/achievements
+          - meta/db_meta_test
+          - meta/db_meta_modules
+          - meta/db_meta
+          - jobs/jobs
+          - jobs/database-jobs
+          - data-types/uuid
+          - data-types/types
+          - data-types/stamps
+          - data-types/geotypes
 
     env:
       PGHOST: pg_db

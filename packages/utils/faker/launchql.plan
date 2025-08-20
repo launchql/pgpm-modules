@@ -2,7 +2,7 @@
 %project=launchql-faker
 %uri=launchql-faker
   
-schemas/faker/schema [launchql-ext-types:schemas/public/domains/url] 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add schemas/faker/schema
+schemas/faker/schema [launchql-types:schemas/public/domains/url] 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add schemas/faker/schema
 schemas/faker/tables/dictionary/table [schemas/faker/schema] 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add schemas/faker/tables/dictionary/table
 schemas/faker/procedures/utils [schemas/faker/schema schemas/faker/tables/dictionary/table] 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add schemas/faker/procedures/utils
 schemas/faker/tables/cities/table [schemas/faker/schema] 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add schemas/faker/tables/cities/table
