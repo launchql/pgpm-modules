@@ -1,0 +1,8 @@
+# launchql-meta-db-test extension
+comment = 'launchql-meta-db-test extension'
+default_version = '0.0.1'
+module_pathname = '$libdir/launchql-meta-db-test'
+requires = 'plpgsql,launchql-meta-db-modules,launchql-meta-db,launchql-verify'
+relocatable = false
+superuser = false
+  

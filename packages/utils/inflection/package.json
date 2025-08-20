@@ -1,5 +1,5 @@
 {
-  "name": "@pgql/inflection",
+  "name": "@lql-pg/inflection",
   "version": "0.4.7",
   "description": "inflection is a port of Rails Active Support Inflection into PostgreSQL",
   "publishConfig": {
@@ -7,8 +7,11 @@
   },
   "scripts": {
     "bundle": "lql package",
-    "test": "jest --config ./jest.config.js",
-    "test:watch": "jest --config ./jest.config.js --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@lql-pg/verify": "workspace:*"
   },
   "devDependencies": {
     "@launchql/cli": "^4.8.0"

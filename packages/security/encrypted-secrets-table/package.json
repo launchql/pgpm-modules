@@ -1,5 +1,5 @@
 {
-  "name": "encrypted-secrets-table",
+  "name": "@lql-pg/encrypted-secrets-table",
   "version": "0.1.0",
   "description": "Encrypted secrets backing table helpers",
   "publishConfig": {
@@ -7,8 +7,11 @@
   },
   "scripts": {
     "bundle": "lql package",
-    "test": "jest --config ./jest.config.js",
-    "test:watch": "jest --config ./jest.config.js --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@lql-pg/verify": "workspace:*"
   },
   "devDependencies": {
     "@launchql/cli": "^4.8.0"

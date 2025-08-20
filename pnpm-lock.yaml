@@ -73,24 +73,46 @@ importers:
         version: 5.9.2
 
   packages/data-types/geotypes:
+    dependencies:
+      '@lql-pg/types':
+        specifier: workspace:*
+        version: link:../types
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/data-types/stamps:
+    dependencies:
+      '@lql-pg/jwt-claims':
+        specifier: workspace:*
+        version: link:../../security/jwt-claims
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/data-types/types:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/data-types/uuid:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
@@ -98,12 +120,12 @@ importers:
 
   packages/jobs/database-jobs:
     dependencies:
-      '@pgql/default-roles':
-        specifier: workspace:^
+      '@lql-pg/default-roles':
+        specifier: workspace:*
         version: link:../../security/default-roles
-      '@pgql/jwt-claims':
-        specifier: workspace:^
-        version: link:../../security/jwt-claims
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
@@ -111,66 +133,129 @@ importers:
 
   packages/jobs/jobs:
     dependencies:
-      '@pgql/default-roles':
-        specifier: workspace:^
+      '@lql-pg/default-roles':
+        specifier: workspace:*
         version: link:../../security/default-roles
-      '@pgql/jwt-claims':
-        specifier: workspace:^
-        version: link:../../security/jwt-claims
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/meta/db_meta:
+    dependencies:
+      '@lql-pg/database-jobs':
+        specifier: workspace:*
+        version: link:../../jobs/database-jobs
+      '@lql-pg/inflection':
+        specifier: workspace:*
+        version: link:../../utils/inflection
+      '@lql-pg/types':
+        specifier: workspace:*
+        version: link:../../data-types/types
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/meta/db_meta_modules:
+    dependencies:
+      '@lql-pg/meta-db':
+        specifier: workspace:*
+        version: link:../db_meta
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/meta/db_meta_test:
+    dependencies:
+      '@lql-pg/meta-db':
+        specifier: workspace:*
+        version: link:../db_meta
+      '@lql-pg/meta-db-modules':
+        specifier: workspace:*
+        version: link:../db_meta_modules
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/metrics/achievements:
+    dependencies:
+      '@lql-pg/jwt-claims':
+        specifier: workspace:*
+        version: link:../../security/jwt-claims
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/metrics/measurements:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/security/default-roles:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/security/defaults:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/security/encrypted-secrets:
+    dependencies:
+      '@lql-pg/default-roles':
+        specifier: workspace:*
+        version: link:../default-roles
+      '@lql-pg/encrypted-secrets-table':
+        specifier: workspace:*
+        version: link:../encrypted-secrets-table
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/security/encrypted-secrets-table:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
@@ -178,39 +263,68 @@ importers:
 
   packages/security/jwt-claims:
     dependencies:
-      '@pgql/types':
-        specifier: workspace:^
+      '@lql-pg/types':
+        specifier: workspace:*
         version: link:../../data-types/types
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/security/totp:
+    dependencies:
+      '@lql-pg/base32':
+        specifier: workspace:*
+        version: link:../../utils/base32
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../../utils/verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/utils/base32:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/utils/faker:
+    dependencies:
+      '@lql-pg/types':
+        specifier: workspace:*
+        version: link:../../data-types/types
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/utils/inflection:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0
         version: 4.8.0(@babel/core@7.28.0)(@pgsql/types@17.6.1)(graphile-build-pg@4.14.1(graphql@15.5.2)(pg@8.16.3))(graphql@15.5.2)(pg-sql2@4.14.1(pg@8.16.3))(postgraphile-core@4.14.1(graphql@15.5.2)(pg@8.16.3))
 
   packages/utils/utils:
+    dependencies:
+      '@lql-pg/verify':
+        specifier: workspace:*
+        version: link:../verify
     devDependencies:
       '@launchql/cli':
         specifier: ^4.8.0

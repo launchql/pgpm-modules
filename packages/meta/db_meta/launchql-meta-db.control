@@ -1,0 +1,8 @@
+# launchql-meta-db extension
+comment = 'launchql-meta-db extension'
+default_version = '0.1.0'
+module_pathname = '$libdir/launchql-meta-db'
+requires = 'citext,hstore,launchql-inflection,launchql-database-jobs,launchql-types,pgcrypto,plpgsql,postgis,uuid-ossp,launchql-verify'
+relocatable = false
+superuser = false
+  
