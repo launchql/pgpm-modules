@@ -7,8 +7,8 @@
   },
   "scripts": {
     "bundle": "lql package",
-    "test": "jest --config ./jest.config.js",
-    "test:watch": "jest --config ./jest.config.js --watch"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "devDependencies": {
     "@launchql/cli": "^4.8.0"
