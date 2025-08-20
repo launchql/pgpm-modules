@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/default-roles",
+  "name": "@pgql/default-roles",
   "version": "0.4.6",
   "description": "default roles",
   "publishConfig": {

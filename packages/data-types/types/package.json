@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/types",
+  "name": "@pgql/types",
   "version": "0.4.6",
   "description": "types",
   "publishConfig": {

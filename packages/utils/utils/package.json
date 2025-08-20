@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/utils",
+  "name": "@pgql/utils",
   "version": "0.4.6",
   "description": "utils",
   "publishConfig": {

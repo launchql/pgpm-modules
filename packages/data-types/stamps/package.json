@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/ext-stamps",
+  "name": "@pgql/stamps",
   "version": "0.4.6",
   "description": "stamps",
   "publishConfig": {

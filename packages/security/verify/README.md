@@ -1,3 +1,3 @@
-# @launchql/verify
+# @pgql/verify
 
 Verification utilities for LaunchQL extensions.

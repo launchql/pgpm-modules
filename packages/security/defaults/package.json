@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/ext-defaults",
+  "name": "@pgql/defaults",
   "version": "0.4.6",
   "description": "defaults",
   "publishConfig": {

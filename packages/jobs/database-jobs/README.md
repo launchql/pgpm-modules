@@ -1,3 +1,3 @@
-# @launchql/ext-jobs
+# @pgql/database-jobs
 
 Jobs helpers.

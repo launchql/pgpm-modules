@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/verify",
+  "name": "@pgql/verify",
   "version": "0.4.6",
   "description": "verification utils",
   "publishConfig": {

@@ -1,3 +1,3 @@
-# @launchql/ext-defaults
+# @pgql/defaults
 
 Defaults helpers.

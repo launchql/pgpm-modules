@@ -1,3 +1,3 @@
-# @launchql/measurements
+# @pgql/measurements
 
 Measurements utilities.

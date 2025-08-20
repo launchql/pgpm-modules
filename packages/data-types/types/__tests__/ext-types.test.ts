@@ -11,7 +11,7 @@ afterAll(async () => {
   await teardown();
 });
 
-describe('@launchql/types', () => {
+describe('@pgql/types', () => {
   it('creates domain types', async () => {
     const { typname } = await pg.one(
       `SELECT typname FROM pg_type WHERE typname = 'url'`

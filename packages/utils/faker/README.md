@@ -1,3 +1,3 @@
-# @launchql/faker
+# @pgql/faker
 
 Faker helpers.

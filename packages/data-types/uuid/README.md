@@ -1,3 +1,3 @@
-# @launchql/uuid
+# @pgql/uuid
 
 UUID helpers for LaunchQL.

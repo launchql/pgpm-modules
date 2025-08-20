@@ -1,3 +1,3 @@
-# @launchql/ext-stamps
+# @pgql/stamps
 
 Stamps helpers.

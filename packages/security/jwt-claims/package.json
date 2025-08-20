@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/jwt-claims",
+  "name": "@pgql/jwt-claims",
   "version": "0.4.6",
   "description": "jwt claims",
   "publishConfig": {
@@ -15,7 +15,7 @@
     "test:watch": "jest --config ./jest.config.js --watch"
   },
   "dependencies": {
-    "@launchql/types": "workspace:^"
+    "@pgql/types": "workspace:^"
   },
   "repository": {
     "type": "git",

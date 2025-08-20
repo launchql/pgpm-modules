@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/totp",
+  "name": "@pgql/totp",
   "version": "0.4.6",
   "description": "TOTP utilities",
   "publishConfig": {

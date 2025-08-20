@@ -1,3 +1,3 @@
-# @launchql/totp
+# @pgql/totp
 
 TOTP helpers.

@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/uuid",
+  "name": "@pgql/uuid",
   "version": "0.4.6",
   "description": "uuid",
   "publishConfig": {

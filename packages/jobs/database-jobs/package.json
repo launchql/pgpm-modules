@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/ext-jobs",
+  "name": "@pgql/database-jobs",
   "version": "0.4.6",
   "description": "jobs",
   "publishConfig": {
@@ -15,8 +15,8 @@
     "test:watch": "jest --config ./jest.config.js --watch"
   },
   "dependencies": {
-    "@launchql/default-roles": "workspace:^",
-    "@launchql/jwt-claims": "workspace:^"
+    "@pgql/default-roles": "workspace:^",
+    "@pgql/jwt-claims": "workspace:^"
   },
   "repository": {
     "type": "git",

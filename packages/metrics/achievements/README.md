@@ -1,3 +1,3 @@
-# @launchql/achievements
+# @pgql/achievements
 
 Achievements utilities.

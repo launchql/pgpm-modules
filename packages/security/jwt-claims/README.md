@@ -1,3 +1,3 @@
-# @launchql/jwt-claims
+# @pgql/jwt-claims
 
 JWT claims helpers.

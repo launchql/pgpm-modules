@@ -1,3 +1,3 @@
-# @launchql/utils
+# @pgql/utils
 
 General utilities.

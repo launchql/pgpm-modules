@@ -1,3 +1,3 @@
-# @launchql/default-roles
+# @pgql/default-roles
 
 Default roles helpers.

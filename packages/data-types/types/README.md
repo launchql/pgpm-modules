@@ -1,3 +1,3 @@
-# @launchql/types
+# @pgql/types
 
 Types extension for LaunchQL.

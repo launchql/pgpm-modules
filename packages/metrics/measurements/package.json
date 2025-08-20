@@ -1,5 +1,5 @@
 {
-  "name": "@launchql/measurements",
+  "name": "@pgql/measurements",
   "version": "0.4.6",
   "description": "measurements",
   "publishConfig": {
