@@ -17,13 +17,40 @@ dbsafename() {
 cleanup_db() {
     local dbname="$1"
     echo "  Cleaning up database: $dbname"
-    dropdb "$dbname" 2>/dev/null || true
+    docker exec postgres dropdb -U postgres "$dbname" 2>/dev/null || true
 }
 
 test_package() {
     local package_path="$1"
     local package_name=$(basename "$package_path")
     local dbname=$(dbsafename "$package_path")
+    
+    local lql_package_name
+    case "$package_name" in
+        "geotypes") lql_package_name="launchql-geo-types" ;;
+        "stamps") lql_package_name="launchql-stamps" ;;
+        "types") lql_package_name="launchql-types" ;;
+        "uuid") lql_package_name="launchql-uuid" ;;
+        "database-jobs") lql_package_name="launchql-database-jobs" ;;
+        "jobs") lql_package_name="launchql-jobs" ;;
+        "db_meta") lql_package_name="launchql-meta-db" ;;
+        "db_meta_modules") lql_package_name="launchql-meta-db-modules" ;;
+        "db_meta_test") lql_package_name="launchql-meta-db-test" ;;
+        "achievements") lql_package_name="launchql-achievements" ;;
+        "measurements") lql_package_name="launchql-measurements" ;;
+        "default-roles") lql_package_name="launchql-default-roles" ;;
+        "defaults") lql_package_name="launchql-defaults" ;;
+        "encrypted-secrets-table") lql_package_name="launchql-encrypted-secrets-table" ;;
+        "encrypted-secrets") lql_package_name="launchql-encrypted-secrets" ;;
+        "jwt-claims") lql_package_name="launchql-jwt-claims" ;;
+        "totp") lql_package_name="launchql-totp" ;;
+        "base32") lql_package_name="launchql-base32" ;;
+        "faker") lql_package_name="launchql-faker" ;;
+        "inflection") lql_package_name="launchql-inflection" ;;
+        "utils") lql_package_name="launchql-utils" ;;
+        "verify") lql_package_name="launchql-verify" ;;
+        *) lql_package_name="launchql-$package_name" ;;
+    esac
     
     echo -e "${YELLOW}Testing package: $package_name${NC}"
     echo "  Package path: $package_path"
@@ -32,41 +59,41 @@ test_package() {
     cleanup_db "$dbname"
     
     echo "  Creating database: $dbname"
-    createdb "$dbname" || {
+    docker exec postgres createdb -U postgres "$dbname" || {
         echo -e "${RED}FAILED: Could not create database $dbname for package $package_name${NC}"
         return 1
     }
     
-    cd "$package_path" || {
-        echo -e "${RED}FAILED: Could not change to directory $package_path${NC}"
+    cd "$SCRIPT_DIR/$package_path" || {
+        echo -e "${RED}FAILED: Could not change to directory $SCRIPT_DIR/$package_path${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
     echo "  Running lql deploy..."
-    lql deploy --recursive --database "$dbname" --yes --package "$package_name" || {
-        echo -e "${RED}FAILED: lql deploy failed for package $package_name${NC}"
+    lql deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: lql deploy failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
     echo "  Running lql verify..."
-    lql verify --recursive --database "$dbname" --yes --package "$package_name" || {
-        echo -e "${RED}FAILED: lql verify failed for package $package_name${NC}"
+    lql verify --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: lql verify failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
     echo "  Running lql revert..."
-    lql revert --recursive --database "$dbname" --yes --package "$package_name" || {
-        echo -e "${RED}FAILED: lql revert failed for package $package_name${NC}"
+    lql revert --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: lql revert failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
     echo "  Running lql deploy (second time)..."
-    lql deploy --recursive --database "$dbname" --yes --package "$package_name" || {
-        echo -e "${RED}FAILED: lql deploy (second time) failed for package $package_name${NC}"
+    lql deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: lql deploy (second time) failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
@@ -88,9 +115,14 @@ main() {
         exit 1
     fi
     
-    if ! command -v createdb &> /dev/null || ! command -v dropdb &> /dev/null; then
-        echo -e "${RED}ERROR: PostgreSQL client tools (createdb/dropdb) not found.${NC}"
-        echo "Please ensure PostgreSQL client tools are installed and in PATH."
+    if ! command -v docker &> /dev/null; then
+        echo -e "${RED}ERROR: Docker not found. Please install Docker.${NC}"
+        exit 1
+    fi
+    
+    if ! docker exec postgres psql -U postgres -c "SELECT 1;" &> /dev/null; then
+        echo -e "${RED}ERROR: PostgreSQL container not running or not accessible.${NC}"
+        echo "Please run: docker-compose up -d"
         exit 1
     fi
     
