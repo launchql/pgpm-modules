@@ -17,7 +17,11 @@ dbsafename() {
 cleanup_db() {
     local dbname="$1"
     echo "  Cleaning up database: $dbname"
-    docker exec postgres dropdb -U postgres "$dbname" 2>/dev/null || true
+    if command -v docker &> /dev/null && docker exec postgres psql -U postgres -c "SELECT 1;" &> /dev/null; then
+        docker exec postgres dropdb -U postgres "$dbname" 2>/dev/null || true
+    else
+        dropdb "$dbname" 2>/dev/null || true
+    fi
 }
 
 test_package() {
@@ -59,10 +63,17 @@ test_package() {
     cleanup_db "$dbname"
     
     echo "  Creating database: $dbname"
-    docker exec postgres createdb -U postgres "$dbname" || {
-        echo -e "${RED}FAILED: Could not create database $dbname for package $package_name${NC}"
-        return 1
-    }
+    if command -v docker &> /dev/null && docker exec postgres psql -U postgres -c "SELECT 1;" &> /dev/null; then
+        docker exec postgres createdb -U postgres "$dbname" || {
+            echo -e "${RED}FAILED: Could not create database $dbname for package $package_name${NC}"
+            return 1
+        }
+    else
+        createdb "$dbname" || {
+            echo -e "${RED}FAILED: Could not create database $dbname for package $package_name${NC}"
+            return 1
+        }
+    fi
     
     cd "$PROJECT_ROOT/$package_path" || {
         echo -e "${RED}FAILED: Could not change to directory $PROJECT_ROOT/$package_path${NC}"
@@ -115,14 +126,14 @@ main() {
         exit 1
     fi
     
-    if ! command -v docker &> /dev/null; then
-        echo -e "${RED}ERROR: Docker not found. Please install Docker.${NC}"
-        exit 1
-    fi
-    
-    if ! docker exec postgres psql -U postgres -c "SELECT 1;" &> /dev/null; then
-        echo -e "${RED}ERROR: PostgreSQL container not running or not accessible.${NC}"
-        echo "Please run: docker-compose up -d"
+    if command -v docker &> /dev/null && docker exec postgres psql -U postgres -c "SELECT 1;" &> /dev/null; then
+        echo "Using Docker PostgreSQL container"
+    elif psql -c "SELECT 1;" &> /dev/null; then
+        echo "Using direct PostgreSQL connection"
+    else
+        echo -e "${RED}ERROR: PostgreSQL not accessible.${NC}"
+        echo "For local development: docker-compose up -d"
+        echo "For CI: ensure PostgreSQL service is running"
         exit 1
     fi
     
