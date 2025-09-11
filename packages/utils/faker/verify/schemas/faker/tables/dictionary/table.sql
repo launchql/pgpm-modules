@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT verify_table ('faker.words');
+SELECT verify_table ('faker.dictionary');
 
 ROLLBACK;

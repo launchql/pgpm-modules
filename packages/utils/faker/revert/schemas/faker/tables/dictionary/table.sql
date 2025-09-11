@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TABLE faker.words;
+DROP TABLE faker.dictionary;
 
 COMMIT;
