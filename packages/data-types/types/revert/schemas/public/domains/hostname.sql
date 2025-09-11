@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TYPE public.domain;
+DROP DOMAIN hostname;
 
 COMMIT;
