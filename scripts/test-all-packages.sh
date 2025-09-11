@@ -115,9 +115,44 @@ test_package() {
     return 0
 }
 
+usage() {
+    echo "Usage: $0 [OPTIONS]"
+    echo ""
+    echo "OPTIONS:"
+    echo "  --stop-on-fail    Stop testing immediately when a package fails (default: continue testing all packages)"
+    echo "  --help            Show this help message"
+    echo ""
+}
+
 main() {
+    local STOP_ON_FAIL=false
+    
+    # Parse command line arguments
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --stop-on-fail)
+                STOP_ON_FAIL=true
+                shift
+                ;;
+            --help)
+                usage
+                exit 0
+                ;;
+            *)
+                echo "Unknown option: $1"
+                usage
+                exit 1
+                ;;
+        esac
+    done
+    
     echo "=== LaunchQL Package Integration Test ==="
     echo "Testing all packages with deploy/verify/revert/deploy cycle"
+    if [[ "$STOP_ON_FAIL" == "true" ]]; then
+        echo "Mode: Stop on first failure"
+    else
+        echo "Mode: Test all packages (collect all failures)"
+    fi
     echo ""
     
     if ! command -v lql &> /dev/null; then
@@ -164,6 +199,23 @@ main() {
             successful_packages+=("$(basename "$package")")
         else
             failed_packages+=("$(basename "$package")")
+            if [[ "$STOP_ON_FAIL" == "true" ]]; then
+                echo ""
+                echo -e "${RED}STOPPING: Test failed for package $(basename "$package") and --stop-on-fail was specified${NC}"
+                echo ""
+                echo "=== TEST SUMMARY (PARTIAL) ==="
+                if [ ${#successful_packages[@]} -gt 0 ]; then
+                    echo -e "${GREEN}Successful packages before failure (${#successful_packages[@]}):${NC}"
+                    for successful_package in "${successful_packages[@]}"; do
+                        echo -e "  ${GREEN}✓${NC} $successful_package"
+                    done
+                    echo ""
+                fi
+                echo -e "${RED}Failed package: $(basename "$package")${NC}"
+                echo ""
+                echo -e "${RED}OVERALL RESULT: FAILED (stopped on first failure)${NC}"
+                exit 1
+            fi
         fi
         echo ""
     done
