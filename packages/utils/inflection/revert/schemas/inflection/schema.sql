@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP SCHEMA inflection;
+DROP SCHEMA inflection CASCADE;
 
 COMMIT;

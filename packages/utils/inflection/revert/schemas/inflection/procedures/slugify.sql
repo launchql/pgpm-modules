@@ -2,6 +2,7 @@
 
 BEGIN;
 
-DROP FUNCTION inflection.slugify;
+DROP FUNCTION inflection.slugify(text);
+DROP FUNCTION inflection.slugify(text, boolean);
 
 COMMIT;

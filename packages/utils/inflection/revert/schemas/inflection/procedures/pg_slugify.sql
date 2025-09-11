@@ -2,6 +2,7 @@
 
 BEGIN;
 
-DROP FUNCTION inflection.pg_slugify;
+DROP FUNCTION inflection.pg_slugify(text);
+DROP FUNCTION inflection.pg_slugify(text, boolean);
 
 COMMIT;
