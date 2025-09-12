@@ -2,6 +2,9 @@
 
 BEGIN;
 
-SELECT verify_function ('status_private.status_triggers');
+SELECT verify_function ('status_private.tg_achievement');
+SELECT verify_function ('status_private.tg_achievement_toggle');
+SELECT verify_function ('status_private.tg_achievement_boolean');
+SELECT verify_function ('status_private.tg_achievement_toggle_boolean');
 
 ROLLBACK;

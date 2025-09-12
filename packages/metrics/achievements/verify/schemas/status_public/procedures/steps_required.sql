@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT verify_function ('status_public.tasks_required_for');
+SELECT verify_function ('status_public.steps_required');
 
 ROLLBACK;

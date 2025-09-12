@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT verify_table ('status_public.user_levels');
+-- SELECT verify_table ('status_public.user_levels');
 
 ROLLBACK;

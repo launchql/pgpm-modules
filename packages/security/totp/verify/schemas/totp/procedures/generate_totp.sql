@@ -2,6 +2,6 @@
 
 BEGIN;
 
-SELECT verify_function ('totp.generate_totp');
+SELECT verify_function ('totp.generate');
 
 ROLLBACK;
