@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP FUNCTION status_public.tasks_required_for;
+DROP FUNCTION status_public.steps_required;
 
 COMMIT;

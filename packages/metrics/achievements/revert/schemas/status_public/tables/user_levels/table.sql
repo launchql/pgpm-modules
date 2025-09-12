@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TABLE status_public.user_levels;
+-- DROP TABLE status_public.user_levels;
 
 COMMIT;

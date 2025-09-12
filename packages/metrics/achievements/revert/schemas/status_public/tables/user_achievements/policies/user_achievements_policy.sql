@@ -14,6 +14,5 @@ DROP POLICY can_insert_user_achievements ON status_public.user_achievements;
 DROP POLICY can_update_user_achievements ON status_public.user_achievements;
 DROP POLICY can_delete_user_achievements ON status_public.user_achievements;
 
-DROP FUNCTION status_private.user_achievements_policy_fn;
 
 COMMIT;
