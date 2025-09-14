@@ -2,6 +2,6 @@
 
 BEGIN;
 
-DROP TYPE public.location;
+DROP TYPE public.geolocation;
 
 COMMIT;
