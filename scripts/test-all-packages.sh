@@ -31,29 +31,29 @@ test_package() {
     
     local lql_package_name
     case "$package_name" in
-        "geotypes") lql_package_name="launchql-geo-types" ;;
-        "stamps") lql_package_name="launchql-stamps" ;;
-        "types") lql_package_name="launchql-types" ;;
-        "uuid") lql_package_name="launchql-uuid" ;;
-        "database-jobs") lql_package_name="launchql-database-jobs" ;;
-        "jobs") lql_package_name="launchql-jobs" ;;
-        "db_meta") lql_package_name="launchql-meta-db" ;;
-        "db_meta_modules") lql_package_name="launchql-meta-db-modules" ;;
-        "db_meta_test") lql_package_name="launchql-meta-db-test" ;;
-        "achievements") lql_package_name="launchql-achievements" ;;
-        "measurements") lql_package_name="launchql-measurements" ;;
-        "default-roles") lql_package_name="launchql-default-roles" ;;
-        "defaults") lql_package_name="launchql-defaults" ;;
-        "encrypted-secrets-table") lql_package_name="launchql-encrypted-secrets-table" ;;
-        "encrypted-secrets") lql_package_name="launchql-encrypted-secrets" ;;
-        "jwt-claims") lql_package_name="launchql-jwt-claims" ;;
-        "totp") lql_package_name="launchql-totp" ;;
-        "base32") lql_package_name="launchql-base32" ;;
-        "faker") lql_package_name="launchql-faker" ;;
-        "inflection") lql_package_name="launchql-inflection" ;;
-        "utils") lql_package_name="launchql-utils" ;;
-        "verify") lql_package_name="launchql-verify" ;;
-        *) lql_package_name="launchql-$package_name" ;;
+        "geotypes") lql_package_name="pgpm-geo-types" ;;
+        "stamps") lql_package_name="pgpm-stamps" ;;
+        "types") lql_package_name="pgpm-types" ;;
+        "uuid") lql_package_name="pgpm-uuid" ;;
+        "database-jobs") lql_package_name="pgpm-database-jobs" ;;
+        "jobs") lql_package_name="pgpm-jobs" ;;
+        "db_meta") lql_package_name="pgpm-meta-db" ;;
+        "db_meta_modules") lql_package_name="pgpm-meta-db-modules" ;;
+        "db_meta_test") lql_package_name="pgpm-meta-db-test" ;;
+        "achievements") lql_package_name="pgpm-achievements" ;;
+        "measurements") lql_package_name="pgpm-measurements" ;;
+        "default-roles") lql_package_name="pgpm-default-roles" ;;
+        "defaults") lql_package_name="pgpm-defaults" ;;
+        "encrypted-secrets-table") lql_package_name="pgpm-encrypted-secrets-table" ;;
+        "encrypted-secrets") lql_package_name="pgpm-encrypted-secrets" ;;
+        "jwt-claims") lql_package_name="pgpm-jwt-claims" ;;
+        "totp") lql_package_name="pgpm-totp" ;;
+        "base32") lql_package_name="pgpm-base32" ;;
+        "faker") lql_package_name="pgpm-faker" ;;
+        "inflection") lql_package_name="pgpm-inflection" ;;
+        "utils") lql_package_name="pgpm-utils" ;;
+        "verify") lql_package_name="pgpm-verify" ;;
+        *) lql_package_name="pgpm-$package_name" ;;
     esac
     
     echo -e "${YELLOW}Testing package: $package_name${NC}"
@@ -81,30 +81,30 @@ test_package() {
         return 1
     }
     
-    echo "  Running lql deploy..."
-    lql deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
-        echo -e "${RED}FAILED: lql deploy failed for package $lql_package_name${NC}"
+    echo "  Running pgpm deploy..."
+    pgpm deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: pgpm deploy failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
-    echo "  Running lql verify..."
-    lql verify --recursive --database "$dbname" --yes --package "$lql_package_name" || {
-        echo -e "${RED}FAILED: lql verify failed for package $lql_package_name${NC}"
+    echo "  Running pgpm verify..."
+    pgpm verify --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: pgpm verify failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
-    echo "  Running lql revert..."
-    lql revert --recursive --database "$dbname" --yes --package "$lql_package_name" || {
-        echo -e "${RED}FAILED: lql revert failed for package $lql_package_name${NC}"
+    echo "  Running pgpm revert..."
+    pgpm revert --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: pgpm revert failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
     
-    echo "  Running lql deploy (second time)..."
-    lql deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
-        echo -e "${RED}FAILED: lql deploy (second time) failed for package $lql_package_name${NC}"
+    echo "  Running pgpm deploy (second time)..."
+    pgpm deploy --recursive --database "$dbname" --yes --package "$lql_package_name" || {
+        echo -e "${RED}FAILED: pgpm deploy (second time) failed for package $lql_package_name${NC}"
         cleanup_db "$dbname"
         return 1
     }
@@ -155,9 +155,9 @@ main() {
     fi
     echo ""
     
-    if ! command -v lql &> /dev/null; then
-        echo -e "${RED}ERROR: lql CLI not found. Please install @launchql/cli globally.${NC}"
-        echo "Run: npm install -g @launchql/cli@4.9.0"
+    if ! command -v pgpm &> /dev/null; then
+        echo -e "${RED}ERROR: pgpm CLI not found. Please install @pgpm/cli globally.${NC}"
+        echo "Run: npm install -g @pgpm/cli@4.9.0"
         exit 1
     fi
     
@@ -183,7 +183,7 @@ main() {
         if [[ "$dir_path" != *"/dist" ]]; then
             packages+=("$dir_path")
         fi
-    done < <(find packages -name "launchql.plan" -print0 | sort -z)
+    done < <(find packages -name "pgpm.plan" -print0 | sort -z)
     
     echo "Found ${#packages[@]} packages to test:"
     for package in "${packages[@]}"; do

@@ -1,11 +1,11 @@
 {
-  "name": "launchql-extensions",
+  "name": "pgpm-extensions",
   "version": "0.0.1",
-  "author": "launchql <hello@launchql.com>",
+  "author": "pgpm <hello@pgpm.com>",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/launchql/extensions"
+    "url": "https://github.com/pgpm/extensions"
   },
   "license": "MIT",
   "engines": {

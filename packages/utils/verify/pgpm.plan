@@ -1,6 +1,6 @@
 %syntax-version=1.0.0
-%project=launchql-verify
-%uri=launchql-verify
+%project=pgpm-verify
+%uri=pgpm-verify
 
 procedures/get_entity_from_str 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add procedures/get_entity_from_str
 procedures/get_schema_from_str 2017-08-11T08:11:51Z skitch <skitch@5b0c196eeb62> # add procedures/get_schema_from_str

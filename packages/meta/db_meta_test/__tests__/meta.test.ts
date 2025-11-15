@@ -140,7 +140,7 @@ afterAll(async () => {
 it('api', async () => {
   const result = await query<ApiResult, QueryVariables>(ApiQuery, {
     subdomain: 'api',
-    domain: 'lql.io'
+    domain: 'pgpm.io'
   });
   
   expect(result.data).toBeDefined();
@@ -150,7 +150,7 @@ it('api', async () => {
 it('meta', async () => {
   const result = await query<ApiResult, QueryVariables>(ApiQuery, {
     subdomain: 'meta',
-    domain: 'lql.io'
+    domain: 'pgpm.io'
   });
   
   expect(result.data).toBeDefined();
@@ -160,7 +160,7 @@ it('meta', async () => {
 it('site', async () => {
   const result = await query<SiteResult, QueryVariables>(SiteQuery, {
     subdomain: 'app',
-    domain: 'lql.io'
+    domain: 'pgpm.io'
   });
   
   expect(result.data).toBeDefined();

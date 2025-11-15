@@ -92,7 +92,7 @@ describe('db_meta functionality', () => {
       `INSERT INTO meta_public.domains (database_id, api_id, domain, subdomain) 
        VALUES ($1, $2, $3, $4) 
        RETURNING *`,
-      [database_id, objs.apis.public.id, 'lql.io', 'api']
+      [database_id, objs.apis.public.id, 'pgpm.io', 'api']
     );
     objs.domains.api = apiDomain;
     expect(snapshot(apiDomain)).toMatchSnapshot();
@@ -101,7 +101,7 @@ describe('db_meta functionality', () => {
       `INSERT INTO meta_public.domains (database_id, site_id, domain, subdomain) 
        VALUES ($1, $2, $3, $4) 
        RETURNING *`,
-      [database_id, objs.sites.app.id, 'lql.io', 'app']
+      [database_id, objs.sites.app.id, 'pgpm.io', 'app']
     );
     objs.domains.app = appDomain;
     expect(snapshot(appDomain)).toMatchSnapshot();
@@ -110,7 +110,7 @@ describe('db_meta functionality', () => {
       `INSERT INTO meta_public.domains (database_id, api_id, domain, subdomain) 
        VALUES ($1, $2, $3, $4) 
        RETURNING *`,
-      [database_id, objs.apis.admin.id, 'lql.io', 'admin']
+      [database_id, objs.apis.admin.id, 'pgpm.io', 'admin']
     );
     objs.domains.admin = adminDomain;
     expect(snapshot(adminDomain)).toMatchSnapshot();
@@ -119,7 +119,7 @@ describe('db_meta functionality', () => {
       `INSERT INTO meta_public.domains (database_id, domain) 
        VALUES ($1, $2) 
        RETURNING *`,
-      [database_id, 'lql.io']
+      [database_id, 'pgpm.io']
     );
     objs.domains.base = baseDomain;
 
@@ -129,7 +129,7 @@ describe('db_meta functionality', () => {
        VALUES ($1, $2, $3, $4::jsonb) 
        RETURNING *`,
       [database_id, objs.sites.app.id, 'legal-emails', JSON.stringify({
-        supportEmail: 'support@launchql.com'
+        supportEmail: 'support@pgpm.com'
       })]
     );
     expect(snapshot(siteModule1)).toMatchSnapshot();

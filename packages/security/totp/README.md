@@ -131,30 +131,30 @@ yarn test:watch
 Create a new folder in `packages/`
 
 ```sh
-lql init
+pgpm init
 ```
 
 Then, run a generator:
 
 ```sh
-lql generate
+pgpm generate
 ```
 
 You can also add arguments if you already know what you want to do:
 
 ```sh
-lql generate schema --schema myschema
-lql generate table --schema myschema --table mytable
+pgpm generate schema --schema myschema
+pgpm generate table --schema myschema --table mytable
 ```
 
 ## deploy code as extensions
 
-`cd` into `packages/<module>`, and run `lql package`. This will make an sql file in `packages/<module>/sql/` used for `CREATE EXTENSION` calls to install your sqitch module as an extension.
+`cd` into `packages/<module>`, and run `pgpm package`. This will make an sql file in `packages/<module>/sql/` used for `CREATE EXTENSION` calls to install your sqitch module as an extension.
 
 ## recursive deploy
 
 You can also deploy all modules utilizing versioning as sqtich modules. Remove `--createdb` if you already created your db:
 
 ```sh
-lql deploy awesome-db --yes --recursive --createdb
+pgpm deploy awesome-db --yes --recursive --createdb
 ```

@@ -6,12 +6,12 @@
     "access": "public"
   },
   "scripts": {
-    "bundle": "lql package",
+    "bundle": "pgpm package",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "@launchql/cli": "^4.9.0"
+    "@pgpm/cli": "^4.9.0"
   },
   "dependencies": {
     "@pgpm/types": "workspace:*",

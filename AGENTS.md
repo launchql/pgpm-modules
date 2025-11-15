@@ -1,16 +1,16 @@
-# AGENTS.md — LaunchQL/Sqitch‑style Workflow for SQL Changes
+# AGENTS.md — PGPM/Sqitch‑style Workflow for SQL Changes
 
-> **Audience:** internal agents and contributors who ship database changes across the Interweb/LaunchQL workspace.
+> **Audience:** internal agents and contributors who ship database changes across the Interweb/PGPM workspace.
 >
-> **Goal:** make safe, testable, reversible SQL changes using a Sqitch‑style plan (`launchql.plan`) and the `deploy/`, `revert/`, `verify/` folders.
+> **Goal:** make safe, testable, reversible SQL changes using a Sqitch‑style plan (`pgpm.plan`) and the `deploy/`, `revert/`, `verify/` folders.
 
 ---
 
 ## Mental model
 
-LaunchQL extends the **Sqitch** model to a multi‑package **npm workspace**. Think of it as **Lerna/Yarn workspaces, but for SQL**:
+PGPM extends the **Sqitch** model to a multi‑package **npm workspace**. Think of it as **Lerna/Yarn workspaces, but for SQL**:
 
-* Each package contains its own `launchql.plan` plus `deploy/`, `revert/`, `verify/` trees.
+* Each package contains its own `pgpm.plan` plus `deploy/`, `revert/`, `verify/` trees.
 * Plans compose **recursively** up the workspace (e.g., an app package depends on a module package). Dependencies are explicit in the plan.
 * Every change is a **triple**:
 
@@ -28,9 +28,9 @@ LaunchQL extends the **Sqitch** model to a multi‑package **npm workspace**. Th
 ```
 packages/
   utils/
-    verify/                 # launchql-verify helpers live here (as a package)
+    verify/                 # pgpm-verify helpers live here (as a package)
   my-module/
-    launchql.plan
+    pgpm.plan
     deploy/
       public/
         create_table_users.sql
@@ -44,7 +44,7 @@ packages/
         create_table_users.sql
         add_index_users_email.sql
   my-app/
-    launchql.plan
+    pgpm.plan
     ...
 ```
 
@@ -68,7 +68,7 @@ packages/
 * The file path must **mirror** its deploy partner:
   `verify/<ns>/<change>.sql` ↔ `deploy/<ns>/<change>.sql`.
 * Must **prove** the intended state: table exists, column types, indexes present, grants applied, invariants hold, etc.
-* Use **`launchql-verify`** helpers (lives at `packages/utils/verify`). Examples below.
+* Use **`pgpm-verify`** helpers (lives at `packages/utils/verify`). Examples below.
 
 ### Revert (must exist for every deploy)
 
@@ -100,7 +100,7 @@ COMMIT;
 `verify/public/create_table_users.sql`
 
 ```sql
--- Helpers are provided by the launchql-verify extension.
+-- Helpers are provided by the pgpm-verify extension.
 -- Assert table and index exist
 SELECT verify_table('public.users');
 SELECT verify_index('public.users','users_email_idx');
@@ -119,7 +119,7 @@ COMMIT;
 
 ### Plan entries
 
-`launchql.plan`
+`pgpm.plan`
 
 ```
 change create_table_users
@@ -131,11 +131,11 @@ change create_table_users
 
 When a package depends on SQL provided by another package:
 
-* Reference that package’s tagged frontier (or explicit change) in your `launchql.plan` with `requires pkg:<name>/<module>@<tag>`.
+* Reference that package’s tagged frontier (or explicit change) in your `pgpm.plan` with `requires pkg:<name>/<module>@<tag>`.
 * The workspace runner resolves dependencies in topological order across packages, then executes deploy → verify.
 * Keep shared primitives (schemas, types, roles, policies) in foundational packages (e.g., `utils/schema-core`) and depend on them.
 
-## Using `launchql-verify` in practice
+## Using `pgpm-verify` in practice
 
 **Common helpers** *(names per your package)*:
 
