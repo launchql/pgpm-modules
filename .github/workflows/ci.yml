@@ -246,5 +246,5 @@ jobs:
           pgpm admin-users add --test --yes
 
       - name: Run Integration Tests
-        run: ./scripts/test-all-packages.sh
+        run: ./scripts/test-all-packages.js
 
