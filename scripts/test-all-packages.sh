@@ -31,29 +31,29 @@ test_package() {
     
     local lql_package_name
     case "$package_name" in
-        "geotypes") lql_package_name="pgpm-geo-types" ;;
-        "stamps") lql_package_name="pgpm-stamps" ;;
-        "types") lql_package_name="pgpm-types" ;;
-        "uuid") lql_package_name="pgpm-uuid" ;;
-        "database-jobs") lql_package_name="pgpm-database-jobs" ;;
-        "jobs") lql_package_name="pgpm-jobs" ;;
-        "db_meta") lql_package_name="pgpm-meta-db" ;;
-        "db_meta_modules") lql_package_name="pgpm-meta-db-modules" ;;
-        "db_meta_test") lql_package_name="pgpm-meta-db-test" ;;
-        "achievements") lql_package_name="pgpm-achievements" ;;
-        "measurements") lql_package_name="pgpm-measurements" ;;
-        "default-roles") lql_package_name="pgpm-default-roles" ;;
-        "defaults") lql_package_name="pgpm-defaults" ;;
-        "encrypted-secrets-table") lql_package_name="pgpm-encrypted-secrets-table" ;;
-        "encrypted-secrets") lql_package_name="pgpm-encrypted-secrets" ;;
-        "jwt-claims") lql_package_name="pgpm-jwt-claims" ;;
-        "totp") lql_package_name="pgpm-totp" ;;
-        "base32") lql_package_name="pgpm-base32" ;;
-        "faker") lql_package_name="pgpm-faker" ;;
-        "inflection") lql_package_name="pgpm-inflection" ;;
-        "utils") lql_package_name="pgpm-utils" ;;
+        "geotypes") lql_package_name="launchql-geo-types" ;;
+        "stamps") lql_package_name="launchql-stamps" ;;
+        "types") lql_package_name="launchql-types" ;;
+        "uuid") lql_package_name="launchql-uuid" ;;
+        "database-jobs") lql_package_name="launchql-database-jobs" ;;
+        "jobs") lql_package_name="launchql-jobs" ;;
+        "db_meta") lql_package_name="launchql-meta-db" ;;
+        "db_meta_modules") lql_package_name="launchql-meta-db-modules" ;;
+        "db_meta_test") lql_package_name="launchql-meta-db-test" ;;
+        "achievements") lql_package_name="launchql-achievements" ;;
+        "measurements") lql_package_name="launchql-measurements" ;;
+        "default-roles") lql_package_name="launchql-default-roles" ;;
+        "defaults") lql_package_name="launchql-defaults" ;;
+        "encrypted-secrets-table") lql_package_name="launchql-encrypted-secrets-table" ;;
+        "encrypted-secrets") lql_package_name="launchql-encrypted-secrets" ;;
+        "jwt-claims") lql_package_name="launchql-jwt-claims" ;;
+        "totp") lql_package_name="launchql-totp" ;;
+        "base32") lql_package_name="launchql-base32" ;;
+        "faker") lql_package_name="launchql-faker" ;;
+        "inflection") lql_package_name="launchql-inflection" ;;
+        "utils") lql_package_name="launchql-utils" ;;
         "verify") lql_package_name="launchql-verify" ;;
-        *) lql_package_name="pgpm-$package_name" ;;
+        *) lql_package_name="launchql-$package_name" ;;
     esac
     
     echo -e "${YELLOW}Testing package: $package_name${NC}"
