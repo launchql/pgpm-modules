@@ -61,8 +61,8 @@ cd my-app
 pgpm init
 cd packages/your-module
 
-# 3. Install a package 
-pgpm install @pgpm/faker
+# 3. Install a package
+pgpm install [@pgpm/faker](https://www.npmjs.com/package/@pgpm/faker)
 
 # 4. Deploy everything
 pgpm deploy --createdb --database mydb1
@@ -76,8 +76,8 @@ psql -d mydb1 -c "SELECT faker.city('MI');"
 # 1. Navigate to your module
 cd packages/your-module
 
-# 2. Install a package 
-pgpm install @pgpm/faker
+# 2. Install a package
+pgpm install [@pgpm/faker](https://www.npmjs.com/package/@pgpm/faker)
 
 # 3. Deploy all installed modules
 pgpm deploy --createdb --database mydb1
@@ -112,38 +112,38 @@ Each module includes its own README with detailed documentation. See individual 
 ## Package Structure
 
 ### Data Types
-- `@pgpm/types` - Core PostgreSQL data types
-- `@pgpm/uuid` - UUID utilities and extensions
-- `@pgpm/stamps` - Timestamp utilities and audit trails
-- `@pgpm/geotypes` - Geographic data types and spatial functions
+- [`@pgpm/types`](https://www.npmjs.com/package/@pgpm/types) - Core PostgreSQL data types
+- [`@pgpm/uuid`](https://www.npmjs.com/package/@pgpm/uuid) - UUID utilities and extensions
+- [`@pgpm/stamps`](https://www.npmjs.com/package/@pgpm/stamps) - Timestamp utilities and audit trails
+- [`@pgpm/geotypes`](https://www.npmjs.com/package/@pgpm/geotypes) - Geographic data types and spatial functions
 
 ### Jobs & Background Processing
-- `@pgpm/jobs` - Core job system for background tasks
-- `@pgpm/database-jobs` - Database-specific job handling
+- [`@pgpm/jobs`](https://www.npmjs.com/package/@pgpm/jobs) - Core job system for background tasks
+- [`@pgpm/database-jobs`](https://www.npmjs.com/package/@pgpm/database-jobs) - Database-specific job handling
 
 ### Meta & Database Introspection
-- `@pgpm/db_meta` - Database metadata utilities
-- `@pgpm/db_meta_modules` - Module metadata handling
-- `@pgpm/db_meta_test` - Testing utilities for metadata
+- [`@pgpm/db_meta`](https://www.npmjs.com/package/@pgpm/db_meta) - Database metadata utilities
+- [`@pgpm/db_meta_modules`](https://www.npmjs.com/package/@pgpm/db_meta_modules) - Module metadata handling
+- [`@pgpm/db_meta_test`](https://www.npmjs.com/package/@pgpm/db_meta_test) - Testing utilities for metadata
 
 ### Security & Authentication
-- `@pgpm/default-roles` - Default PostgreSQL role definitions
-- `@pgpm/defaults` - Security defaults and configurations
-- `@pgpm/jwt-claims` - JWT claim handling and validation
-- `@pgpm/totp` - Time-based One-Time Password authentication
-- `@pgpm/encrypted-secrets` - Encrypted secrets management
-- `@pgpm/encrypted-secrets-table` - Table-based encrypted secrets
+- [`@pgpm/default-roles`](https://www.npmjs.com/package/@pgpm/default-roles) - Default PostgreSQL role definitions
+- [`@pgpm/defaults`](https://www.npmjs.com/package/@pgpm/defaults) - Security defaults and configurations
+- [`@pgpm/jwt-claims`](https://www.npmjs.com/package/@pgpm/jwt-claims) - JWT claim handling and validation
+- [`@pgpm/totp`](https://www.npmjs.com/package/@pgpm/totp) - Time-based One-Time Password authentication
+- [`@pgpm/encrypted-secrets`](https://www.npmjs.com/package/@pgpm/encrypted-secrets) - Encrypted secrets management
+- [`@pgpm/encrypted-secrets-table`](https://www.npmjs.com/package/@pgpm/encrypted-secrets-table) - Table-based encrypted secrets
 
 ### Utilities
-- `@pgpm/utils` - General utility functions
-- `@pgpm/verify` - Verification utilities (used by other modules)
-- `@pgpm/inflection` - String inflection utilities
-- `@pgpm/base32` - Base32 encoding/decoding
-- `@pgpm/faker` - Fake data generation for testing
+- [`@pgpm/utils`](https://www.npmjs.com/package/@pgpm/utils) - General utility functions
+- [`@pgpm/verify`](https://www.npmjs.com/package/@pgpm/verify) - Verification utilities (used by other modules)
+- [`@pgpm/inflection`](https://www.npmjs.com/package/@pgpm/inflection) - String inflection utilities
+- [`@pgpm/base32`](https://www.npmjs.com/package/@pgpm/base32) - Base32 encoding/decoding
+- [`@pgpm/faker`](https://www.npmjs.com/package/@pgpm/faker) - Fake data generation for testing
 
 ### Metrics & Analytics
-- `@pgpm/measurements` - Performance tracking and analytics
-- `@pgpm/achievements` - Achievement system for user progress
+- [`@pgpm/measurements`](https://www.npmjs.com/package/@pgpm/measurements) - Performance tracking and analytics
+- [`@pgpm/achievements`](https://www.npmjs.com/package/@pgpm/achievements) - Achievement system for user progress
 
 ## pgpm Workflow
 
