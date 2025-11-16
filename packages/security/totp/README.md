@@ -32,40 +32,42 @@ This is a quick way to get started. The sections below provide more detailed ins
 ### Prerequisites
 
 ```bash
-# Install pgpm globally
+# Install pgpm CLI 
 npm install -g pgpm
 
-# Start PostgreSQL
+# Start local Postgres (via Docker) and export env vars
 pgpm docker start
-
-# Set environment variables
 eval "$(pgpm env)"
 ```
 
-### Deploy
+> **Tip:** Already running Postgres? Skip the Docker step and just export your `PG*` environment variables.
 
-#### Option 1: Deploy by installing with pgpm
+### **Add to an Existing Package**
 
 ```bash
+# 1. Install the package
 pgpm install @pgpm/totp
-pgpm deploy
+
+# 2. Deploy locally
+pgpm deploy 
 ```
 
-#### Option 2: Deploy from Package Directory
+### **Add to a New Project**
 
 ```bash
-cd packages/security/totp
-pgpm deploy --createdb
-```
+# 1. Create a workspace
+pgpm init --workspace
+cd my-app
 
-#### Option 3: Deploy from Workspace Root
+# 2. Create your first module
+pgpm init
+cd packages/your-module
 
-```bash
-# Install workspace dependencies
-pnpm install
+# 3. Install a package 
+pgpm install @pgpm/totp
 
-# Deploy with dependencies
-pgpm deploy mydb1 --yes --createdb
+# 4. Deploy everything
+pgpm deploy --createdb --database mydb1
 ```
 
 ## Usage
@@ -240,139 +242,6 @@ And major improvements from
 https://gist.github.com/bwbroersma/676d0de32263ed554584ab132434ebd9
 
 ---
-
-## Development
-
-## start the postgres db process
-
-First you'll want to start the postgres docker (you can also just use `docker-compose up -d`):
-
-```sh
-make up
-```
-
-## install modules
-
-Install modules
-
-```sh
-yarn install
-```
-
-## install the Postgres extensions
-
-Now that the postgres process is running, install the extensions:
-
-```sh
-make install
-```
-
-This basically `ssh`s into the postgres instance with the `packages/` folder mounted as a volume, and installs the bundled sql code as pgxn extensions.
-
-## testing
-
-Testing will load all your latest sql changes and create fresh, populated databases for each sqitch module in `packages/`.
-
-```sh
-yarn test:watch
-```
-
-## building new modules
-
-Create a new folder in `packages/`
-
-```sh
-pgpm init
-```
-
-Then, run a generator:
-
-```sh
-pgpm generate
-```
-
-You can also add arguments if you already know what you want to do:
-
-```sh
-pgpm generate schema --schema myschema
-pgpm generate table --schema myschema --table mytable
-```
-
-## deploy code as extensions
-
-`cd` into `packages/<module>`, and run `pgpm package`. This will make an sql file in `packages/<module>/sql/` used for `CREATE EXTENSION` calls to install your sqitch module as an extension.
-
-## recursive deploy
-
-You can also deploy all modules utilizing versioning as sqtich modules. Remove `--createdb` if you already created your db:
-
-```sh
-pgpm deploy mydb1 --yes --createdb
-```
-
----
-
-### **Before You Begin**
-
-```bash
-# 1. Install pgpm
-npm install -g pgpm
-
-# 2. Start Postgres (Docker or local)
-pgpm docker start
-
-# 3. Load PG* environment variables (PGHOST, PGUSER, ...)
-eval "$(pgpm env)"
-```
-
----
-
-### **Starting a New Project**
-
-```bash
-# 1. Create a workspace
-pgpm init --workspace
-cd my-app
-
-# 2. Create your first module
-pgpm init
-
-# 3. Add a migration
-pgpm add some_change
-
-# 4. Deploy (auto-creates database)
-pgpm deploy --createdb
-```
-
----
-
-### **Working With an Existing Project**
-
-```bash
-# 1. Clone and enter the project
-git clone <repo> && cd <project>
-
-# 2. Install dependencies
-pnpm install
-
-# 3. Deploy locally
-pgpm deploy --createdb
-```
-
----
-
-### **Testing a Module Inside a Workspace**
-
-```bash
-# 1. Install workspace deps
-pnpm install
-
-# 2. Enter the module directory
-cd packages/<some-module>
-
-# 3. Run tests in watch mode
-pnpm test:watch
-```
 
 ## Related Tooling
 

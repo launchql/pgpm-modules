@@ -31,40 +31,42 @@ This is a quick way to get started. The sections below provide more detailed ins
 ### Prerequisites
 
 ```bash
-# Install pgpm globally
+# Install pgpm CLI 
 npm install -g pgpm
 
-# Start PostgreSQL
+# Start local Postgres (via Docker) and export env vars
 pgpm docker start
-
-# Set environment variables
 eval "$(pgpm env)"
 ```
 
-### Deploy
+> **Tip:** Already running Postgres? Skip the Docker step and just export your `PG*` environment variables.
 
-#### Option 1: Deploy by installing with pgpm
+### **Add to an Existing Package**
 
 ```bash
+# 1. Install the package
 pgpm install @pgpm/types
-pgpm deploy
+
+# 2. Deploy locally
+pgpm deploy 
 ```
 
-#### Option 2: Deploy from Package Directory
+### **Add to a New Project**
 
 ```bash
-cd packages/data-types/types
-pgpm deploy --createdb
-```
+# 1. Create a workspace
+pgpm init --workspace
+cd my-app
 
-#### Option 3: Deploy from Workspace Root
+# 2. Create your first module
+pgpm init
+cd packages/your-module
 
-```bash
-# Install workspace dependencies
-pnpm install
+# 3. Install a package 
+pgpm install @pgpm/types
 
-# Deploy with dependencies
-pgpm deploy mydb1 --yes --createdb
+# 4. Deploy everything
+pgpm deploy --createdb --database mydb1
 ```
 
 ## Usage
@@ -194,76 +196,6 @@ The test suite validates:
 - URL format validation with extensive test cases
 - Hostname format validation
 - Image and attachment JSON structure validation
-
-## Development
-
-See the [Development](#development) section below for information on working with this package.
-
----
-
-## Development
-
-### **Before You Begin**
-
-```bash
-# 1. Install pgpm
-npm install -g pgpm
-
-# 2. Start Postgres (Docker or local)
-pgpm docker start
-
-# 3. Load PG* environment variables (PGHOST, PGUSER, ...)
-eval "$(pgpm env)"
-```
-
----
-
-### **Starting a New Project**
-
-```bash
-# 1. Create a workspace
-pgpm init --workspace
-cd my-app
-
-# 2. Create your first module
-pgpm init
-
-# 3. Add a migration
-pgpm add some_change
-
-# 4. Deploy (auto-creates database)
-pgpm deploy --createdb
-```
-
----
-
-### **Working With an Existing Project**
-
-```bash
-# 1. Clone and enter the project
-git clone <repo> && cd <project>
-
-# 2. Install dependencies
-pnpm install
-
-# 3. Deploy locally
-pgpm deploy --createdb
-```
-
----
-
-### **Testing a Module Inside a Workspace**
-
-```bash
-# 1. Install workspace deps
-pnpm install
-
-# 2. Enter the module directory
-cd packages/<some-module>
-
-# 3. Run tests in watch mode
-pnpm test:watch
-```
 
 ## Related Tooling
 

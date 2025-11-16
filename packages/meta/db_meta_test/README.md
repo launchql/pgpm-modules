@@ -27,40 +27,42 @@ This is a quick way to get started. The sections below provide more detailed ins
 ### Prerequisites
 
 ```bash
-# Install pgpm globally
+# Install pgpm CLI 
 npm install -g pgpm
 
-# Start PostgreSQL
+# Start local Postgres (via Docker) and export env vars
 pgpm docker start
-
-# Set environment variables
 eval "$(pgpm env)"
 ```
 
-### Deploy
+> **Tip:** Already running Postgres? Skip the Docker step and just export your `PG*` environment variables.
 
-#### Option 1: Deploy by installing with pgpm
+### **Add to an Existing Package**
 
 ```bash
+# 1. Install the package
 pgpm install @pgpm/meta-db-test
-pgpm deploy
+
+# 2. Deploy locally
+pgpm deploy 
 ```
 
-#### Option 2: Deploy from Package Directory
+### **Add to a New Project**
 
 ```bash
-cd packages/meta/db_meta_test
-pgpm deploy --createdb
-```
+# 1. Create a workspace
+pgpm init --workspace
+cd my-app
 
-#### Option 3: Deploy from Workspace Root
+# 2. Create your first module
+pgpm init
+cd packages/your-module
 
-```bash
-# Install workspace dependencies
-pnpm install
+# 3. Install a package 
+pgpm install @pgpm/meta-db-test
 
-# Deploy with dependencies
-pgpm deploy mydb1 --yes --createdb
+# 4. Deploy everything
+pgpm deploy --createdb --database mydb1
 ```
 
 ## Usage
@@ -98,97 +100,7 @@ Use this package to test metadata operations in your application:
 - Validate module configurations
 - Ensure metadata integrity
 
-### Development Testing
-
-Test metadata functionality during development:
-- Verify new metadata tables
-- Test metadata queries
-- Validate metadata relationships
-- Check constraint enforcement
-
-## Dependencies
-
-- `@pgpm/meta-db`: Core metadata management
-- `@pgpm/meta-db-modules`: Module metadata
-- `@pgpm/verify`: Verification utilities
-
-## Testing
-
-```bash
-pnpm test
-```
-
-## Development
-
-See the [Development](#development) section below for information on working with this package.
-
----
-
-## Development
-
-### **Before You Begin**
-
-```bash
-# 1. Install pgpm
-npm install -g pgpm
-
-# 2. Start Postgres (Docker or local)
-pgpm docker start
-
-# 3. Load PG* environment variables (PGHOST, PGUSER, ...)
-eval "$(pgpm env)"
-```
-
----
-
-### **Starting a New Project**
-
-```bash
-# 1. Create a workspace
-pgpm init --workspace
-cd my-app
-
-# 2. Create your first module
-pgpm init
-
-# 3. Add a migration
-pgpm add some_change
-
-# 4. Deploy (auto-creates database)
-pgpm deploy --createdb
-```
-
----
-
-### **Working With an Existing Project**
-
-```bash
-# 1. Clone and enter the project
-git clone <repo> && cd <project>
-
-# 2. Install dependencies
-pnpm install
-
-# 3. Deploy locally
-pgpm deploy --createdb
-```
-
----
-
-### **Testing a Module Inside a Workspace**
-
-```bash
-# 1. Install workspace deps
-pnpm install
-
-# 2. Enter the module directory
-cd packages/<some-module>
-
-# 3. Run tests in watch mode
-pnpm test:watch
-```
-
-## Related Tooling
+### Related Tooling
 
 * [pgpm](https://github.com/launchql/launchql/tree/main/packages/pgpm): **🖥️ PostgreSQL Package Manager** for modular Postgres development. Works with database workspaces, scaffolding, migrations, seeding, and installing database packages.
 * [pgsql-test](https://github.com/launchql/launchql/tree/main/packages/pgsql-test): **📊 Isolated testing environments** with per-test transaction rollbacks—ideal for integration tests, complex migrations, and RLS simulation.

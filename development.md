@@ -15,7 +15,7 @@ eval "$(pgpm env)"
 
 ---
 
-### **Starting a New Project**
+### **Add to a New Project**
 
 ```bash
 # 1. Create a workspace

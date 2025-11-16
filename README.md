@@ -1,5 +1,16 @@
 # pgpm modules
 
+<p align="center" width="100%">
+  <img height="250" src="https://raw.githubusercontent.com/launchql/launchql/refs/heads/main/assets/outline-logo.svg" />
+</p>
+
+<p align="center" width="100%">
+  <a href="https://github.com/launchql/pgpm-modules/actions/workflows/ci.yml">
+    <img height="20" src="https://github.com/launchql/pgpm-modules/actions/workflows/ci.yml/badge.svg" />
+  </a>
+   <a href="https://github.com/launchql/launchql/blob/main/LICENSE"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+</p>
+
 PostgreSQL modules using the `pgpm` workflow for safe, testable, reversible SQL changes.
 
 ## Overview
