@@ -20,6 +20,15 @@ create fake data in PostgreSQL
 
 ## Installation
 
+If you have `pgpm` installed:
+
+```bash
+pgpm install @pgpm/faker
+pgpm deploy
+```
+
+This is a quick way to get started. The sections below provide more detailed installation options.
+
 ### Prerequisites
 
 ```bash
@@ -35,14 +44,21 @@ eval "$(pgpm env)"
 
 ### Deploy
 
-#### Option 1: Deploy from Package Directory
+#### Option 1: Deploy by installing with pgpm
+
+```bash
+pgpm install @pgpm/faker
+pgpm deploy
+```
+
+#### Option 2: Deploy from Package Directory
 
 ```bash
 cd packages/utils/faker
 pgpm deploy --createdb
 ```
 
-#### Option 2: Deploy from Workspace Root
+#### Option 3: Deploy from Workspace Root
 
 ```bash
 # Install workspace dependencies
