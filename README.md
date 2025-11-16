@@ -19,12 +19,64 @@ This repository contains a curated collection of PostgreSQL modules built using 
 ## Installation
 
 ```bash
-# Install dependencies
-pnpm install
-
-# Install pgpm CLI globally
+# Install pgpm CLI 
 npm install -g pgpm
 ```
+
+## Using These Modules
+
+All modules in this repository are published to npm under the `@pgpm` scope. Install and use them in your own pgpm projects.
+
+### 🚀 Quick Start
+
+#### Setup Your Environment
+
+```bash
+# Start local Postgres (via Docker) and export env vars
+pgpm docker start
+eval "$(pgpm env)"
+```
+
+> **Tip:** Already running Postgres? Skip the Docker step and just export your `PG*` environment variables.
+
+#### Create a Workspace and Install a Package
+
+```bash
+# 1. Create a workspace
+pgpm init --workspace
+cd my-app
+
+# 2. Create your first module
+pgpm init
+cd packages/your-module
+
+# 3. Install a package 
+pgpm install @pgpm/faker
+
+# 4. Deploy everything
+pgpm deploy --createdb --database mydb1
+psql -d mydb1 -c "SELECT faker.city('MI');"
+>  Ann Arbor
+```
+
+#### Add to an Existing Module
+
+```bash
+# 1. Navigate to your module
+cd packages/your-module
+
+# 2. Install a package 
+pgpm install @pgpm/faker
+
+# 3. Deploy all installed modules
+pgpm deploy --createdb --database mydb1
+psql -d mydb1 -c "SELECT faker.city('MI');"
+>  Sterling Heights
+```
+
+Each module includes its own README with detailed documentation. See individual package directories for usage examples and API documentation.
+
+---
 
 ## Package Structure
 
@@ -64,63 +116,43 @@ npm install -g pgpm
 
 ## pgpm Workflow
 
-Each package follows the deploy/verify/revert pattern:
+Each package follows the Sqitch-inspired **deploy/verify/revert** pattern:
 
 - **Deploy**: `deploy/**/*.sql` - Applies database changes
 - **Verify**: `verify/**/*.sql` - Proves changes work correctly
 - **Revert**: `revert/**/*.sql` - Safely removes changes
 
-### Basic Commands
+## Developing
+
+This section is for **contributing to** or **developing** the modules in this repository. If you just want to use the published modules, see [Using These Modules](#using-these-modules) above.
+
+### Getting Started
 
 ```bash
-# Deploy changes
-pgpm deploy
+# Clone the repository
+git clone https://github.com/launchql/pgpm-modules.git
+cd pgpm-modules
 
-# Verify deployment
-pgpm verify
-
-# Revert changes
-pgpm revert
-
-# Package a module
-pgpm package
-```
-
-## Development
-
-```bash
 # Install dependencies
 pnpm install
-
-# Build all packages
-pnpm -r build
-
-# Test all packages
-pnpm -r test
-
-# Clean build artifacts
-pnpm -r clean
-
-# Lint code
-pnpm eslint .
 ```
 
-## Publishing
+### Testing a Package
+
+```bash
+# 1. Install workspace deps
+pnpm install
+
+# 2. Enter the module directory
+cd packages/utils/base32
+
+# 3. Run tests in watch mode
+pnpm test:watch
+```
+
+### Publishing
 
 ```bash
 # Publish to npm
 pnpm lerna publish
 ```
-
-## Dependencies
-
-Packages use workspace protocol for internal dependencies:
-```json
-{
-  "dependencies": {
-    "@pgpm/verify": "workspace:*"
-  }
-}
-```
-
-For more details on the pgpm workflow, see [AGENTS.md](./AGENTS.md).

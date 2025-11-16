@@ -62,7 +62,7 @@ pgpm deploy --createdb
 
 ```bash
 # Install workspace dependencies
-pgpm install
+pnpm install
 
 # Deploy with dependencies
 pgpm deploy mydb1 --yes --createdb
