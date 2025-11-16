@@ -121,7 +121,7 @@ function findPackages(projectRoot) {
 }
 
 function runPgpmCommand(command, dbname, packageName, packagePath, projectRoot) {
-  const fullCommand = `pgpm ${command} --recursive --database "${dbname}" --yes --package "${packageName}"`;
+  const fullCommand = `pgpm ${command} --database "${dbname}" --yes --package "${packageName}"`;
   const result = execCommand(fullCommand, {
     cwd: path.join(projectRoot, packagePath)
   });
