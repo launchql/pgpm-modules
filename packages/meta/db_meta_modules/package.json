@@ -2,6 +2,12 @@
   "name": "@pgpm/meta-db-modules",
   "version": "0.7.0",
   "description": "Module metadata handling and dependency tracking",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "metadata",
+    "modules"
+  ],
   "publishConfig": {
     "access": "public"
   },

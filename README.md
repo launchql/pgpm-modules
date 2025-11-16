@@ -62,7 +62,7 @@ pgpm init
 cd packages/your-module
 
 # 3. Install a package
-pgpm install [@pgpm/faker](https://www.npmjs.com/package/@pgpm/faker)
+pgpm install @pgpm/faker
 
 # 4. Deploy everything
 pgpm deploy --createdb --database mydb1
@@ -77,7 +77,7 @@ psql -d mydb1 -c "SELECT faker.city('MI');"
 cd packages/your-module
 
 # 2. Install a package
-pgpm install [@pgpm/faker](https://www.npmjs.com/package/@pgpm/faker)
+pgpm install @pgpm/faker
 
 # 3. Deploy all installed modules
 pgpm deploy --createdb --database mydb1

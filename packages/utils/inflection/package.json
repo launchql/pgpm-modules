@@ -2,6 +2,12 @@
   "name": "@pgpm/inflection",
   "version": "0.7.0",
   "description": "String inflection utilities for PostgreSQL naming conventions",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "inflection",
+    "strings"
+  ],
   "publishConfig": {
     "access": "public"
   },

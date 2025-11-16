@@ -2,6 +2,12 @@
   "name": "@pgpm/jwt-claims",
   "version": "0.7.0",
   "description": "JWT claim handling and validation functions",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "jwt",
+    "authentication"
+  ],
   "publishConfig": {
     "access": "public"
   },

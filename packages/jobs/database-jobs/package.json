@@ -2,6 +2,12 @@
   "name": "@pgpm/database-jobs",
   "version": "0.7.0",
   "description": "Database-specific job handling and queue management",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "jobs",
+    "queue"
+  ],
   "publishConfig": {
     "access": "public"
   },

@@ -2,6 +2,12 @@
   "name": "@pgpm/uuid",
   "version": "0.7.0",
   "description": "UUID utilities and extensions for PostgreSQL",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "uuid",
+    "identifiers"
+  ],
   "publishConfig": {
     "access": "public"
   },

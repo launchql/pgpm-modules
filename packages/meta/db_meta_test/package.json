@@ -2,6 +2,12 @@
   "name": "@pgpm/meta-db-test",
   "version": "0.7.0",
   "description": "Testing utilities for database metadata operations",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "testing",
+    "metadata"
+  ],
   "publishConfig": {
     "access": "public"
   },

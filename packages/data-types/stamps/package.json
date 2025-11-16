@@ -2,6 +2,12 @@
   "name": "@pgpm/stamps",
   "version": "0.7.0",
   "description": "Timestamp utilities and audit trail functions for PostgreSQL",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "timestamp",
+    "audit"
+  ],
   "publishConfig": {
     "access": "public"
   },

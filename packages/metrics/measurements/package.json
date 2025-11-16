@@ -2,6 +2,12 @@
   "name": "@pgpm/measurements",
   "version": "0.7.0",
   "description": "Measurement utilities for performance tracking and analytics",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "metrics",
+    "analytics"
+  ],
   "publishConfig": {
     "access": "public"
   },

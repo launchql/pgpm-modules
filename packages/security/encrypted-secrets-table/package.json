@@ -2,6 +2,12 @@
   "name": "@pgpm/encrypted-secrets-table",
   "version": "0.7.0",
   "description": "Table-based encrypted secrets storage and retrieval",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "encryption",
+    "secrets"
+  ],
   "publishConfig": {
     "access": "public"
   },

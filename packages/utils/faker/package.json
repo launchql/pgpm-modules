@@ -2,6 +2,12 @@
   "name": "@pgpm/faker",
   "version": "0.7.0",
   "description": "Fake data generation utilities for testing and development",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "faker",
+    "testing"
+  ],
   "publishConfig": {
     "access": "public"
   },

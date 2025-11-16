@@ -2,6 +2,12 @@
   "name": "@pgpm/base32",
   "version": "0.7.0",
   "description": "Base32 encoding and decoding functions for PostgreSQL",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "base32",
+    "encoding"
+  ],
   "publishConfig": {
     "access": "public"
   },

@@ -2,6 +2,12 @@
   "name": "@pgpm/utils",
   "version": "0.7.0",
   "description": "General utility functions for PostgreSQL extensions",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "utilities",
+    "functions"
+  ],
   "publishConfig": {
     "access": "public"
   },

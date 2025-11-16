@@ -2,6 +2,12 @@
   "name": "@pgpm/types",
   "version": "0.7.0",
   "description": "Core PostgreSQL data types with deploy/verify/revert SQL scripts",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "data-types",
+    "sql"
+  ],
   "publishConfig": {
     "access": "public"
   },

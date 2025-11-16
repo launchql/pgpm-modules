@@ -2,6 +2,12 @@
   "name": "@pgpm/totp",
   "version": "0.7.0",
   "description": "Time-based One-Time Password (TOTP) authentication",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "totp",
+    "2fa"
+  ],
   "publishConfig": {
     "access": "public"
   },
