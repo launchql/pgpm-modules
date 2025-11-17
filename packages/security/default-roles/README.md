@@ -65,13 +65,13 @@ pgpm deploy
 ```bash
 # 1. Create a workspace
 pgpm init --workspace
-cd my-app
 
 # 2. Create your first module
+cd my-workspace
 pgpm init
-cd packages/your-module
 
-# 3. Install a package 
+# 3. Install a package
+cd packages/my-module
 pgpm install @pgpm/default-roles
 
 # 4. Deploy everything

@@ -20,12 +20,13 @@ eval "$(pgpm env)"
 ```bash
 # 1. Create a workspace
 pgpm init --workspace
-cd my-app
 
 # 2. Create your first module
+cd my-workspace
 pgpm init
 
 # 3. Add a migration
+cd packages/my-module
 pgpm add some_change
 
 # 4. Deploy (auto-creates database)

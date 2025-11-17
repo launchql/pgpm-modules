@@ -55,13 +55,13 @@ eval "$(pgpm env)"
 ```bash
 # 1. Create a workspace
 pgpm init --workspace
-cd my-app
 
 # 2. Create your first module
+cd my-workspace
 pgpm init
-cd packages/your-module
 
 # 3. Install a package
+cd packages/my-module
 pgpm install @pgpm/faker
 
 # 4. Deploy everything
@@ -74,7 +74,7 @@ psql -d mydb1 -c "SELECT faker.city('MI');"
 
 ```bash
 # 1. Navigate to your module
-cd packages/your-module
+cd packages/my-module
 
 # 2. Install a package
 pgpm install @pgpm/faker
@@ -89,7 +89,7 @@ psql -d mydb1 -c "SELECT faker.city('MI');"
 
 ```bash
 # 1. Navigate to your module
-cd packages/your-module
+cd packages/my-module
 
 # 2. Add a database change
 pgpm add some_change
@@ -99,7 +99,7 @@ pgpm add some_change
 
 ```bash
 # 1. Navigate to your module
-cd packages/your-module
+cd packages/my-module
 
 # 2. Add a database change
 pnpm test:watch
