@@ -18,7 +18,7 @@ RUN set -eux; \
     corepack prepare pnpm@10.12.2 --activate; \
     rm -rf /var/lib/apt/lists/*
 
-# Copy workspace (build context should be pgpm-modules directory)
+# Copy workspace (build context is the repo root of pgpm-modules)
 COPY . .
 
 # Install workspace deps and bundle packages

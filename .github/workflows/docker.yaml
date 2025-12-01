@@ -1,11 +1,9 @@
-name: Docker
+name: docker-publish
 
 on:
   push:
     branches:
       - main
-    paths:
-      - '.github/workflows/docker.yaml'
   pull_request:
     branches:
       - main
@@ -16,15 +14,13 @@ permissions:
   packages: write
 
 concurrency:
-  group: docker-pgpm-modules-${{ github.ref }}
+  group: docker-${{ github.ref }}
   cancel-in-progress: true
 
 env:
-  IMAGE_NAME: pgpm/modules
+  IMAGE_NAME: pgpm-modules
   IMAGE_REGISTRY: ghcr.io
   IMAGE_REPO: ${{ github.repository_owner }}
-  BUILD_CONTEXT: pgpm-modules
-  DOCKERFILE_PATH: pgpm-modules/Dockerfile
   PLATFORMS: ${{ github.event_name != 'pull_request' && 'linux/amd64,linux/arm64' || 'linux/amd64' }}
 
 jobs:
@@ -63,8 +59,8 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.BUILD_CONTEXT }}
-          file: ${{ env.DOCKERFILE_PATH }}
+          context: .
+          file: ./Dockerfile
           push: ${{ github.event_name != 'pull_request' }}
           platforms: ${{ env.PLATFORMS }}
           tags: ${{ steps.meta.outputs.tags }}
@@ -74,4 +70,3 @@ jobs:
 
       - name: Image digest
         run: echo "Pushed ${{ env.IMAGE_REGISTRY }}/${{ env.IMAGE_REPO }}/${{ env.IMAGE_NAME }} with tags - ${{ steps.meta.outputs.tags }}"
-
