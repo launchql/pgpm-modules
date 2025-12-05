@@ -1,4 +1,4 @@
-# @pgpm/meta-db
+# @pgpm/db-meta-schema
 
 <p align="center" width="100%">
   <img height="250" src="https://raw.githubusercontent.com/launchql/launchql/refs/heads/main/assets/outline-logo.svg" />
@@ -9,14 +9,14 @@
     <img height="20" src="https://github.com/launchql/pgpm-modules/actions/workflows/ci.yml/badge.svg" />
   </a>
    <a href="https://github.com/launchql/pgpm-modules/blob/main/LICENSE"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
-   <a href="https://www.npmjs.com/package/@pgpm/meta-db"><img height="20" src="https://img.shields.io/github/package-json/v/launchql/pgpm-modules?filename=packages%2Fmeta%2Fdb_meta%2Fpackage.json"/></a>
+   <a href="https://www.npmjs.com/package/@pgpm/db-meta-schema"><img height="20" src="https://img.shields.io/github/package-json/v/launchql/pgpm-modules?filename=packages%2Fmeta%2Fdb-meta-schema%2Fpackage.json"/></a>
 </p>
 
 Database metadata utilities and introspection functions.
 
 ## Overview
 
-`@pgpm/meta-db` provides a comprehensive metadata management system for PostgreSQL databases. This package creates tables and schemas for storing and querying database structure information including databases, schemas, tables, fields, constraints, indexes, and more. It enables runtime schema introspection, metadata-driven code generation, and database structure management.
+`@pgpm/db-meta-schema` provides a comprehensive metadata management system for PostgreSQL databases. This package creates tables and schemas for storing and querying database structure information including databases, schemas, tables, fields, constraints, indexes, and more. It enables runtime schema introspection, metadata-driven code generation, and database structure management.
 
 ## Features
 
@@ -34,7 +34,7 @@ Database metadata utilities and introspection functions.
 If you have `pgpm` installed:
 
 ```bash
-pgpm install @pgpm/meta-db
+pgpm install @pgpm/db-meta-schema
 pgpm deploy
 ```
 
@@ -57,7 +57,7 @@ eval "$(pgpm env)"
 
 ```bash
 # 1. Install the package
-pgpm install @pgpm/meta-db
+pgpm install @pgpm/db-meta-schema
 
 # 2. Deploy locally
 pgpm deploy 
@@ -75,7 +75,7 @@ pgpm init
 
 # 3. Install a package
 cd packages/my-module
-pgpm install @pgpm/meta-db
+pgpm install @pgpm/db-meta-schema
 
 # 4. Deploy everything
 pgpm deploy --createdb --database mydb1

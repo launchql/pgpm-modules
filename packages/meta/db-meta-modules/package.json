@@ -1,5 +1,5 @@
 {
-  "name": "@pgpm/meta-db-modules",
+  "name": "@pgpm/db-meta-modules",
   "version": "0.9.0",
   "description": "Module metadata handling and dependency tracking",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -21,7 +21,7 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@pgpm/meta-db": "workspace:*",
+    "@pgpm/db-meta-schema": "workspace:*",
     "@pgpm/verify": "workspace:*"
   },
   "devDependencies": {
