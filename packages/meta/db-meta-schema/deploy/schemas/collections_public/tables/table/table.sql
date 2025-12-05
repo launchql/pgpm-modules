@@ -4,6 +4,9 @@
 -- requires: schemas/collections_public/tables/schema/table
 
 BEGIN;
+
+CREATE TYPE collections_public.table_category AS ENUM ('system', 'module', 'user');
+
 CREATE TABLE collections_public.table (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
   database_id uuid NOT NULL DEFAULT uuid_nil(),
@@ -17,7 +20,10 @@ CREATE TABLE collections_public.table (
   
   smart_tags jsonb,
   
-  is_system boolean DEFAULT FALSE, -- TODO DEPRECATE
+  category collections_public.table_category NOT NULL DEFAULT 'user',
+  module text NULL,
+  scope int NULL,
+
   use_rls boolean NOT NULL DEFAULT FALSE,
   
   timestamps boolean NOT NULL DEFAULT FALSE,
