@@ -1,4 +1,4 @@
-\echo Use "CREATE EXTENSION launchql-meta-db-modules" to load this file. \quit
+\echo Use "CREATE EXTENSION db-meta-modules" to load this file. \quit
 CREATE TABLE meta_public.connected_accounts_module (
   id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
   database_id uuid NOT NULL,
