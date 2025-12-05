@@ -146,7 +146,7 @@ importers:
 
   packages/meta/db-meta-modules:
     dependencies:
-      '@pgpm/meta-db':
+      '@pgpm/db-meta-schema':
         specifier: workspace:*
         version: link:../db-meta-schema
       '@pgpm/verify':
