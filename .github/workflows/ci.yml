@@ -26,9 +26,8 @@ jobs:
           - security/default-roles
           - metrics/measurements
           - metrics/achievements
-          - meta/db_meta_test
-          - meta/db_meta_modules
-          - meta/db_meta
+          - meta/db-meta-schema
+          - meta/db-meta-modules
           - jobs/jobs
           - jobs/database-jobs
           - data-types/uuid
