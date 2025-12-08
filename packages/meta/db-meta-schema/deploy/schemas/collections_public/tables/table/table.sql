@@ -12,20 +12,20 @@ CREATE TABLE collections_public.table (
   database_id uuid NOT NULL DEFAULT uuid_nil(),
 
   schema_id uuid NOT NULL,
-  
+
   name text NOT NULL,
 
   label text,
   description text,
-  
+
   smart_tags jsonb,
-  
+
   category collections_public.table_category NOT NULL DEFAULT 'app',
   module text NULL,
   scope int NULL,
 
   use_rls boolean NOT NULL DEFAULT FALSE,
-  
+
   timestamps boolean NOT NULL DEFAULT FALSE,
   peoplestamps boolean NOT NULL DEFAULT FALSE,
 
@@ -34,16 +34,19 @@ CREATE TABLE collections_public.table (
 
   tags citext[] NOT NULL DEFAULT '{}',
 
-  -- 
+  --
 
   CONSTRAINT db_fkey FOREIGN KEY (database_id) REFERENCES collections_public.database (id) ON DELETE CASCADE,
   CONSTRAINT schema_fkey FOREIGN KEY (schema_id) REFERENCES collections_public.schema (id) ON DELETE CASCADE,
-  
+
   UNIQUE (database_id, name)
 );
 
 ALTER TABLE collections_public.table ADD COLUMN
     inherits_id uuid NULL REFERENCES collections_public.table(id);
+
+ALTER TABLE collections_public.table ADD COLUMN
+    tags citext[] NOT NULL DEFAULT '{}';
 
 COMMENT ON CONSTRAINT schema_fkey ON collections_public.table IS E'@omit manyToMany';
 COMMENT ON CONSTRAINT db_fkey ON collections_public.table IS E'@omit manyToMany';
