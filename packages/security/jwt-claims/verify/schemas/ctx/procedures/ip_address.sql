@@ -5,3 +5,4 @@ BEGIN;
 SELECT verify_function ('ctx.ip_address');
 
 ROLLBACK;
+

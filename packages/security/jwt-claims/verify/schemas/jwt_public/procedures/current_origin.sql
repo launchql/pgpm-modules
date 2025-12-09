@@ -5,3 +5,4 @@ BEGIN;
 SELECT verify_function ('jwt_public.current_origin');
 
 ROLLBACK;
+

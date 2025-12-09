@@ -5,3 +5,4 @@ BEGIN;
 SELECT verify_function ('jwt_private.current_token_id');
 
 ROLLBACK;
+

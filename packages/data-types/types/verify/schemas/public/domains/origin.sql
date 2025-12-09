@@ -5,3 +5,4 @@ BEGIN;
 SELECT verify_type ('public.origin');
 
 ROLLBACK;
+

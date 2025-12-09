@@ -13,3 +13,4 @@ GRANT EXECUTE ON FUNCTIONS
 TO authenticated;
 
 COMMIT;
+

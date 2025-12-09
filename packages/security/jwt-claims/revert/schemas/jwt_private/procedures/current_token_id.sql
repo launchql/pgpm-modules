@@ -5,3 +5,4 @@ BEGIN;
 DROP FUNCTION jwt_private.current_token_id;
 
 COMMIT;
+

@@ -5,3 +5,4 @@ BEGIN;
 DROP FUNCTION ctx.origin;
 
 COMMIT;
+

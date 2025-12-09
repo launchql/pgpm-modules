@@ -5,3 +5,4 @@ BEGIN;
 DROP SCHEMA ctx;
 
 COMMIT;
+

@@ -5,3 +5,4 @@ BEGIN;
 DROP TYPE public.origin;
 
 COMMIT;
+

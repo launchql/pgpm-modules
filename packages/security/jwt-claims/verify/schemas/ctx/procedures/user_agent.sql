@@ -5,3 +5,4 @@ BEGIN;
 SELECT verify_function ('ctx.user_agent');
 
 ROLLBACK;
+

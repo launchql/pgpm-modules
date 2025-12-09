@@ -5,3 +5,4 @@ BEGIN;
 DROP FUNCTION jwt_public.current_origin;
 
 COMMIT;
+

@@ -21,3 +21,4 @@ GRANT EXECUTE ON FUNCTION ctx.security_definer() TO PUBLIC;
 GRANT EXECUTE ON FUNCTION ctx.is_security_definer() TO PUBLIC;
 
 COMMIT;
+
