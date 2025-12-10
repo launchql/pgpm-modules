@@ -158,6 +158,7 @@ INSERT INTO customers (domain) VALUES
 ### Image and Attachment Domains
 
 The `image` domain stores JSON objects with URL and MIME type information. The `attachment` domain accepts either that JSON shape or a plain URL string.
+The `upload` domain uses the same JSON object shape as `image`, ensuring both the file URL and MIME type are present.
 
 ```sql
 -- Valid image
@@ -184,7 +185,7 @@ INSERT INTO customers (document) VALUES ('https://storage.example.com/favicon.ic
 | `hostname` | `text` | Domain name without protocol | `example.com` |
 | `image` | `json` | Image metadata with URL and MIME | `{"url": "...", "mime": "image/jpeg"}` |
 | `attachment` | `json` | File attachment URL or metadata | `{"url": "...", "mime": "application/pdf"}` or `https://example.com/favicon.ico` |
-| `upload` | `text` | File upload identifier | Various formats |
+| `upload` | `json` | File upload metadata (URL + MIME) | `{"url": "...", "mime": "application/pdf"}` |
 | `single_select` | `text` | Single selection value | Text value |
 | `multiple_select` | `text[]` | Multiple selection values | Array of text values |
 
@@ -212,7 +213,7 @@ The test suite validates:
 - Email format validation (valid and invalid cases)
 - URL format validation with extensive test cases
 - Hostname format validation
-- Image and attachment JSON structure validation
+- Image, upload, and attachment JSON structure validation
 
 ## Related Tooling
 
