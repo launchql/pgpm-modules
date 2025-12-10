@@ -2,6 +2,7 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
+  maxWorkers: 1,
 
   // Match both __tests__ and colocated test files
   testMatch: ['**/?(*.)+(test|spec).{ts,tsx,js,jsx}'],

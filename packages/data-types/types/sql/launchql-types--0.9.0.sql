@@ -35,8 +35,11 @@ CREATE DOMAIN single_select AS jsonb
 
 COMMENT ON DOMAIN single_select IS '@name launchqlInternalTypeSingleSelect';
 
-CREATE DOMAIN upload AS text 
-  CHECK (value ~ E'^(https?)://[^\\s/$.?#].[^\\s]*$');
+CREATE DOMAIN upload AS jsonb 
+  CHECK (
+  value ?& ARRAY['url', 'mime']
+    AND (value ->> 'url') ~ E'^(https?)://[^\\s/$.?#].[^\\s]*$'
+);
 
 COMMENT ON DOMAIN upload IS '@name launchqlInternalTypeUpload';
 

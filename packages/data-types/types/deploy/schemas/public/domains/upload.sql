@@ -4,7 +4,11 @@
 
 BEGIN;
 
-CREATE DOMAIN upload AS text CHECK (VALUE ~ '^(https?)://[^\s/$.?#].[^\s]*$');
+CREATE DOMAIN upload AS jsonb CHECK (
+  value ?& ARRAY['url', 'mime']
+  AND
+  value->>'url' ~ '^(https?)://[^\s/$.?#].[^\s]*$'
+);
 COMMENT ON DOMAIN upload IS E'@name launchqlInternalTypeUpload';
 
 COMMIT;

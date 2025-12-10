@@ -64,6 +64,17 @@ const invalidImages = [
   { url: 'https://foo.bar/some.png' }
 ];
 
+const validUploads = [
+  { url: 'http://www.foo.bar/some.jpg', mime: 'image/jpg' },
+  { url: 'https://foo.bar/some.PNG', mime: 'image/png' }
+];
+
+const invalidUploads = [
+  { url: 'hi there' },
+  { url: 'https://foo.bar/some.png' },
+  { url: 'ftp://foo.bar/some.png', mime: 'image/png' }
+];
+
 let pg: PgTestClient;
 let teardown:  () => Promise<void>;
 
@@ -79,7 +90,8 @@ CREATE TABLE customers (
   image image,
   attachment attachment,
   domain hostname,
-  email email
+  email email,
+  upload upload
 );
   `);
 });
@@ -122,6 +134,24 @@ describe('types', () => {
       let failed = false;
       try {
         await pg.any(`INSERT INTO customers (image) VALUES ($1::json);`, [image]);
+      } catch (e) {
+        failed = true;
+      }
+      expect(failed).toBe(true);
+    }
+  });
+
+  it('valid upload', async () => {
+    for (const upload of validUploads) {
+      await pg.any(`INSERT INTO customers (upload) VALUES ($1::json);`, [upload]);
+    }
+  });
+
+  it('invalid upload', async () => {
+    for (const upload of invalidUploads) {
+      let failed = false;
+      try {
+        await pg.any(`INSERT INTO customers (upload) VALUES ($1::json);`, [upload]);
       } catch (e) {
         failed = true;
       }
