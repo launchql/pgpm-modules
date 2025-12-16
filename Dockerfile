@@ -2,7 +2,7 @@ ARG BASE=node
 ARG BASE_VERSION=20-bookworm
 FROM ${BASE}:${BASE_VERSION} AS build
 
-LABEL org.opencontainers.image.source="https://github.com/launchql/pgpm-modules"
+LABEL org.opencontainers.image.source="https://github.com/constructive-io/pgpm-modules"
 ARG BASE
 ARG BASE_VERSION
 ENV BASE_VERSION=${BASE_VERSION}

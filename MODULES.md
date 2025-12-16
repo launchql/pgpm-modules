@@ -1,4 +1,4 @@
-# LaunchQL Extension Modules Verification Checklist
+# PGPM Extension Modules Verification Checklist
 
 ## What This Checklist Means
 

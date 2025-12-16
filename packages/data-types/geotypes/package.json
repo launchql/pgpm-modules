@@ -4,7 +4,7 @@
   "description": "Geographic data types and spatial functions for PostgreSQL",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "contributors": [
-    "Interweb <developers@interweb.co>"
+    "Constructive <developers@constructive.io>"
   ],
   "keywords": [
     "postgresql",
@@ -25,14 +25,14 @@
     "@pgpm/verify": "workspace:*"
   },
   "devDependencies": {
-    "pgpm": "^0.2.0"
+    "pgpm": "^1.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/launchql/pgpm-modules"
+    "url": "https://github.com/constructive-io/pgpm-modules"
   },
-  "homepage": "https://github.com/launchql/pgpm-modules",
+  "homepage": "https://github.com/constructive-io/pgpm-modules",
   "bugs": {
-    "url": "https://github.com/launchql/pgpm-modules/issues"
+    "url": "https://github.com/constructive-io/pgpm-modules/issues"
   }
 }
