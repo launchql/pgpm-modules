@@ -28,7 +28,7 @@ pgpm extends the **Sqitch** model to a multi‑package **npm workspace**. Think 
 ```
 packages/
   utils/
-    verify/                 # launchql-verify helpers live here (as a package)
+    verify/                 # pgpm-verify helpers live here (as a package)
   my-module/
     pgpm.plan
     deploy/
@@ -68,7 +68,7 @@ packages/
 * The file path must **mirror** its deploy partner:
   `verify/<ns>/<change>.sql` ↔ `deploy/<ns>/<change>.sql`.
 * Must **prove** the intended state: table exists, column types, indexes present, grants applied, invariants hold, etc.
-* Use **`launchql-verify`** helpers (lives at `packages/utils/verify`). Examples below.
+* Use **`pgpm-verify`** helpers (lives at `packages/utils/verify`). Examples below.
 
 ### Revert (must exist for every deploy)
 
@@ -100,7 +100,7 @@ COMMIT;
 `verify/public/create_table_users.sql`
 
 ```sql
--- Helpers are provided by the launchql-verify extension.
+-- Helpers are provided by the pgpm-verify extension.
 -- Assert table and index exist
 SELECT verify_table('public.users');
 SELECT verify_index('public.users','users_email_idx');
@@ -135,7 +135,7 @@ When a package depends on SQL provided by another package:
 * The workspace runner resolves dependencies in topological order across packages, then executes deploy → verify.
 * Keep shared primitives (schemas, types, roles, policies) in foundational packages (e.g., `utils/schema-core`) and depend on them.
 
-## Using `launchql-verify` in practice
+## Using `pgpm-verify` in practice
 
 **Common helpers** *(names per your package)*:
 

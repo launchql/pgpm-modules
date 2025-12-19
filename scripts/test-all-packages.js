@@ -220,7 +220,7 @@ function main() {
     }
   }
   
-  console.log('=== LaunchQL Package Integration Test ===');
+  console.log('=== PGPM Package Integration Test ===');
   console.log('Testing all packages with deploy/verify/revert/deploy cycle');
   if (stopOnFail) {
     console.log('Mode: Stop on first failure');
@@ -231,7 +231,7 @@ function main() {
   
   if (!commandExists('pgpm')) {
     console.error(`${RED}ERROR: pgpm CLI not found. Please install pgpm globally.${NC}`);
-    console.log('Run: npm install -g pgpm@0.2.0');
+    console.log('Run: npm install -g pgpm');
     process.exit(1);
   }
   
@@ -253,7 +253,7 @@ function main() {
   const projectRoot = path.resolve(scriptDir, '..');
   process.chdir(projectRoot);
   
-  console.log('Finding all LaunchQL packages...');
+  console.log('Finding all PGPM packages...');
   const packages = findPackages(projectRoot);
   
   console.log(`Found ${packages.length} packages to test:`);
