@@ -1,5 +1,5 @@
 EXTENSION = pgpm-faker
-DATA = sql/pgpm-faker--0.14.0.sql
+DATA = sql/pgpm-faker--0.15.2.sql
 
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)

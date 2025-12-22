@@ -1,5 +1,5 @@
 EXTENSION = pgpm-utils
-DATA = sql/pgpm-utils--0.14.0.sql
+DATA = sql/pgpm-utils--0.15.2.sql
 
 PG_CONFIG = pg_config
 PGXS := $(shell $(PG_CONFIG) --pgxs)
