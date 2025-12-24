@@ -21,7 +21,6 @@ JWT claim handling and validation functions.
 ## Features
 
 - **User Context Functions**: Extract user ID from JWT claims
-- **Group Membership**: Access user's group IDs
 - **Request Metadata**: Get IP address and user agent from requests
 - **Database Context**: Access database ID from JWT claims
 - **Type-Safe Extraction**: Proper error handling for invalid claim values
@@ -93,18 +92,6 @@ SELECT jwt_public.current_user_id();
 
 **JWT Claim:** `jwt.claims.user_id`
 
-### jwt_public.current_group_ids()
-Extracts the user's group IDs from JWT claims.
-
-**Returns:** `uuid[]` - Array of group IDs, or empty array if not set
-
-**Usage:**
-```sql
-SELECT jwt_public.current_group_ids();
-```
-
-**JWT Claim:** `jwt.claims.group_ids`
-
 ### jwt_public.current_ip_address()
 Extracts the client's IP address from JWT claims.
 
@@ -151,9 +138,6 @@ JWT claims are set as PostgreSQL session variables, typically by your authentica
 -- Set user ID claim
 SELECT set_config('jwt.claims.user_id', 'user-uuid-here', false);
 
--- Set group IDs claim
-SELECT set_config('jwt.claims.group_ids', '{uuid1,uuid2,uuid3}', false);
-
 -- Set IP address claim
 SELECT set_config('jwt.claims.ip_address', '192.168.1.1', false);
 
@@ -176,11 +160,6 @@ CREATE POLICY user_posts ON posts
   TO authenticated
   USING (user_id = jwt_public.current_user_id());
 
--- Users can see posts from their groups
-CREATE POLICY group_posts ON posts
-  FOR SELECT
-  TO authenticated
-  USING (group_id = ANY(jwt_public.current_group_ids()));
 ```
 
 ### Using Claims in Functions
@@ -200,13 +179,6 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
--- Function that checks group membership
-CREATE FUNCTION user_in_group(group_id uuid)
-RETURNS boolean AS $$
-BEGIN
-  RETURN group_id = ANY(jwt_public.current_group_ids());
-END;
-$$ LANGUAGE plpgsql;
 ```
 
 ### Audit Logging with JWT Claims
@@ -311,10 +283,6 @@ All functions include error handling for invalid claim values:
 -- If jwt.claims.user_id is not a valid UUID
 SELECT jwt_public.current_user_id();
 -- Returns NULL and raises NOTICE: 'Invalid UUID value'
-
--- If jwt.claims.group_ids is not a valid UUID array
-SELECT jwt_public.current_group_ids();
--- Returns empty array [] and raises NOTICE: 'Invalid UUID value'
 ```
 
 ## Security Considerations
