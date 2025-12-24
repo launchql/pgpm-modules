@@ -462,7 +462,7 @@ SELECT
   )
 $EOFCODE$ LANGUAGE sql;
 
-CREATE FUNCTION faker.float(min double precision DEFAULT 0, max double precision DEFAULT 100) RETURNS double precision AS $EOFCODE$
+CREATE FUNCTION faker."float"(min double precision DEFAULT 0, max double precision DEFAULT 100) RETURNS double precision AS $EOFCODE$
 DECLARE
   num float;
   high float;
@@ -475,7 +475,7 @@ BEGIN
 END;
 $EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
-CREATE FUNCTION faker.integer(min int DEFAULT 0, max int DEFAULT 100) RETURNS int AS $EOFCODE$
+CREATE FUNCTION faker."integer"(min int DEFAULT 0, max int DEFAULT 100) RETURNS int AS $EOFCODE$
 DECLARE
   num int;
 BEGIN
@@ -513,7 +513,7 @@ BEGIN
 END;
 $EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
-CREATE FUNCTION faker.interval() RETURNS interval AS $EOFCODE$
+CREATE FUNCTION faker."interval"() RETURNS interval AS $EOFCODE$
 DECLARE
   ival text;
 BEGIN
@@ -523,11 +523,11 @@ BEGIN
 END;
 $EOFCODE$ LANGUAGE plpgsql VOLATILE;
 
-CREATE FUNCTION faker.interval(min int, max int) RETURNS interval AS $EOFCODE$
+CREATE FUNCTION faker."interval"(min int, max int) RETURNS interval AS $EOFCODE$
 SELECT (faker.integer(min, max)::text || ' ' || 'seconds')::interval;
 $EOFCODE$ LANGUAGE sql VOLATILE;
 
-CREATE FUNCTION faker.boolean() RETURNS boolean AS $EOFCODE$
+CREATE FUNCTION faker."boolean"() RETURNS boolean AS $EOFCODE$
 BEGIN
   RETURN (
     CASE (RANDOM() * 1)::INT

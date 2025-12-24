@@ -28,7 +28,7 @@ CREATE DOMAIN multiple_select AS jsonb
 COMMENT ON DOMAIN multiple_select IS '@name pgpmInternalTypeMultipleSelect';
 
 CREATE DOMAIN origin AS text 
-  CHECK (value = SUBSTRING(value FROM '^(https?://[^/]*)'));
+  CHECK (value = pg_catalog."substring"(value, '^(https?://[^/]*)'));
 
 COMMENT ON DOMAIN origin IS '@name pgpmInternalTypeOrigin';
 

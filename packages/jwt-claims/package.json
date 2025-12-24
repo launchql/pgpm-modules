@@ -21,7 +21,7 @@
     "test:watch": "jest --watch"
   },
   "devDependencies": {
-    "pgpm": "^1.0.0"
+    "pgpm": "^1.2.2"
   },
   "dependencies": {
     "@pgpm/types": "workspace:*",
