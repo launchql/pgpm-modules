@@ -72,187 +72,200 @@ importers:
         specifier: ^5.9.3
         version: 5.9.3
 
-  packages/data-types/geotypes:
-    dependencies:
-      '@pgpm/types':
-        specifier: workspace:*
-        version: link:../types
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../../utils/verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/data-types/stamps:
+  packages/achievements:
     dependencies:
       '@pgpm/jwt-claims':
         specifier: workspace:*
-        version: link:../../security/jwt-claims
+        version: link:../jwt-claims
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/data-types/types:
+  packages/base32:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/data-types/uuid:
+  packages/database-jobs:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/jobs/database-jobs:
-    dependencies:
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../../utils/verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/jobs/jobs:
-    dependencies:
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../../utils/verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/meta/db-meta-modules:
+  packages/db-meta-modules:
     dependencies:
       '@pgpm/db-meta-schema':
         specifier: workspace:*
         version: link:../db-meta-schema
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/meta/db-meta-schema:
+  packages/db-meta-schema:
     dependencies:
       '@pgpm/database-jobs':
         specifier: workspace:*
-        version: link:../../jobs/database-jobs
+        version: link:../database-jobs
       '@pgpm/inflection':
         specifier: workspace:*
-        version: link:../../utils/inflection
+        version: link:../inflection
       '@pgpm/types':
         specifier: workspace:*
-        version: link:../../data-types/types
+        version: link:../types
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/metrics/achievements:
-    dependencies:
-      '@pgpm/jwt-claims':
-        specifier: workspace:*
-        version: link:../../security/jwt-claims
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../../utils/verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/metrics/measurements:
+  packages/defaults:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/security/defaults:
-    dependencies:
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../../utils/verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/security/encrypted-secrets:
+  packages/encrypted-secrets:
     dependencies:
       '@pgpm/encrypted-secrets-table':
         specifier: workspace:*
         version: link:../encrypted-secrets-table
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/security/encrypted-secrets-table:
+  packages/encrypted-secrets-table:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/security/jwt-claims:
+  packages/faker:
     dependencies:
       '@pgpm/types':
         specifier: workspace:*
-        version: link:../../data-types/types
+        version: link:../types
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/security/totp:
+  packages/geotypes:
+    dependencies:
+      '@pgpm/types':
+        specifier: workspace:*
+        version: link:../types
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/inflection:
+    dependencies:
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/jobs:
+    dependencies:
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/jwt-claims:
+    dependencies:
+      '@pgpm/types':
+        specifier: workspace:*
+        version: link:../types
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/measurements:
+    dependencies:
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/stamps:
+    dependencies:
+      '@pgpm/jwt-claims':
+        specifier: workspace:*
+        version: link:../jwt-claims
+      '@pgpm/verify':
+        specifier: workspace:*
+        version: link:../verify
+    devDependencies:
+      pgpm:
+        specifier: ^1.0.0
+        version: 1.0.3(@babel/core@7.28.5)
+
+  packages/totp:
     dependencies:
       '@pgpm/base32':
         specifier: workspace:*
-        version: link:../../utils/base32
+        version: link:../base32
       '@pgpm/verify':
         specifier: workspace:*
-        version: link:../../utils/verify
+        version: link:../verify
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/utils/base32:
+  packages/types:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
@@ -260,22 +273,9 @@ importers:
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/utils/faker:
-    dependencies:
-      '@pgpm/types':
-        specifier: workspace:*
-        version: link:../../data-types/types
-      '@pgpm/verify':
-        specifier: workspace:*
-        version: link:../verify
-    devDependencies:
-      pgpm:
-        specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-
-  packages/utils/inflection:
+  packages/utils:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
@@ -283,9 +283,9 @@ importers:
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/utils/utils:
+  packages/uuid:
     dependencies:
       '@pgpm/verify':
         specifier: workspace:*
@@ -293,13 +293,13 @@ importers:
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
-  packages/utils/verify:
+  packages/verify:
     devDependencies:
       pgpm:
         specifier: ^1.0.0
-        version: 1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2)
+        version: 1.0.3(@babel/core@7.28.5)
 
 packages:
 
@@ -867,34 +867,17 @@ packages:
   '@octokit/types@13.10.0':
     resolution: {integrity: sha512-ifLaO34EbbPj0Xgro4G5lP5asESjwHracYJvVaPIyXMuiuXLlhic3S47cBdTb+jfODkTE5YtGCLt3Ay3+J97sA==}
 
-  '@pgpmjs/core@3.0.5':
-    resolution: {integrity: sha512-wCB22AzsOnseuZVTv2O+Pa0wM7PUEqhKfCLQXpzu0j7WkuBIY72kp+jJDZGY+ytcT1GeBtIssp2h30wVutsPGg==}
-    peerDependencies:
-      '@pgsql/types': ^17.6.1
-
   '@pgpmjs/core@3.0.9':
     resolution: {integrity: sha512-ofidSBmkdT/j6pOXsSYAFbkXE/JKZ69c/fu1B9JH8IL/JIE+PRCy+Ow/YokpylnoLueDfuCUck6sy69/KD1Qdw==}
-
-  '@pgpmjs/env@2.8.3':
-    resolution: {integrity: sha512-nHqQrtI81EKOSPP7gmR5lUjCMcRwcvlODN+ibXkcM9Nga6pHvSKGp3YjAkKzah1SzgqwVUec+QNEVTx//2/fbA==}
 
   '@pgpmjs/env@2.8.5':
     resolution: {integrity: sha512-sFEof4RkjZEFd1zbokiPsowQ/zOIpJsohMRyd4AmxcN1ana5/HeYI/1RZLU9ZYtOhPxHFfvMzGNq38wOiUDr1A==}
 
-  '@pgpmjs/logger@1.3.3':
-    resolution: {integrity: sha512-tEYziSGlPEEhj0zO0/5TaRrtY2SYDPV2TUvDf383dtt/kqZ+QC0FX74/pdsV5HyailFV3Lnt0Rod0Tcll67o7A==}
-
   '@pgpmjs/logger@1.3.5':
     resolution: {integrity: sha512-mXxd2WJ5nutqDdy2Dzofro6bA+PPfup+s23Rpd1M8ZhYSKwe69slUXHYAuW6UfeXrRvbyeJCaEcLH5wGc9KQhQ==}
 
-  '@pgpmjs/server-utils@2.8.5':
-    resolution: {integrity: sha512-1MYs/JrMukr8m5UxAmhxHxajidmMl7wVc9Y6jibOU2qKV1UXc7FKIrKVHkaenhDm3FpFrSx8t1sZra9iQFuMPQ==}
-
   '@pgpmjs/server-utils@2.8.7':
     resolution: {integrity: sha512-27tMk10FCHC9dWRT/kQSouG9RRHDtipi7aZyYuMOIqDObkvVGsE7a4r5P5Kb38Aa+mfiGE7c/O8Auw0IMAgUig==}
-
-  '@pgpmjs/types@2.12.3':
-    resolution: {integrity: sha512-U8K3EPnwnRU5Q506YuDgEuVwI8JXtM8h9185bIWTrJes9OLfGOGgx2SuKVdLXWFu8ijbIPAzQ9vYJ8MDLUFc1w==}
 
   '@pgpmjs/types@2.12.5':
     resolution: {integrity: sha512-dKct1vWY3vOw5HPij7/dcJDnmM3vxWf+FxchxDR4Q69cVmHbP2FYvPpyzy3j7iRb1id853GTM7/yzzeVY/3v8A==}
@@ -3378,9 +3361,6 @@ packages:
   pg-ast@2.4.5:
     resolution: {integrity: sha512-6WCzXDECCra3DW8ZOuQlV1C+hffcj3dGYfdMBMVwCDapcykilelTPqUyvAbav85ib2up+Aa8iEMQB11pV9udEg==}
 
-  pg-cache@1.6.5:
-    resolution: {integrity: sha512-rC4uPdp4BUaq2oDCpq5v20ukqg+OsrMhgaiuO7Suz4bAWK0dOWk3YtsIDayuaLrlvFtS5Y9gf3SUkfer3XDs3g==}
-
   pg-cache@1.6.7:
     resolution: {integrity: sha512-oIwzNfff7wmUefV9mcFeu8QynINLe3XMJ1KHfKj5hB71Nboy1Sgnwja5HKMtmY3aoK6RHwItBj2k25DU7ytxzw==}
 
@@ -3392,9 +3372,6 @@ packages:
 
   pg-copy-streams@7.0.0:
     resolution: {integrity: sha512-zBvnY6wtaBRE2ae2xXWOOGMaNVPkXh1vhypAkNSKgMdciJeTyIQAHZaEeRAxUjs/p1El5jgzYmwG5u871Zj3dQ==}
-
-  pg-env@1.2.2:
-    resolution: {integrity: sha512-5KNzr7W0x+b22+4gSDu0Bc63QNWTwEv4PYhfXgKwHzab4pCyTku5dH6NXj1pQhYs/x0Nws9oFS3sAKChRHQaDQ==}
 
   pg-env@1.2.4:
     resolution: {integrity: sha512-xlReaPB7IXntHlphsaaO0EURBhlrkaZppoBzsKFh0QS0AYtn7PD00YP66yMI+6kgwU0DjiE3egY1EWzD/l9lJw==}
@@ -5208,29 +5185,6 @@ snapshots:
     dependencies:
       '@octokit/openapi-types': 24.2.0
 
-  '@pgpmjs/core@3.0.5(@babel/core@7.28.5)(@pgsql/types@17.6.2)':
-    dependencies:
-      '@pgpmjs/env': 2.8.3
-      '@pgpmjs/logger': 1.3.3
-      '@pgpmjs/server-utils': 2.8.5
-      '@pgpmjs/types': 2.12.3
-      '@pgsql/types': 17.6.2
-      create-gen-app: 0.3.6
-      csv-to-pg: 2.0.10(@babel/core@7.28.5)
-      glob: 13.0.0
-      komoji: 0.7.11
-      parse-package-name: 1.0.0
-      pg: 8.16.3
-      pg-cache: 1.6.5
-      pg-env: 1.2.2
-      pgsql-deparser: 17.12.2
-      pgsql-parser: 17.9.2
-      yanse: 0.1.8
-    transitivePeerDependencies:
-      - '@babel/core'
-      - pg-native
-      - supports-color
-
   '@pgpmjs/core@3.0.9(@babel/core@7.28.5)':
     dependencies:
       '@pgpmjs/env': 2.8.5
@@ -5253,33 +5207,14 @@ snapshots:
       - pg-native
       - supports-color
 
-  '@pgpmjs/env@2.8.3':
-    dependencies:
-      '@pgpmjs/types': 2.12.3
-      deepmerge: 4.3.1
-
   '@pgpmjs/env@2.8.5':
     dependencies:
       '@pgpmjs/types': 2.12.5
       deepmerge: 4.3.1
 
-  '@pgpmjs/logger@1.3.3':
-    dependencies:
-      yanse: 0.1.8
-
   '@pgpmjs/logger@1.3.5':
     dependencies:
       yanse: 0.1.8
-
-  '@pgpmjs/server-utils@2.8.5':
-    dependencies:
-      '@pgpmjs/logger': 1.3.3
-      '@pgpmjs/types': 2.12.3
-      cors: 2.8.5
-      express: 5.2.1
-      lru-cache: 11.2.4
-    transitivePeerDependencies:
-      - supports-color
 
   '@pgpmjs/server-utils@2.8.7':
     dependencies:
@@ -5290,10 +5225,6 @@ snapshots:
       lru-cache: 11.2.4
     transitivePeerDependencies:
       - supports-color
-
-  '@pgpmjs/types@2.12.3':
-    dependencies:
-      pg-env: 1.2.2
 
   '@pgpmjs/types@2.12.5':
     dependencies:
@@ -8296,16 +8227,6 @@ snapshots:
       '@pgsql/types': 17.6.2
       nested-obj: 0.1.7
 
-  pg-cache@1.6.5:
-    dependencies:
-      '@pgpmjs/logger': 1.3.3
-      '@pgpmjs/types': 2.12.3
-      lru-cache: 11.2.4
-      pg: 8.16.3
-      pg-env: 1.2.2
-    transitivePeerDependencies:
-      - pg-native
-
   pg-cache@1.6.7:
     dependencies:
       '@pgpmjs/logger': 1.3.5
@@ -8322,8 +8243,6 @@ snapshots:
   pg-connection-string@2.9.1: {}
 
   pg-copy-streams@7.0.0: {}
-
-  pg-env@1.2.2: {}
 
   pg-env@1.2.4: {}
 
@@ -8367,26 +8286,25 @@ snapshots:
     dependencies:
       split2: 4.2.0
 
-  pgpm@1.0.3(@babel/core@7.28.5)(@pgsql/types@17.6.2):
+  pgpm@1.0.3(@babel/core@7.28.5):
     dependencies:
-      '@pgpmjs/core': 3.0.5(@babel/core@7.28.5)(@pgsql/types@17.6.2)
-      '@pgpmjs/env': 2.8.3
-      '@pgpmjs/logger': 1.3.3
-      '@pgpmjs/types': 2.12.3
+      '@pgpmjs/core': 3.0.9(@babel/core@7.28.5)
+      '@pgpmjs/env': 2.8.5
+      '@pgpmjs/logger': 1.3.5
+      '@pgpmjs/types': 2.12.5
       appstash: 0.2.6
       create-gen-app: 0.3.6
       find-and-require-package-json: 0.8.2
-      inquirerer: 2.1.14
+      inquirerer: 2.2.0
       js-yaml: 4.1.1
       minimist: 1.2.8
-      pg-cache: 1.6.5
-      pg-env: 1.2.2
+      pg-cache: 1.6.7
+      pg-env: 1.2.4
       semver: 7.7.3
       shelljs: 0.10.0
       yanse: 0.1.8
     transitivePeerDependencies:
       - '@babel/core'
-      - '@pgsql/types'
       - pg-native
       - supports-color
 
