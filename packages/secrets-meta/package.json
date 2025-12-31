@@ -1,0 +1,37 @@
+{
+  "name": "@pgpm/secrets-meta",
+  "version": "0.0.1",
+  "description": "Meta-level secrets registry (providers + secret metadata, no values)",
+  "author": "Constructive <developers@constructive.io>",
+  "keywords": [
+    "postgresql",
+    "pgpm",
+    "secrets",
+    "metadata"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "bundle": "pgpm package",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@pgpm/database-jobs": "workspace:*",
+    "@pgpm/db-meta-schema": "workspace:*",
+    "@pgpm/verify": "workspace:*"
+  },
+  "devDependencies": {
+    "pgpm": "^1.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/constructive-io/pgpm-modules"
+  },
+  "homepage": "https://github.com/constructive-io/pgpm-modules",
+  "bugs": {
+    "url": "https://github.com/constructive-io/pgpm-modules/issues"
+  }
+}
+
