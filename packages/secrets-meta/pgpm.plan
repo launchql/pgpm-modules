@@ -1,0 +1,15 @@
+%syntax-version=1.0.0
+%project=secrets-meta
+%uri=secrets-meta
+
+# Meta-level secrets metadata and helpers
+
+schemas/meta_public/tables/secret_providers/table [db-meta-schema:schemas/meta_public/tables/apps/table] 2025-01-01T00:00:00Z secrets-meta <secrets@constructive.io> # add secret_providers registry
+schemas/meta_public/tables/secrets/table [schemas/meta_public/tables/secret_providers/table db-meta-schema:schemas/meta_public/tables/apps/table] 2025-01-01T00:00:00Z secrets-meta <secrets@constructive.io> # add secrets metadata table
+
+schemas/meta_public/tables/secrets/triggers/invariants [schemas/meta_public/tables/secrets/table] 2025-01-01T00:00:00Z secrets-meta <secrets@constructive.io> # enforce invariants on secrets
+
+schemas/meta_public/procedures/secret_metadata [schemas/meta_public/tables/secrets/table] 2025-01-01T00:00:00Z secrets-meta <secrets@constructive.io> # helpers for create/rotate/delete metadata
+
+schemas/meta_private/procedures/get_job_secrets_metadata [pgpm-database-jobs:schemas/app_jobs/tables/jobs/table schemas/meta_public/tables/secrets/table schemas/meta_public/tables/secret_providers/table db-meta-schema:schemas/meta_public/tables/apps/table] 2025-01-01T00:00:00Z secrets-meta <secrets@constructive.io> # helper for jobId→secretRefs→metadata
+
