@@ -216,6 +216,11 @@ CREATE INDEX field_table_id_idx ON collections_public.field (table_id);
 
 CREATE INDEX field_database_id_idx ON collections_public.field (database_id);
 
+ALTER TABLE collections_public.field ADD COLUMN
+    default_value_ast jsonb NULL DEFAULT NULL;
+
+COMMENT ON COLUMN collections_public.field.default_value IS '@sqlExpression';
+
 CREATE UNIQUE INDEX databases_field_uniq_names_idx ON collections_public.field (table_id, (decode(md5(lower(regexp_replace(name, '^(.+?)(_row_id|_id|_uuid|_fk|_pk)$', E'\\1', 'i'))), 'hex')));
 
 CREATE TABLE collections_public.foreign_key_constraint (
