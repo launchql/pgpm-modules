@@ -69,4 +69,11 @@ COMMENT ON CONSTRAINT db_fkey ON collections_public.field IS E'@omit manyToMany'
 CREATE INDEX field_table_id_idx ON collections_public.field ( table_id );
 CREATE INDEX field_database_id_idx ON collections_public.field ( database_id );
 
+-- Add AST column for SQL expression validation (AST is the source of truth)
+ALTER TABLE collections_public.field ADD COLUMN
+    default_value_ast jsonb NULL DEFAULT NULL;
+
+-- Smart comment for Graphile SQL expression validator plugin
+COMMENT ON COLUMN collections_public.field.default_value IS E'@sqlExpression';
+
 COMMIT;
