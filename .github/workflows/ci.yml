@@ -9,7 +9,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    container: pyramation/node-sqitch:20.12.0
     continue-on-error: true
     strategy:
       fail-fast: false
