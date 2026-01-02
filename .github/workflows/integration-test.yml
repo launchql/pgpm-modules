@@ -9,13 +9,13 @@ on:
 jobs:
   integration-test:
     runs-on: ubuntu-latest
-    container: pyramation/node-sqitch:20.12.0
 
     env:
-      PGHOST: pg_db
+      PGHOST: localhost
       PGPORT: 5432
       PGUSER: postgres
       PGPASSWORD: password
+      PGPM_VERSION: 2.7.9
 
     services:
       pg_db:
@@ -68,8 +68,15 @@ jobs:
       - name: Install
         run: pnpm install
 
+      - name: Cache pgpm CLI
+        id: cache-pgpm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: pgpm-${{ env.PGPM_VERSION }}
+
       - name: Install pgpm CLI globally
-        run: npm install -g pgpm
+        run: npm install -g pgpm@${{ env.PGPM_VERSION }}
 
       - name: Build
         run: pnpm -r build
